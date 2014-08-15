@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:orientation="vertical">  
+      
+ <RelativeLayout
+        android:id="@+id/aboveLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#20308030"
+            android:orientation="vertical" >
+
+              <LinearLayout
+                android:id="@+id/fragmentRoot"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                 android:orientation="horizontal" />
+            
+            
+            <LinearLayout
+                android:id="@+id/bottomList"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/black"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/bottomItemCurrentBg1"
+                    style="@style/main_bottom_item" >
+
+                    <Button
+                        android:id="@+id/rbWeiXin"
+                        style="@style/footbar"
+                        android:drawableTop="@drawable/arrow_top"
+                        android:paddingTop="8dp"
+                        android:text="列表" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bottomItemCurrentBg2"
+                    style="@style/main_bottom_item" >
+
+                    <Button
+                        android:id="@+id/rbAddress"
+                        style="@style/footbar"
+                        android:drawableTop="@drawable/arrow_top"
+                        android:paddingTop="8dp"
+                        android:text="图表" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/bottomItemCurrentBg3"
+                    style="@style/main_bottom_item" >
+
+                    <Button
+                        android:id="@+id/rbFind"
+                        style="@style/footbar"
+                        android:drawableTop="@drawable/arrow_top"
+                        android:paddingTop="8dp"
+                        android:text="未用" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/bottomItemCurrentBg4"
+                    style="@style/main_bottom_item" >
+
+                    <Button
+                        android:id="@+id/rbMe"
+                        style="@style/footbar"
+                        android:drawableTop="@drawable/arrow_top"
+                        android:paddingTop="8dp"
+                        android:text="未用" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+ 
+</LinearLayout>  
