@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:background="@color/app_green" >
+
+    <TextView
+        android:id="@+id/activity_top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:text="@string/login_title"
+        android:textColor="@color/app_white" />
+
+    <ImageButton
+        android:id="@+id/activity_top_menu2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="#00000000" />
+
+    <ImageButton
+        android:id="@+id/activity_top_menu1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/activity_top_menu2"
+        android:background="#00000000" />
+
+</RelativeLayout>
