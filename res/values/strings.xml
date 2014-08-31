@@ -13,5 +13,43 @@
      <string name="blood_pressure_date">日期</string>
      <string name="blood_pressure_high">收缩压</string>
      <string name="blood_pressure_low">舒张压</string>
+     
+     
+     <!-- button -->
+     
+     <string name="button_next">下一步</string>
+     <string name="button_top">上一步</string>
+     <string name="button_no">退出</string>
+     <string name="button_ok">确定</string>
+     <string name="button_over">完成</string>
+     
+     <!-- 登录 -->
+     <string name="login_title">登录</string>
+     <string name="login_name">账号</string>
+     <string name="login_name_ps">手机号</string>
+     <string name="login_pass">密码</string>
+     <string name="login_pass_ps">6-30位数字或字母</string>
+     <string name="login_chick_text">一个月内免登录</string>
+     <string name="login_forget_pass">忘记密码</string>
+     <string name="login_no">还没有账号，马上注册</string>
+     <string name="login_pass_two">重复密码</string>
+     <string name="login_email">Email</string>
+     <string name="login_email_ps">Email</string>
+     
+     <string name="user_name">昵称</string>
+     <string name="user_name_ps">美男</string>
+     <string name="user_sax">性别</string>
+     <string name="user_birthday">出生日期</string>
+     <string name="user_hight">身高</string>
+     <string name="user_whgit">体重</string>
+     <string name="user_waist">腰围</string>
+     
+     <string name="user_device">型号</string>
+     <string name="user_device_num">输入十六位编码</string>
+     
+     
+     <string name="user_vers">验证码</string>
+     <string name="user_vers_ps">4位验证码</string>
+     <string name="user_passwprd_too">请重复密码</string>
 
 </resources>
