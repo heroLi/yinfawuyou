@@ -38,6 +38,34 @@
             android:name="com.yifa.health_manage.Blood_pressure_Activity"
             android:label="@string/title_activity_blood_pressure_" >
         </activity>
+        <activity
+            android:name="com.yifa.health_manage.LoginActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.BindDeviceActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.FindPasswordActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.RegisterActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.RegisterMessageActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.ChangePasswordActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.UtilsAllActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

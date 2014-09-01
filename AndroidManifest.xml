@@ -58,6 +58,14 @@
             android:name="com.yifa.health_manage.RegisterMessageActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        <activity
+            android:name="com.yifa.health_manage.ChangePasswordActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.UtilsAllActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>
