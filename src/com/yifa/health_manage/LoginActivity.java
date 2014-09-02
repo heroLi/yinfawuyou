@@ -3,11 +3,16 @@ package com.yifa.health_manage;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.yifa.health_manage.util.WebServiceParmas;
+import com.yifa.health_manage.util.WebServiceUtils;
 
 /*
  * 登录
@@ -17,6 +22,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private TextView noLogin, forgetPass;
 	private Button loginButton;
 
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			Log.d("--------", msg.obj.toString());
+
+		};
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -25,6 +37,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login_layout);
 		initView();
 		initListener();
+		new WebServiceUtils(this, mHandler).sendExecuteNo(new String[]{},
+				WebServiceParmas.TEST, WebServiceParmas.HTTP_POST);
 	}
 
 	private void initView() {
