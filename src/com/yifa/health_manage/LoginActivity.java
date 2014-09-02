@@ -1,5 +1,8 @@
 package com.yifa.health_manage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +13,10 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
 
@@ -26,6 +32,17 @@ public class LoginActivity extends Activity implements OnClickListener {
 		public void handleMessage(android.os.Message msg) {
 			Log.d("--------", msg.obj.toString());
 
+			try {
+				JSONObject jsonObject = new JSONObject(msg.obj.toString());
+
+				Gson gson = new Gson();
+				ResultResponse response = gson.fromJson(jsonObject.toString(),
+						ResultResponse.class);
+				Toast.makeText(LoginActivity.this, response.getInfo(), 3000).show();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		};
 	};
 
@@ -37,8 +54,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login_layout);
 		initView();
 		initListener();
-		new WebServiceUtils(this, mHandler).sendExecuteNo(new String[]{},
+		new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {},
 				WebServiceParmas.TEST, WebServiceParmas.HTTP_POST);
+
 	}
 
 	private void initView() {

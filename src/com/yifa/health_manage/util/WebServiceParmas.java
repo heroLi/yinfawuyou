@@ -1,6 +1,7 @@
 package com.yifa.health_manage.util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class WebServiceParmas {
 		return obj;
 	}
 
-
 	/**
 	 * type:login username: xxxx, pwd: xxxx
 	 * */
@@ -42,24 +42,14 @@ public class WebServiceParmas {
 		JSONObject entity = new JSONObject();
 		try {
 			entity.put("type", "login");
-			entity.put("username", "user");
-			entity.put("pwd", "12345");
+			entity.put("username", "admin");
+			entity.put("pwd", "admin");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("type", "login"));
-		params.add(new BasicNameValuePair("username", "user"));
-		params.add(new BasicNameValuePair("pwd", "12345"));
-		try {
-			HttpEntity httpEntity = new UrlEncodedFormEntity(params,"utf-8");
-			obj = Connection.getConnection(url, httpType, entity);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
+		obj = Connection.getConnection(url, httpType, entity);
 
 		return obj;
 	}
