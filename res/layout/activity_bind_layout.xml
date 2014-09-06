@@ -1,15 +1,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    
     android:background="@color/app_white" >
-    <include layout="@layout/activity_main_top"
-        android:id="@+id/top"/>
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/activity_main_top" />
+
+    <RadioGroup
+        android:id="@+id/bind_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/top"
+        android:orientation="horizontal"
+        >
+        
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bind_blood_presure"
+            android:text="血压计"
+            android:checked="true"
+            android:textColor="@color/app_green"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bind_blood_glucose"
+            android:text="血糖计"
+            android:textColor="@color/app_green"
+            />
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/namelayout"
         android:layout_width="match_parent"
-        android:layout_below="@id/top"
         android:layout_height="50dp"
+        android:layout_below="@id/bind_group"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -24,15 +51,16 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/login_edit_name"
+            android:id="@+id/bind_devices_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:background="#00000000"
             android:gravity="right"
-            android:layout_marginRight="5dp"
             android:hint="@string/user_device_num" />
     </LinearLayout>
 
+    <!--
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/passwordLayout"
@@ -60,38 +88,37 @@
             android:layout_marginRight="5dp"
             android:hint="@string/user_device_num" />
     </LinearLayout>
-    
+    -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        >
-        <Button 
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/register_btn_no"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
-            android:text="@string/button_top"
-           android:textColor="@color/app_white"
+            android:layout_weight="1"
             android:background="@drawable/button_bg"
-            />
-        <Button 
-           android:id="@+id/register_btn_next"
+            android:text="@string/button_top"
+            android:textColor="@color/app_white" />
+
+        <Button
+            android:id="@+id/register_btn_next"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="15dp"
-            android:text="@string/button_over"
-            android:textColor="@color/app_white"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:background="@drawable/button_bg"
-            />
-        
+            android:text="@string/button_over"
+            android:textColor="@color/app_white" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -11,15 +11,14 @@
         android:text="@string/user_message_text"
         android:textColor="@color/line_gray" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/namelayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/login_top_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,22 +26,23 @@
             android:layout_marginLeft="5dp"
             android:text="@string/user_message_photo"
             android:textColor="@color/app_green"
+            android:layout_centerVertical="true"
             android:textSize="15sp" />
 
         <ImageView
-            android:id="@+id/login_edit_name"
-            android:layout_width="match_parent"
+            android:id="@+id/user_photo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
             android:background="#00000000" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/login_top_bg"
+        android:background="@drawable/login_middle_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
@@ -55,6 +55,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -81,6 +82,7 @@
             android:textSize="15sp" />
 
         <RadioGroup
+            android:id="@+id/sex_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -119,7 +121,7 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/login_edit_password_two"
+            android:id="@+id/user_bri"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -146,6 +148,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/user_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -180,6 +183,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/user_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -214,6 +218,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/user_yao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -238,6 +243,7 @@
         android:textColor="@color/line_gray" />
 
     <LinearLayout
+        android:id="@+id/user_blood_p"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
@@ -262,6 +268,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/user_blood_g"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"

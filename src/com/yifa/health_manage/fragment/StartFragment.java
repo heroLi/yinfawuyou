@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.yifa.health_manage.Blood_pressure_Activity;
+import com.yifa.health_manage.ChartActivity;
 import com.yifa.health_manage.R;
 
 /**
@@ -107,6 +108,16 @@ public class StartFragment extends Fragment {
 			}
 
 		});
+		view.findViewById(R.id.imageView3).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						startActivity(new Intent(getActivity(),
+								ChartActivity.class));
+
+					}
+				});
 
 	}
 

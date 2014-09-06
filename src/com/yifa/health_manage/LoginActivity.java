@@ -1,5 +1,8 @@
 package com.yifa.health_manage;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,11 +15,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.model.ResultResponse;
+import com.yifa.health_manage.util.AndroidUtils;
+import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
 
@@ -27,20 +35,35 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	private TextView noLogin, forgetPass;
 	private Button loginButton;
+	private EditText nameEdit, passEdit;
 
+	private CheckBox isLogin;
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			Log.d("--------", msg.obj.toString());
 
+			if (msg.obj.toString().equalsIgnoreCase("")) {
+				return;
+			}
 			try {
 				JSONObject jsonObject = new JSONObject(msg.obj.toString());
-
 				Gson gson = new Gson();
+				// Type type = new TypeToken<ResultResponse>() {
+				// }.getType();
+				// List<ResultResponse> response = gson.fromJson(
+				// jsonObject.toString(), type);
 				ResultResponse response = gson.fromJson(jsonObject.toString(),
 						ResultResponse.class);
-				Toast.makeText(LoginActivity.this, response.getInfo(), 3000).show();
+				if (response.isResult()) {
+					SharePrefenceUtils.saveAccount(LoginActivity.this, nameEdit
+							.getText().toString().trim());
+					SharePrefenceUtils.savePassword(LoginActivity.this,
+							passEdit.getText().toString().trim());
+					startActivity(new Intent(LoginActivity.this,
+							Main_board_Activity.class));
+					finish();
+				}
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		};
@@ -54,8 +77,6 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_login_layout);
 		initView();
 		initListener();
-		new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {},
-				WebServiceParmas.TEST, WebServiceParmas.HTTP_POST);
 
 	}
 
@@ -63,6 +84,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 		noLogin = (TextView) findViewById(R.id.no_login_name);
 		forgetPass = (TextView) findViewById(R.id.login_forget_pass);
 		loginButton = (Button) findViewById(R.id.login_button);
+		nameEdit = (EditText) findViewById(R.id.login_edit_name);
+		passEdit = (EditText) findViewById(R.id.login_edit_password);
+		isLogin = (CheckBox) findViewById(R.id.login_click);
+
+		if (!SharePrefenceUtils.getAccount(this).equalsIgnoreCase("")) {
+			nameEdit.setText(SharePrefenceUtils.getAccount(this));
+		}
+		if (!SharePrefenceUtils.getPassword(this).equalsIgnoreCase("")) {
+			passEdit.setText(SharePrefenceUtils.getPassword(this));
+		}
 	}
 
 	private void initListener() {
@@ -73,21 +104,54 @@ public class LoginActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+
+		// finish();
+	}
+
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.no_login_name:
 			startActivity(new Intent(this, RegisterActivity.class));
+
 			break;
 		case R.id.login_forget_pass:
-			startActivity(new Intent(this, FindPasswordActivity.class));
+			startActivityForResult(
+					new Intent(this, FindPasswordActivity.class), 0);
 			break;
 		case R.id.login_button:
-			startActivity(new Intent(this, Main_board_Activity.class));
+			if (isVerify()) {
+				if (isLogin.isChecked()) {
+					SharePrefenceUtils.saveAutoLogin(this, true);
+				} else {
+					SharePrefenceUtils.saveAutoLogin(this, false);
+				}
+				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+						nameEdit.getText().toString().trim(),
+						passEdit.getText().toString().trim() },
+						WebServiceParmas.LOGIN, WebServiceParmas.HTTP_POST);
+			}
+
 			break;
 
 		default:
 			break;
 		}
 
+	}
+
+	private boolean isVerify() {
+		if (nameEdit.getText().toString().trim().equalsIgnoreCase("")) {
+			AndroidUtils.showToast(this, "用户名不能为空");
+			return false;
+		}
+		if (passEdit.getText().toString().trim().equalsIgnoreCase("")) {
+			AndroidUtils.showToast(this, "密码不能为空");
+			return false;
+		}
+		return true;
 	}
 }

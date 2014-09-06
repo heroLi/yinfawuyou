@@ -58,12 +58,15 @@ public class Connection {
 			return -1 + "";
 		}
 		http.setHeader("Content-Type", "application/json");
-		http.setHeader("chaarset", "utf-8");
+		http.setHeader("charset", "utf-8");
 		String responseBody = "";
 		HttpResponse response = null;
 		try {
 			response = httpclient.execute(http);
-			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
+			if (response.getStatusLine().getStatusCode() == 200) {
+				responseBody = EntityUtils.toString(response.getEntity(),
+						"UTF-8");
+			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			responseBody = "超时";
@@ -73,32 +76,32 @@ public class Connection {
 		} finally {
 			httpclient.getConnectionManager().shutdown();
 		}
-//        StringBuilder result = new StringBuilder();
-//        InputStream stream = null;
-//        BufferedReader reader = null;
-//        try {
-//            response = httpclient.execute(http);
-//            stream = response.getEntity().getContent();
-//            reader = new BufferedReader(new InputStreamReader(stream,
-//                    HTTP.UTF_8));
-//            String line = "";
-//            while ((line = reader.readLine()) != null) {
-//                result.append(line);
-//            }
-//            responseBody = result.toString();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (reader != null)
-//                    reader.close();
-//                if (stream != null)
-//                    stream.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            httpclient.getConnectionManager().shutdown();
-//        }
+		// StringBuilder result = new StringBuilder();
+		// InputStream stream = null;
+		// BufferedReader reader = null;
+		// try {
+		// response = httpclient.execute(http);
+		// stream = response.getEntity().getContent();
+		// reader = new BufferedReader(new InputStreamReader(stream,
+		// HTTP.UTF_8));
+		// String line = "";
+		// while ((line = reader.readLine()) != null) {
+		// result.append(line);
+		// }
+		// responseBody = result.toString();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// } finally {
+		// try {
+		// if (reader != null)
+		// reader.close();
+		// if (stream != null)
+		// stream.close();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// httpclient.getConnectionManager().shutdown();
+		// }
 		return responseBody;
 	}
 
@@ -118,7 +121,7 @@ public class Connection {
 			return -1 + "";
 		}
 		http.setHeader("Content-Type", "application/json");
-		http.setHeader("chaarset", "utf-8");
+		http.setHeader("charset", "utf-8");
 		String responseBody = "";
 		HttpResponse response = null;
 		try {
@@ -156,7 +159,7 @@ public class Connection {
 		}
 		requestBasePost.setHeader("Connection", "Keep-Alive");
 		requestBasePost.setHeader("Content-Type", "application/json");
-		requestBasePost.setHeader("chaarset", "utf-8");
+		requestBasePost.setHeader("charset", "utf-8");
 		requestBasePost.setHeader("Content-Type",
 				"multipart/form-data; boundary=" + "--%@");
 		requestBasePost.setHeader("User-Agent",

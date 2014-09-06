@@ -27,6 +27,6 @@ public class ProductFragment extends Fragment {
 
 	private void initWeb(View view) {
 		webView = (WebView) view.findViewById(R.id.myWeb);
-		webView.loadUrl("www.baidu.com");
+		webView.loadUrl("http://112.124.126.43/health/ad.php");
 	}
 }

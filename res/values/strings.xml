@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">银发无忧健康管理</string>
+    <string name="app_name">银发无忧</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_board_">Main_board_Activity</string>
     <string name="dummy_button">Dummy Button</string>
