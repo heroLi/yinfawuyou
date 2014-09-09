@@ -3,7 +3,6 @@ package com.yifa.health_manage.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,16 +17,12 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import android.util.Log;
 
 import com.yifa.health_manage.common.Constant;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 public class API {
 	
 	private final static String API_URL=Constant.SERVER_URL+"/health/";

@@ -1,13 +1,9 @@
 package com.yifa.health_manage.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.yifa.health_manage.common.Constant;
-
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 
 public class SqlliteHander {

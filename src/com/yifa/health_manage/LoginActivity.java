@@ -1,8 +1,5 @@
 package com.yifa.health_manage;
 
-import java.lang.reflect.Type;
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,10 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;

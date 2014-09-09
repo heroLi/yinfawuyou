@@ -7,12 +7,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
-import com.yifa.health_manage.model.UserInfo;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Base64;
+
+import com.yifa.health_manage.model.UserInfo;
 
 public class SharePrefenceUtils {
 
@@ -90,6 +90,24 @@ public class SharePrefenceUtils {
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
 		return preferences.getString("ver", "");
+	}
+	/**
+	 * 保存当前用户设备亲友的id
+	 * */
+	public static void saveFriendId(Context c, String id) {
+		
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("fId", id);
+		editor.commit();
+	}
+	
+	public static String getFriendId(Context c) {
+		
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		return preferences.getString("fId", "");
 	}
 
 	/**

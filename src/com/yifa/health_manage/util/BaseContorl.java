@@ -1,12 +1,4 @@
 package com.yifa.health_manage.util;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.yifa.health_manage.R;
 /**
  * 
  * @author track	

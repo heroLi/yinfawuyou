@@ -17,22 +17,21 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/login_top_bg"
-        >
+        android:background="@drawable/login_top_bg" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:text="@string/user_message_photo"
             android:textColor="@color/app_green"
-            android:layout_centerVertical="true"
             android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/user_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:background="#00000000" />
     </RelativeLayout>
@@ -342,37 +341,39 @@
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/user_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:background="#00000000" />
+            android:background="#00000000"
+            android:gravity="right"
+            android:text="000" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/user_account_pass"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/login_middle_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:background="@drawable/login_middle_bg" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:text="@string/user_account_pass"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:background="#00000000"
-            android:gravity="right" />
-    </LinearLayout>
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -481,6 +482,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/user_out_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="70dp"

@@ -85,8 +85,8 @@ public class RegisterMessageActivity extends Activity implements
 		saxGroup.setOnCheckedChangeListener(this);
 
 		if (SharePrefenceUtils.getUsetInfo(this) != null) {
-			if (SharePrefenceUtils.getUsetInfo(this).getImageUrl()
-					.equalsIgnoreCase(""))
+			if (SharePrefenceUtils.getUsetInfo(this).getImageUrl()==null
+					)
 				return;
 			byte[] b = Base64.decode(SharePrefenceUtils.getUsetInfo(this)
 					.getImageUrl().getBytes(), Base64.DEFAULT);

@@ -1,19 +1,5 @@
 package com.yifa.health_manage.util;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,12 +16,11 @@ public class WebServiceParmas {
 	public static final int FIND_PASS = REGISTER + 1;
 	public static final int SET_NEW_PASS = FIND_PASS + 1;
 	public static final int BIND_DEVICE = SET_NEW_PASS + 1;
+	public static final int GET_DEVICE_FRIEND = BIND_DEVICE + 1;
+	public static final int DELETE_DEVICE = GET_DEVICE_FRIEND + 1;
+	public static final int NEW_DATA = DELETE_DEVICE + 1;
+	public static final int GET_BLOOD_DATA = NEW_DATA + 1;
 
-	
-	
-	
-	
-	
 	private static final String Url = "http://112.124.126.43/health/json.php";
 
 	/**
@@ -65,7 +50,7 @@ public class WebServiceParmas {
 		try {
 			entity.put("type", "resetpwd");
 			entity.put("username", parmas[0]);
-//			entity.put("pwd", parmas[1]);
+			// entity.put("pwd", parmas[1]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,8 +109,8 @@ public class WebServiceParmas {
 		try {
 			entity.put("type", "binddev");
 			entity.put("username", parmas[0]);
-			entity.put("device_type", parmas[0]);
-			entity.put("device_sn", parmas[1]);
+			entity.put("device_type", parmas[1]);
+			entity.put("device_sn", parmas[2]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,8 +133,6 @@ public class WebServiceParmas {
 			entity.put("type", "getdev");
 			entity.put("username", parmas[0]);
 			entity.put("device_type", parmas[1]);
-			entity.put("device_sn", parmas[2]);
-			entity.put("device_type", parmas[3]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -189,7 +172,7 @@ public class WebServiceParmas {
 			entity.put("type", "deletedevice");
 			entity.put("username", parmas[0]);
 			entity.put("device_type", parmas[1]);
-			entity.put("relative", parmas[2]);
+			entity.put("device_sn", parmas[2]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,18 +183,23 @@ public class WebServiceParmas {
 	}
 
 	/**
-	 * 根据设备型号得到用户数据 { type:getdata, username: xxx device_type:xxxx, relative:
-	 * id, datatype: xxx, }
+	 * 根据设备型号得到用户数据 type:getdata, username: xxx device_type:xxxx,
+	 * device_sn:xxxx, relative: id, datatype: xxx,(week/month/year) startdate:
+	 * 2014-09-21 //注意格式, 包含起始两天 enddate:2015-01-01 //如果年,
+	 * startdate=enddata=2014
 	 **/
-	public static Object deleteDevicesData(int httpType, String[] parmas) {
+	public static Object getDevicesData(int httpType, String[] parmas) {
 		Object obj = null;
 		JSONObject entity = new JSONObject();
 		try {
 			entity.put("type", "getdata");
 			entity.put("username", parmas[0]);
 			entity.put("device_type", parmas[1]);
-			entity.put("relative", parmas[2]);
-			entity.put("datatype", parmas[3]);
+			entity.put("device_sn", parmas[2]);
+			entity.put("relative", parmas[3]);
+			entity.put("datatype", parmas[4]);
+			entity.put("startdate", parmas[5]);
+			entity.put("enddate", parmas[6]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,15 +213,13 @@ public class WebServiceParmas {
 	 * 当日数据 { type:latestdata, username: xxx device_type:xxxx, relative: id,
 	 * datatype: latest, }
 	 **/
-	public static Object deleteDevicesDayData(int httpType, String[] parmas) {
+	public static Object getDayData(int httpType, String[] parmas) {
 		Object obj = null;
 		JSONObject entity = new JSONObject();
 		try {
 			entity.put("type", "latestdata");
 			entity.put("username", parmas[0]);
-			entity.put("device_type", parmas[1]);
-			entity.put("relative", parmas[2]);
-			entity.put("datatype", parmas[3]);
+			entity.put("relative", parmas[1]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

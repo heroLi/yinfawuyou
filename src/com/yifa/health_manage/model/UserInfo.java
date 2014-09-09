@@ -16,7 +16,7 @@ public class UserInfo implements Serializable{
 	private String hight;
 	private String wight;
 	private String yaowei;
-	private String imageUrl;
+	private String imageUrl="";
 	public String getName() {
 		return name;
 	}

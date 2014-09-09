@@ -3,16 +3,16 @@ package com.yifa.health_manage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+
 import com.google.gson.Gson;
 import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
 
 public class SplashActivity extends Activity {
 

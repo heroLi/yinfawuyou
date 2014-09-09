@@ -1,6 +1,7 @@
 package com.yifa.health_manage;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.RadioGroup;
@@ -10,6 +11,7 @@ import com.yifa.health_manage.fragment.ProductFragment;
 import com.yifa.health_manage.fragment.StartFragment;
 import com.yifa.health_manage.fragment.UserFragment;
 import com.yifa.health_manage.fragment.UtilsFragment;
+import com.yifa.health_manage.util.AndroidUtils;
 
 public class Main_board_Activity extends FragmentActivity implements
 		OnCheckedChangeListener {
@@ -72,6 +74,27 @@ public class Main_board_Activity extends FragmentActivity implements
 
 		default:
 			break;
+		}
+	}
+
+	private boolean isOut = false;
+
+	@Override
+	public void onBackPressed() {
+		if (!isOut) {
+			AndroidUtils.showToast(this, "再按一次退出程序");
+			isOut = true;
+
+			new Handler().postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					isOut = false;
+
+				}
+			}, 2000);
+		} else {
+			finish();
 		}
 	}
 

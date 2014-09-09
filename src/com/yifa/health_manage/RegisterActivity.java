@@ -3,13 +3,6 @@ package com.yifa.health_manage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.yifa.health_manage.model.ResultResponse;
-import com.yifa.health_manage.util.AndroidUtils;
-import com.yifa.health_manage.util.SharePrefenceUtils;
-import com.yifa.health_manage.util.WebServiceParmas;
-import com.yifa.health_manage.util.WebServiceUtils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.gson.Gson;
+import com.yifa.health_manage.model.ResultResponse;
+import com.yifa.health_manage.util.AndroidUtils;
+import com.yifa.health_manage.util.WebServiceParmas;
+import com.yifa.health_manage.util.WebServiceUtils;
 
 /**
  * 注册

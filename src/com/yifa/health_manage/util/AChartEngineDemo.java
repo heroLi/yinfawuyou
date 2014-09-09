@@ -17,8 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.yifa.health_manage.R;
-
 public class AChartEngineDemo extends Activity {
 
 	private LinearLayout chartLayout;

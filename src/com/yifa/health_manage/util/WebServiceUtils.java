@@ -3,18 +3,14 @@ package com.yifa.health_manage.util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.yifa.health_manage.LoginActivity;
-import com.yifa.health_manage.Main_board_Activity;
-import com.yifa.health_manage.model.ResultResponse;
-
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+
+import com.google.gson.Gson;
+import com.yifa.health_manage.model.ResultResponse;
 
 public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 
@@ -138,6 +134,21 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			break;
 		case WebServiceParmas.SET_NEW_PASS:
 			obj = WebServiceParmas.changePassword(httpType, params);
+			break;
+		case WebServiceParmas.GET_DEVICE_FRIEND:
+			obj = WebServiceParmas.getDevicesFriend(httpType, params);
+			break;
+		case WebServiceParmas.BIND_DEVICE:
+			obj = WebServiceParmas.bindDevices(httpType, params);
+			break;
+		case WebServiceParmas.DELETE_DEVICE:
+			obj = WebServiceParmas.deleteDevicesFriend(httpType, params);
+			break;
+		case WebServiceParmas.NEW_DATA:
+			obj = WebServiceParmas.getDayData(httpType, params);
+			break;
+		case WebServiceParmas.GET_BLOOD_DATA:
+			obj = WebServiceParmas.getDevicesData(httpType, params);
 			break;
 
 		default:

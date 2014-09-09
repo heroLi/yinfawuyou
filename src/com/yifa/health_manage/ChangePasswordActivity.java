@@ -3,21 +3,21 @@ package com.yifa.health_manage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.yifa.health_manage.model.ResultResponse;
-import com.yifa.health_manage.util.AndroidUtils;
-import com.yifa.health_manage.util.SharePrefenceUtils;
-import com.yifa.health_manage.util.WebServiceParmas;
-import com.yifa.health_manage.util.WebServiceUtils;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.yifa.health_manage.model.ResultResponse;
+import com.yifa.health_manage.util.AndroidUtils;
+import com.yifa.health_manage.util.SharePrefenceUtils;
+import com.yifa.health_manage.util.WebServiceParmas;
+import com.yifa.health_manage.util.WebServiceUtils;
 
 /**
  * 修改密码
@@ -26,6 +26,8 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 
 	private EditText oldPass, newPass, newPassTwo;
 	private Button commit;
+
+	private TextView title;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -55,12 +57,15 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
+		initView();
 	}
 
 	private void initView() {
 		oldPass = (EditText) findViewById(R.id.change_oldpass);
 		newPass = (EditText) findViewById(R.id.change_newpass);
 		newPassTwo = (EditText) findViewById(R.id.change_newpass_two);
+		title = (TextView) findViewById(R.id.activity_top_title);
+		title.setText("设置新密码");
 		commit = (Button) findViewById(R.id.commit);
 		commit.setOnClickListener(this);
 	}
@@ -90,8 +95,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 	}
 
 	private boolean isVerify() {
-		if (!newPass.getText().toString().trim()
-				.equalsIgnoreCase(SharePrefenceUtils.getVer(this))) {
+		if (newPass.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "密码不能为空");
 			return false;
 		}

@@ -1,9 +1,13 @@
 package com.yifa.health_manage.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -13,7 +17,7 @@ public class AndroidUtils {
 	 * 提示
 	 * */
 	public static void showToast(Context c, String message) {
-		Toast.makeText(c, message, Toast.LENGTH_LONG).show();
+		Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -39,4 +43,41 @@ public class AndroidUtils {
 		return sb.toString();
 	}
 
+	/**
+	 * 获取时间
+	 * */
+	@SuppressLint("SimpleDateFormat")
+	public static String getTime() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date data = new Date(System.currentTimeMillis());
+		String time = dateFormat.format(data);
+		return time;
+	}
+
+	/**
+	 * 得到几天前的时间
+	 */
+	public static String getDateBefore( int day) {
+		Date data = new Date(System.currentTimeMillis());
+		Calendar now = Calendar.getInstance();
+		now.setTime(data);
+		now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String time = dateFormat.format(now.getTime());
+		return time;
+	}
+
+	/**
+	 * 得到几天后的时间
+	 * 
+	 */
+	public static String getDateAfter(int day) {
+		Date data = new Date(System.currentTimeMillis());
+		Calendar now = Calendar.getInstance();
+		now.setTime(data);
+		now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String time = dateFormat.format(now.getTime());
+		return time;
+	}
 }

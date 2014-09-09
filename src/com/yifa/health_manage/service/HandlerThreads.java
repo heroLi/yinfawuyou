@@ -1,18 +1,7 @@
 package com.yifa.health_manage.service;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-
-import com.yifa.health_manage.util.SqlliteHander;
 
 public  class HandlerThreads {
 

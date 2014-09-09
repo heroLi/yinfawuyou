@@ -3,13 +3,6 @@ package com.yifa.health_manage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.yifa.health_manage.model.ResultResponse;
-import com.yifa.health_manage.util.AndroidUtils;
-import com.yifa.health_manage.util.SharePrefenceUtils;
-import com.yifa.health_manage.util.WebServiceParmas;
-import com.yifa.health_manage.util.WebServiceUtils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +14,12 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.yifa.health_manage.model.ResultResponse;
+import com.yifa.health_manage.util.SharePrefenceUtils;
+import com.yifa.health_manage.util.WebServiceParmas;
+import com.yifa.health_manage.util.WebServiceUtils;
 
 /**
  * 设备绑定界面
@@ -78,8 +77,8 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 		topButton = (Button) findViewById(R.id.register_btn_no);
 		deviceName = (EditText) findViewById(R.id.bind_devices_name);
 		title = (TextView) findViewById(R.id.activity_top_title);
-		group = (RadioGroup) findViewById(R.id.bind_group);
 		title.setText("绑定设备");
+		group = (RadioGroup) findViewById(R.id.bind_group);
 	}
 
 	private void initLisenter() {
@@ -97,8 +96,8 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 		case R.id.register_btn_next:
 			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
 				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
-						SharePrefenceUtils.getAccount(BindDeviceActivity.this),
-						deviceName.getText().toString().trim(), type },
+						SharePrefenceUtils.getAccount(BindDeviceActivity.this),type,
+						deviceName.getText().toString().trim() },
 						WebServiceParmas.BIND_DEVICE,
 						WebServiceParmas.HTTP_POST);
 			} else {

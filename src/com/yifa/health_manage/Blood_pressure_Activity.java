@@ -2,59 +2,26 @@ package com.yifa.health_manage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.yifa.health_manage.fragment.AddressFragment;
 import com.yifa.health_manage.fragment.FindFragment;
 import com.yifa.health_manage.fragment.MeFragment;
 import com.yifa.health_manage.fragment.WeiXinFragment;
 import com.yifa.health_manage.service.HandlerThreads;
-
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint.Align;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.view.ViewGroup.LayoutParams; 
-
-import org.achartengine.ChartFactory;  
-import org.achartengine.GraphicalView;  
-import org.achartengine.chart.PointStyle;  
-import org.achartengine.model.XYMultipleSeriesDataset;  
-import org.achartengine.model.XYSeries;  
-import org.achartengine.renderer.XYMultipleSeriesRenderer;  
-import org.achartengine.renderer.XYSeriesRenderer; 
 
 public class Blood_pressure_Activity extends FragmentActivity   {
 

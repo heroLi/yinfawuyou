@@ -29,8 +29,6 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 
-import com.yifa.health_manage.R;
-
 /** 
  * 
  * @author track

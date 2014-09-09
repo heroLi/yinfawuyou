@@ -10,18 +10,13 @@ import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.LineChart;
 import org.achartengine.chart.PointStyle;
-import org.achartengine.chart.TimeChart;
 import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.yifa.health_manage.R;
-import com.yifa.health_manage.service.HandlerThreads;
 
 import android.graphics.Color;
 import android.graphics.Paint.Align;
@@ -35,6 +30,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.yifa.health_manage.R;
+import com.yifa.health_manage.service.HandlerThreads;
 
 public class AddressFragment extends Fragment{
 
