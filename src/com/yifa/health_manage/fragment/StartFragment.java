@@ -43,8 +43,6 @@ public class StartFragment extends Fragment {
 	 */
 	private int[] imgIdArray;
 
-	private ImageView dummydata;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -56,7 +54,6 @@ public class StartFragment extends Fragment {
 	private void initView(View view) {
 		ViewGroup group = (ViewGroup) view.findViewById(R.id.viewGroup);
 		viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-		dummydata = (ImageView) view.findViewById(R.id.imageView2);
 		// 载入图片资源ID
 		imgIdArray = new int[] { R.drawable.look_deug_home_top_img1,
 				R.drawable.look_deug_home_top_img2,
@@ -97,36 +94,53 @@ public class StartFragment extends Fragment {
 
 		// 设置ViewPager的默认项, 设置为长度的100倍，这样子开始就能往左滑动
 		viewPager.setCurrentItem((mImageViews.length) * 100);
-		dummydata.setClickable(true);
-		dummydata.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent mainIntent = new Intent(getActivity(),
-						Blood_pressure_Activity.class);
-				startActivity(mainIntent);
-			}
-
-		});
-		view.findViewById(R.id.imageView3).setOnClickListener(
+		// 血压
+		view.findViewById(R.id.blood_p).setOnClickListener(
 				new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						startActivity(new Intent(getActivity(),
-								ChartActivity.class));
+						Intent intent = new Intent(getActivity(),
+								ChartActivity.class);
+						intent.putExtra("device_type", "blood_presure");
+						startActivity(intent);
 
 					}
 				});
-		view.findViewById(R.id.ImageView01).setOnClickListener(
+		// 心率
+		view.findViewById(R.id.blood_heart).setOnClickListener(
 				new OnClickListener() {
-					
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getActivity(),
+								ChartActivity.class);
+						intent.putExtra("device_type", "blood_glucose");
+						startActivity(intent);
+
+					}
+				});
+		// 血糖
+		view.findViewById(R.id.blood_suger).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(getActivity(),
+								ChartActivity.class);
+						intent.putExtra("device_type", "blood_glucose");
+						startActivity(intent);
+
+					}
+				});
+		view.findViewById(R.id.blood_new).setOnClickListener(
+				new OnClickListener() {
+
 					@Override
 					public void onClick(View v) {
 						startActivity(new Intent(getActivity(),
 								NewDataActivity.class));
-						
+
 					}
 				});
 

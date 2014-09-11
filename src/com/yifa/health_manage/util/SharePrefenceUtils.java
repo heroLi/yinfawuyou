@@ -91,23 +91,62 @@ public class SharePrefenceUtils {
 				Context.MODE_PRIVATE);
 		return preferences.getString("ver", "");
 	}
+
 	/**
-	 * 保存当前用户设备亲友的id
+	 * 保存血糖当前用户设备亲友的id
 	 * */
-	public static void saveFriendId(Context c, String id) {
-		
+	public static void saveSugarFriendId(Context c, String id) {
+
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
 		editor.putString("fId", id);
 		editor.commit();
 	}
-	
-	public static String getFriendId(Context c) {
-		
+
+	public static String getSugarFriendId(Context c) {
+
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
 		return preferences.getString("fId", "");
+	}
+
+	/**
+	 * 保存血压当前用户设备亲友的id
+	 * */
+	public static void savePressureFriendId(Context c, String id) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("Pressure", id);
+		editor.commit();
+	}
+
+	public static String getPressureFriendId(Context c) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		return preferences.getString("Pressure", "");
+	}
+
+	/**
+	 * 保存心率当前用户设备亲友的id
+	 * */
+	public static void saveHeartFriendId(Context c, String id) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		editor.putString("Heart", id);
+		editor.commit();
+	}
+
+	public static String getHeartFriendId(Context c) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		return preferences.getString("Heart", "");
 	}
 
 	/**

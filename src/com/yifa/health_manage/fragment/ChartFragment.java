@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -49,6 +51,17 @@ public class ChartFragment extends Fragment {
 	private XYMultipleSeriesRenderer renderer;// 线性统计图主描绘器
 	private LinearLayout mLayout;
 	private MyLoger loger = MyLoger.getInstence("ChartFragment");
+
+	private LinearLayout bloodLine;
+
+	private String timeTitle = "2014";
+
+	private TextView time_title;
+
+	public ChartFragment(String type) {
+		this.deviceType = type;
+	}
+
 	// blood_presure 血压 blood_glucose 血糖
 	private String timeType = "week", deviceType = "blood_glucose",
 			device_sn = "123456", relative = "12345", startdate, enddate;
@@ -99,12 +112,26 @@ public class ChartFragment extends Fragment {
 
 	private void initView(View view) {
 		mLayout = (LinearLayout) view.findViewById(R.id.chart_layout);
+		bloodLine = (LinearLayout) view.findViewById(R.id.blood_line);
+		time_title = (TextView) view.findViewById(R.id.timeTitle);
+
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {
+			relative = SharePrefenceUtils.getSugarFriendId(getActivity());
+		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
+			relative = SharePrefenceUtils.getPressureFriendId(getActivity());
+		} else {
+			relative = SharePrefenceUtils.getHeartFriendId(getActivity());
+		}
 
 		new WebServiceUtils(getActivity(), mHandler).sendExecute(new String[] {
 				SharePrefenceUtils.getAccount(getActivity()), deviceType,
-				device_sn, relative, timeType, AndroidUtils.getDateBefore(3),
+				device_sn, relative, timeType, AndroidUtils.getDateBefore(7),
 				AndroidUtils.getTime() }, WebServiceParmas.GET_BLOOD_DATA,
 				WebServiceParmas.HTTP_POST, "加载中...");
+
+		timeTitle = AndroidUtils.getDateBefore(7) + "-"
+				+ AndroidUtils.getTime();
+		time_title.setText(timeTitle);
 	}
 
 	@Override
@@ -153,7 +180,7 @@ public class ChartFragment extends Fragment {
 		}
 		// 点击
 		renderer.setClickEnabled(true);
-		renderer.setSelectableBuffer(40);
+		renderer.setSelectableBuffer(50);
 
 		final GraphicalView view = ChartFactory.getLineChartView(getActivity(),
 				mDataset, renderer);
@@ -196,7 +223,7 @@ public class ChartFragment extends Fragment {
 		// 设置背景色是否启用
 		renderer.setApplyBackgroundColor(true);
 		// 设置背景色
-		renderer.setBackgroundColor(R.color.app_green);
+		renderer.setBackgroundColor(Color.parseColor("#00ffffff"));
 		// 设置x y轴标题字体大小
 		renderer.setAxisTitleTextSize(18f);
 
@@ -214,9 +241,19 @@ public class ChartFragment extends Fragment {
 		// 设置图表上显示点的大小
 		renderer.setPointSize(5f);
 		// 设置边距
-		renderer.setMargins(new int[] { 20, 50, 10, 0 });// 上，左，xia 右
+		renderer.setMargins(new int[] { 60, 40, 0, 0 });// 上，左，xia 右
 		// 设置边距的颜色
-		renderer.setMarginsColor(R.color.app_green);
+		renderer.setMarginsColor(Color.parseColor("#00ffffff"));
+		//设置xy轴线的颜色
+//		renderer.setAxesColor(Color.parseColor("#00ffffff"));
+		
+		//设置xy轴字的颜色
+		renderer.setXLabelsColor(Color.parseColor("#ffffff"));
+		renderer.setYLabelsColor(0, Color.parseColor("#ffffff"));
+
+		renderer.setLegendHeight(20);
+		renderer.setYLabelsAlign(Paint.Align.RIGHT);
+		renderer.setYAxisAlign(Paint.Align.LEFT, 0);
 
 		renderer.setYTitle("mm\nhg");
 		renderer.setXTitle("");
@@ -227,7 +264,7 @@ public class ChartFragment extends Fragment {
 		renderer.setYAxisMin(40);
 		// 轴上数字的数量
 		renderer.setXLabels(0);
-		renderer.setYLabels(4);
+		renderer.setYLabels(0);
 
 		renderer.addXTextLabel(1, "一");
 		renderer.addXTextLabel(2, "二");
@@ -237,10 +274,20 @@ public class ChartFragment extends Fragment {
 		renderer.addXTextLabel(6, "六");
 		renderer.addXTextLabel(7, "七");
 
-		// renderer.addYTextLabel(40, "40");
-		// renderer.addYTextLabel(80, "80");
-		// renderer.addYTextLabel(120, "120");
-		// renderer.addYTextLabel(160, "160");
+		renderer.addYTextLabel(40, "40");
+		renderer.addYTextLabel(80, "80");
+		renderer.addYTextLabel(120, "120");
+		renderer.addYTextLabel(160, "160");
+
+		renderer.setZoomRate(100.0F);
+		renderer.setShowLegend(false);
+		renderer.setZoomButtonsVisible(false);
+		renderer.setAntialiasing(true);
+		renderer.setShowAxes(true);
+		renderer.setShowCustomTextGrid(true);
+		renderer.setExternalZoomEnabled(true);
+		renderer.setFitLegend(true);
+		renderer.setXRoundedLabels(true);
 
 		renderer.setShowGridX(true);
 		// renderer.setShowAxes(false);

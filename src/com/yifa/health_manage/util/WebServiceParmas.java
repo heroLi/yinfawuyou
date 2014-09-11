@@ -22,6 +22,7 @@ public class WebServiceParmas {
 	public static final int GET_BLOOD_DATA = NEW_DATA + 1;
 
 	private static final String Url = "http://112.124.126.43/health/json.php";
+//	private static final String Url = "http://121.40.172.222/health/json.php";//正式
 
 	/**
 	 * type:login username: xxxx, pwd: xxxx
