@@ -1,7 +1,12 @@
 package com.yifa.health_manage.fragment;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -21,13 +26,23 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,9 +58,10 @@ import com.yifa.health_manage.util.WebServiceUtils;
 /**
  * 图表界面
  * **/
-public class ChartFragment extends Fragment {
+public class ChartFragment extends Fragment implements OnClickListener {
 
 	private XYSeries series_high;// XY数据点 用于提供绘制的点集合的数据
+	private XYSeries series_line;// XY数据点 用于提供绘制的点集合的数据
 	private XYSeries series_low;// XY数据点
 	private XYMultipleSeriesDataset mDataset;// XY轴数据集存放XYSeries
 	private XYMultipleSeriesRenderer renderer;// 线性统计图主描绘器
@@ -56,10 +72,33 @@ public class ChartFragment extends Fragment {
 
 	private String timeTitle = "2014";
 
-	private TextView time_title;
+	private int type = 0;// 0周 1月2年
 
-	public ChartFragment(String type) {
+	private TextView time_title, blood_text;
+
+	private int bgH, bgW, imageH, imageW;
+
+	private float density;
+	private LinearLayout linearLayout;
+	private ImageView arrow;
+
+	private RelativeLayout topLayout;
+
+	private FrameLayout chartLayout;
+
+	private String startTime, endTime;
+
+	private ImageButton leftButton, rightButton;
+
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			setImageShow(80);
+		};
+	};
+
+	public ChartFragment(String type, int timeType) {
 		this.deviceType = type;
+		this.type = timeType;
 	}
 
 	// blood_presure 血压 blood_glucose 血糖
@@ -88,9 +127,14 @@ public class ChartFragment extends Fragment {
 					ChartActivity cahrt = (ChartActivity) getActivity();
 					cahrt.setListData(mList);
 					initData(mList);
+
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+				time_title.setText(startTime + "-" + endTime);
+				if (startTime.equalsIgnoreCase(endTime)) {
+					time_title.setText(startTime);
 				}
 				break;
 
@@ -110,28 +154,60 @@ public class ChartFragment extends Fragment {
 		return view;
 	}
 
+	@SuppressLint("ResourceAsColor")
 	private void initView(View view) {
 		mLayout = (LinearLayout) view.findViewById(R.id.chart_layout);
 		bloodLine = (LinearLayout) view.findViewById(R.id.blood_line);
 		time_title = (TextView) view.findViewById(R.id.timeTitle);
+		blood_text = (TextView) view.findViewById(R.id.blood_detail_number_tv);
+		linearLayout = (LinearLayout) view.findViewById(R.id.layout_halfRound);
+		topLayout = (RelativeLayout) view.findViewById(R.id.topLayout);
+		chartLayout = (FrameLayout) view.findViewById(R.id.chartlayout);
+		arrow = (ImageView) view.findViewById(R.id.needle_iv);
+		leftButton = (ImageButton) view.findViewById(R.id.chart_left);
+		rightButton = (ImageButton) view.findViewById(R.id.chart_right);
 
+		initListener();
+
+		SharePrefenceUtils.saveSugarFriendId(getActivity(), "12345");
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
 			relative = SharePrefenceUtils.getSugarFriendId(getActivity());
+			topLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
+			chartLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
+
 		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
 			relative = SharePrefenceUtils.getPressureFriendId(getActivity());
-		} else {
+			topLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
+			chartLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
+		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			relative = SharePrefenceUtils.getHeartFriendId(getActivity());
+			topLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
+			chartLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 		}
+		// 初始化时间
+		initRequstTime(type);
+
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getActivity().getWindow().getWindowManager().getDefaultDisplay()
+				.getMetrics(displayMetrics);
+		density = displayMetrics.density;
+		if (startTime.equalsIgnoreCase(endTime)) {
+			time_title.setText(startTime);
+		}
+		time_title.setText(startTime + "-" + endTime);
+
+		initLineSet();
+	}
+
+	private void initListener() {
+		leftButton.setOnClickListener(this);
+		rightButton.setOnClickListener(this);
 
 		new WebServiceUtils(getActivity(), mHandler).sendExecute(new String[] {
 				SharePrefenceUtils.getAccount(getActivity()), deviceType,
-				device_sn, relative, timeType, AndroidUtils.getDateBefore(7),
-				AndroidUtils.getTime() }, WebServiceParmas.GET_BLOOD_DATA,
-				WebServiceParmas.HTTP_POST, "加载中...");
-
-		timeTitle = AndroidUtils.getDateBefore(7) + "-"
-				+ AndroidUtils.getTime();
-		time_title.setText(timeTitle);
+				device_sn, relative, timeType, startTime, endTime },
+				WebServiceParmas.GET_BLOOD_DATA, WebServiceParmas.HTTP_POST,
+				"加载中...");
 	}
 
 	@Override
@@ -142,40 +218,54 @@ public class ChartFragment extends Fragment {
 	}
 
 	private void initData(List<BloodValuesInfo> mList) {
-
+		series_line = new XYSeries("line");
 		series_high = new XYSeries("高压");
+		series_low = new XYSeries("低压");
+		series_high.clear();
+		series_low.clear();
 		mDataset = new XYMultipleSeriesDataset();
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1, Double.valueOf(mList.get(i).getValue()));
 			}
+			blood_text.setText(mList.get(mList.size() - 1).getValue());
 		} else {
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1,
 						Double.valueOf(mList.get(i).getHigh_value()));
 			}
-			series_low = new XYSeries("低压");
+
 			for (int i = 0; i < mList.size(); i++) {
 				series_low.add(i + 1,
 						Double.valueOf(mList.get(i).getLow_value()));
 			}
 			mDataset.addSeries(series_low);
+			blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
+					+ "/" + mList.get(mList.size() - 1).getLow_value());
 		}
 		mDataset.addSeries(series_high);
+
+		// 竖线
+		series_line.add(mList.size(), 40);
+		series_line.add(mList.size(), 160);
+		mDataset.addSeries(series_line);
 
 		// 曲线图的格式，包括颜色，值的范围，点和线的形状等等 都封装在
 		// XYSeriesRender对象中，再将XYSeriesRender对象封装在 XYMultipleSeriesRenderer 对象中
 		XYSeriesRenderer r = new XYSeriesRenderer();
 		r.setColor(Color.WHITE);
 		r.setPointStyle(PointStyle.CIRCLE);
+		r.setPointStrokeWidth(10);
 		r.setFillPoints(true);
 		XYSeriesRenderer r2 = new XYSeriesRenderer();
 		r2.setColor(Color.WHITE);
-		r2.setPointStyle(PointStyle.CIRCLE);
+		r2.setPointStyle(PointStyle.TRIANGLE);
 		r2.setFillPoints(true);
 		renderer = getRenderer();
 		renderer.addSeriesRenderer(r);
-		if (!deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
+			renderer.addSeriesRenderer(r2);// line
+		} else {
 			renderer.addSeriesRenderer(r2);
 		}
 		// 点击
@@ -194,21 +284,17 @@ public class ChartFragment extends Fragment {
 						.getCurrentSeriesAndPoint();
 
 				if (seriesSelection == null) {
-					Toast.makeText(getActivity(), "No chart element",
-							Toast.LENGTH_SHORT).show();
 				} else {
-					// display information of the clicked point
-					Toast.makeText(
-							getActivity(),
-							"Chart element in series index "
-									+ seriesSelection.getSeriesIndex()
-									+ " data point index "
-									+ seriesSelection.getPointIndex()
-									+ " was clicked"
-									+ " closest point value X="
-									+ seriesSelection.getXValue() + ", Y="
-									+ seriesSelection.getValue(),
-							Toast.LENGTH_SHORT).show();
+					series_line.clear();
+
+					if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
+						blood_text.setText(seriesSelection.getValue() + "");
+					} else {
+					}
+					series_line.add(seriesSelection.getXValue(), 40);
+					series_line.add(seriesSelection.getXValue(), 160);
+					view.repaint();
+					setImageShow((int) seriesSelection.getValue());
 				}
 			}
 		});
@@ -239,15 +325,15 @@ public class ChartFragment extends Fragment {
 		// 设置是否显示放大缩小按钮
 		renderer.setZoomButtonsVisible(false);
 		// 设置图表上显示点的大小
-		renderer.setPointSize(5f);
+		renderer.setPointSize(6f);
 		// 设置边距
 		renderer.setMargins(new int[] { 60, 40, 0, 0 });// 上，左，xia 右
 		// 设置边距的颜色
 		renderer.setMarginsColor(Color.parseColor("#00ffffff"));
-		//设置xy轴线的颜色
-//		renderer.setAxesColor(Color.parseColor("#00ffffff"));
-		
-		//设置xy轴字的颜色
+		// 设置xy轴线的颜色
+		// renderer.setAxesColor(Color.parseColor("#00ffffff"));
+
+		// 设置xy轴字的颜色
 		renderer.setXLabelsColor(Color.parseColor("#ffffff"));
 		renderer.setYLabelsColor(0, Color.parseColor("#ffffff"));
 
@@ -279,20 +365,20 @@ public class ChartFragment extends Fragment {
 		renderer.addYTextLabel(120, "120");
 		renderer.addYTextLabel(160, "160");
 
-		renderer.setZoomRate(100.0F);
+		// renderer.setZoomRate(100.0F);
 		renderer.setShowLegend(false);
-		renderer.setZoomButtonsVisible(false);
-		renderer.setAntialiasing(true);
+		// renderer.setAntialiasing(true);
 		renderer.setShowAxes(true);
-		renderer.setShowCustomTextGrid(true);
-		renderer.setExternalZoomEnabled(true);
-		renderer.setFitLegend(true);
-		renderer.setXRoundedLabels(true);
+		// renderer.setShowCustomTextGrid(true);
+		// renderer.setExternalZoomEnabled(true);
+		// renderer.setFitLegend(true);
+		// renderer.setXRoundedLabels(true);
 
 		renderer.setShowGridX(true);
 		// renderer.setShowAxes(false);
 		renderer.setPanEnabled(false); // 图表是否可以移动
-		renderer.setZoomEnabled(true); // 图表是否可以缩放
+		renderer.setZoomEnabled(false); // 图表是否可以缩放
+		renderer.setPanEnabled(false);
 		// renderer.setLegendHeight(100); // 图标文字距离底边的高度
 
 		// renderer.setYLabelsAlign(Align.RIGHT);// 右对齐
@@ -326,5 +412,199 @@ public class ChartFragment extends Fragment {
 		}
 		mDataset.addSeries(mSeries);
 		return mDataset;
+	}
+
+	private void initLineSet() {
+
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				bgH = linearLayout.getHeight();
+				bgW = linearLayout.getWidth();
+
+				imageH = arrow.getHeight();
+				imageW = arrow.getWidth();
+
+				Log.d("demo", bgH + "");
+				Log.d("demo", bgW + "");
+				Log.d("demo", imageH + "");
+				Log.d("demo", imageW + "");
+				handler.sendEmptyMessage(0);
+			}
+		}, 1000);
+	}
+
+	private int middle = 100;
+
+	private int totol = 100;
+
+	private void setImageShow(int values) {
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {// xuetang
+
+		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
+
+		} else {
+			totol = 140;
+		}
+
+		double jiao = Math.asin((double) values / middle);
+
+		jiao = Math.toDegrees(jiao);
+		jiao = 180 * (values / totol);
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+		String s = df.format(jiao);
+
+		float banjing = bgH - imageH - 30 * density;
+		float hh = banjing * values / middle;
+		double ww = Math.sqrt(banjing * banjing - (banjing * values / middle)
+				* (banjing * values / middle));
+		Log.d("demo", "hh" + hh);
+		Log.d("demo", "ww" + ww);
+		RotateAnimation animation = new RotateAnimation(0f, Float.valueOf(s),
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);// 按中心旋转
+		animation.setDuration(2000);
+		// (bgH- imageH-30*density)
+		// TranslateAnimation translateAnimation = new TranslateAnimation(0f,
+		// (bgW
+		// / 2 - imageW / 2 - 30 * density), 0f,
+		// -(bgH - imageH * 3 / 2 - 30 * density));
+		TranslateAnimation translateAnimation = new TranslateAnimation(0f,
+				(float) ww, 0f, -hh);
+		translateAnimation.setDuration(1000);
+		AnimationSet animationSet = new AnimationSet(false);
+		animationSet.addAnimation(animation);
+		animationSet.addAnimation(translateAnimation);
+		animationSet.setFillAfter(true);
+
+		arrow.startAnimation(animationSet);
+	}
+
+	@SuppressLint("SimpleDateFormat")
+	@SuppressWarnings({ "deprecation", "static-access" })
+	@Override
+	public void onClick(View v) {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		DateFormat dateFormat = new DateFormat();
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy");
+		try {
+			switch (v.getId()) {
+			case R.id.chart_left:
+				switch (type) {
+				case 0:
+					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
+							.getTime());
+					calendar.add(Calendar.DATE, -7);
+					endTime = startTime;
+					startTime = (String) dateFormat.format("yyyy-MM-dd",
+							calendar);
+					break;
+				case 1:
+					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
+							.getTime());
+					calendar.add(Calendar.MONTH, -1);
+					endTime = startTime;
+					startTime = (String) dateFormat.format("yyyy-MM-dd",
+							calendar);
+					break;
+				case 2:
+
+					calendar.setTimeInMillis(simpleDateFormat2.parse(startTime)
+							.getTime());
+					calendar.add(Calendar.YEAR, -1);
+					endTime = startTime;
+					startTime = (String) dateFormat.format("yyyy", calendar);
+
+					break;
+
+				default:
+					break;
+				}
+				new WebServiceUtils(getActivity(), mHandler).sendExecute(
+						new String[] {
+								SharePrefenceUtils.getAccount(getActivity()),
+								deviceType, device_sn, relative, timeType,
+								startTime, endTime },
+						WebServiceParmas.GET_BLOOD_DATA,
+						WebServiceParmas.HTTP_POST, "加载中...");
+				break;
+			case R.id.chart_right:
+
+				switch (type) {
+				case 0:
+					calendar.setTimeInMillis(simpleDateFormat.parse(endTime)
+							.getTime());
+					calendar.add(Calendar.DATE, 7);
+					startTime = endTime;
+					endTime = (String) dateFormat
+							.format("yyyy-MM-dd", calendar);
+					break;
+				case 1:
+					calendar.setTimeInMillis(simpleDateFormat.parse(endTime)
+							.getTime());
+					calendar.add(Calendar.MONTH, 1);
+					startTime = endTime;
+					endTime = (String) dateFormat
+							.format("yyyy-MM-dd", calendar);
+					break;
+				case 2:
+					calendar.setTimeInMillis(simpleDateFormat2.parse(endTime)
+							.getTime());
+					calendar.add(Calendar.YEAR, 1);
+					startTime = endTime;
+					endTime = (String) dateFormat.format("yyyy", calendar);
+					break;
+
+				default:
+					break;
+				}
+				new WebServiceUtils(getActivity(), mHandler).sendExecute(
+						new String[] {
+								SharePrefenceUtils.getAccount(getActivity()),
+								deviceType, device_sn, relative, timeType,
+								startTime, endTime },
+						WebServiceParmas.GET_BLOOD_DATA,
+						WebServiceParmas.HTTP_POST, "加载中...");
+				break;
+
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void initRequstTime(int type) {
+		Calendar nowCalendar = Calendar.getInstance(Locale.CHINA);
+		nowCalendar.setTimeInMillis(System.currentTimeMillis());
+
+		switch (type) {
+		case 0:
+			int week = nowCalendar.get(Calendar.DAY_OF_WEEK);
+			loger.d(week);
+			endTime = AndroidUtils.getTime();
+			startTime = AndroidUtils.getDateBefore((week-2));
+			break;
+		case 1:
+			int month = nowCalendar.get(Calendar.DAY_OF_MONTH);
+			endTime = AndroidUtils.getTime();
+			startTime = AndroidUtils.getDateBefore(month);
+			break;
+		case 2:
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+			String year = dateFormat
+					.format(new Date(System.currentTimeMillis()));
+			startTime = year;
+			endTime = year;
+			break;
+
+		default:
+			break;
+		}
+
 	}
 }

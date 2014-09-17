@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 public class WebServiceParmas {
 
+	private MyLoger loger = MyLoger.getInstence("WebServiceParmas");
 	public static final int HTTP_POST = 0;
 	public static final int HTTP_PUT = 1;
 	public static final int HTTP_DELETE = 2;
@@ -21,14 +22,13 @@ public class WebServiceParmas {
 	public static final int NEW_DATA = DELETE_DEVICE + 1;
 	public static final int GET_BLOOD_DATA = NEW_DATA + 1;
 
-	private static final String Url = "http://112.124.126.43/health/json.php";
-//	private static final String Url = "http://121.40.172.222/health/json.php";//正式
+//	private static final String Url = "http://112.124.126.43/health/json.php";//demo
+	private static final String Url = "http://121.40.172.222/health/json.php";//正式
 
 	/**
 	 * type:login username: xxxx, pwd: xxxx
 	 * */
 	public static Object login(int httpType, String[] parmas) {
-		String url = "http://112.124.126.43/health/json.php";
 		Object obj = null;
 		JSONObject entity = new JSONObject();
 		try {

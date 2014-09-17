@@ -115,7 +115,7 @@ public class StartFragment extends Fragment {
 					public void onClick(View v) {
 						Intent intent = new Intent(getActivity(),
 								ChartActivity.class);
-						intent.putExtra("device_type", "blood_glucose");
+						intent.putExtra("device_type", "heart_rate");
 						startActivity(intent);
 
 					}

@@ -38,6 +38,8 @@ public class Connection {
 	private static String md5code = null;
 
 	public static String ver = "";
+	
+	private static MyLoger loger = MyLoger.getInstence("Connection");
 
 	private static String getHttpContent(String url, int type, JSONObject entity) {
 		HttpParams httpParameters = new BasicHttpParams();
@@ -182,7 +184,7 @@ public class Connection {
 
 	public static synchronized String getConnection(String url, int type,
 			JSONObject entity) {
-		Log.d("------", entity.toString());
+		loger.d(entity.toString());
 		return getHttpContent(url, type, entity);
 	}
 

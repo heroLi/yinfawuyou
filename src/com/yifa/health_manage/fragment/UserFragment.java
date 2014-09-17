@@ -34,11 +34,11 @@ public class UserFragment extends Fragment implements OnClickListener {
 	private ImageView userPhoto;
 
 	private LinearLayout blood_p;
-	
+
 	private RelativeLayout changePass;
-	
+
 	private TextView userAccount;
-	
+
 	private Button outButton;
 
 	@Override
@@ -51,11 +51,6 @@ public class UserFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initView(View view) {
-		nameEdit = (EditText) view.findViewById(R.id.user_name);
-		briEdit = (EditText) view.findViewById(R.id.user_bri);
-		heightEdit = (EditText) view.findViewById(R.id.user_height);
-		weightEdit = (EditText) view.findViewById(R.id.user_weight);
-		yaoEdit = (EditText) view.findViewById(R.id.user_yao);
 		userPhoto = (ImageView) view.findViewById(R.id.user_photo);
 		blood_p = (LinearLayout) view.findViewById(R.id.user_blood_p);
 		userAccount = (TextView) view.findViewById(R.id.user_name_text);
@@ -105,7 +100,8 @@ public class UserFragment extends Fragment implements OnClickListener {
 			startActivity(new Intent(getActivity(), DeviceListActivity.class));
 			break;
 		case R.id.user_account_pass:
-			startActivity(new Intent(getActivity(), ChangePasswordActivity.class));
+			startActivity(new Intent(getActivity(),
+					ChangePasswordActivity.class));
 			break;
 		case R.id.user_out_button:
 			getActivity().finish();

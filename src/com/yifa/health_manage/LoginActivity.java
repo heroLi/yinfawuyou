@@ -35,33 +35,40 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private CheckBox isLogin;
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			Log.d("--------", msg.obj.toString());
-
-			if (msg.obj.toString().equalsIgnoreCase("")) {
-				return;
-			}
-			try {
-				JSONObject jsonObject = new JSONObject(msg.obj.toString());
-				Gson gson = new Gson();
-				// Type type = new TypeToken<ResultResponse>() {
-				// }.getType();
-				// List<ResultResponse> response = gson.fromJson(
-				// jsonObject.toString(), type);
-				ResultResponse response = gson.fromJson(jsonObject.toString(),
-						ResultResponse.class);
-				if (response.isResult()) {
-					SharePrefenceUtils.saveAccount(LoginActivity.this, nameEdit
-							.getText().toString().trim());
-					SharePrefenceUtils.savePassword(LoginActivity.this,
-							passEdit.getText().toString().trim());
-					startActivity(new Intent(LoginActivity.this,
-							Main_board_Activity.class));
-					finish();
+			switch (msg.what) {
+			case WebServiceParmas.LOGIN:
+				if (msg.obj.toString().equalsIgnoreCase("")) {
+					return;
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
+				try {
+					JSONObject jsonObject = new JSONObject(msg.obj.toString());
+					Gson gson = new Gson();
+					// Type type = new TypeToken<ResultResponse>() {
+					// }.getType();
+					// List<ResultResponse> response = gson.fromJson(
+					// jsonObject.toString(), type);
+					ResultResponse response = gson.fromJson(
+							jsonObject.toString(), ResultResponse.class);
+					if (response.isResult()) {
+						SharePrefenceUtils.saveAccount(LoginActivity.this,
+								nameEdit.getText().toString().trim());
+						SharePrefenceUtils.savePassword(LoginActivity.this,
+								passEdit.getText().toString().trim());
+						startActivity(new Intent(LoginActivity.this,
+								Main_board_Activity.class));
+						finish();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				break;
+
+			default:
+				break;
 			}
 		};
+
 	};
 
 	@Override

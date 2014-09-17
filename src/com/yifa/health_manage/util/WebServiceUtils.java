@@ -96,7 +96,8 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			return;
 		}
 		if ("无网络".equalsIgnoreCase(result.toString())) {
-			mHandler.sendEmptyMessage(-3);// 无网络
+			AndroidUtils.showToast(mContext, "请连接网络");
+			// mHandler.sendEmptyMessage(-3);// 无网络
 			return;
 		}
 		JSONObject jsonObject = null;

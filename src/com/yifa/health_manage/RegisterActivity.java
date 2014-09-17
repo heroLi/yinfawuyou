@@ -41,7 +41,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 							jsonObject.toString(), ResultResponse.class);
 					if (response.isResult()) {
 						startActivity(new Intent(RegisterActivity.this,
-								RegisterMessageActivity.class));
+								BindDeviceActivity.class));
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

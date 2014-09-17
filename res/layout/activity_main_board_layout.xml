@@ -6,8 +6,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_marginBottom="50dp"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp" >
 
         <LinearLayout
             android:id="@+id/main_content_layout"
@@ -22,9 +22,11 @@
     <RadioGroup
         android:id="@+id/main_radiogroup"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        
+        android:background="@color/main_gray"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -32,33 +34,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/main_button_select"
             android:gravity="center"
-            android:background="@drawable/home_buttom_home_normal_bg"
-            android:button="@null" />
+            android:text="首页"
+            android:textColor="@drawable/text_select" />
 
         <RadioButton
             android:id="@+id/main_product"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/home_buttom_home_normal_bg"
-            android:button="@null" />
+            android:button="@null"
+            android:drawableTop="@drawable/product_select"
+            android:gravity="center"
+            android:text="产品"
+            android:textColor="@drawable/text_select" />
 
         <RadioButton
             android:id="@+id/main_utils"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/home_buttom_home_normal_bg"
-            android:button="@null" />
+            android:button="@null"
+            android:drawableTop="@drawable/utils_select"
+            android:gravity="center"
+            android:text="工具"
+            android:textColor="@drawable/text_select" />
 
         <RadioButton
             android:id="@+id/main_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/home_buttom_home_normal_bg"
-            android:button="@null" />
+            android:button="@null"
+            android:drawableTop="@drawable/more_select"
+            android:gravity="center"
+            android:text="设置"
+            android:textColor="@drawable/text_select" />
     </RadioGroup>
 
 </RelativeLayout>

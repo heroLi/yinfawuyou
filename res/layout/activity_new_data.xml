@@ -8,59 +8,98 @@
         android:id="@+id/top"
         layout="@layout/activity_main_top" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="血压" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="血压"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/data1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="当天（2013-1-3）"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/namelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
+        android:background="@drawable/edit_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        
-        android:background="@drawable/edit_bg"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/data1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当天（2013-1-3）"
-            android:textSize="18sp" />
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="高压" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/blood_xh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="高压" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="低压" />
+                <TextView
+                    android:id="@+id/blood_xh"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="center"
+                    android:text="100" />
 
-            <TextView
-                 android:id="@+id/blood_xl"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mmHg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100" />
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="低压" />
+
+                <TextView
+                    android:id="@+id/blood_xl"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mmHg" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -68,66 +107,116 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="太低" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="偏低" />
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="太低" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="正常" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="偏高" />
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏低" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="太高" />
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_ok"
+                    android:gravity="center"
+                    android:text="正常" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏高" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="太高" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="血糖" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/edit_bg"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <TextView
-             android:id="@+id/data2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="血糖"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/data2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="当天（2013-1-3）"
             android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edit_bg"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal" >
 
             <TextView
@@ -136,10 +225,17 @@
                 android:text="血糖" />
 
             <TextView
-                 android:id="@+id/blood_t"
+                android:id="@+id/blood_t"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
+                android:text="100" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100" />
+                android:text="mmol/L" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,54 +243,88 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="偏低" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="正常" />
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏低" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="偏高" />
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="正常" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏高" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="心率" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/edit_bg"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <TextView
-             android:id="@+id/data3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="心率"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/data3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="当天（2013-1-3）"
             android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edit_bg"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal" >
 
             <TextView
@@ -203,10 +333,17 @@
                 android:text="心率" />
 
             <TextView
-                 android:id="@+id/blood_lv"
+                android:id="@+id/blood_lv"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center"
+                android:text="100" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100" />
+                android:text="BPM" />
         </LinearLayout>
 
         <LinearLayout
@@ -214,23 +351,47 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="偏低" />
+                android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="正常" />
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏低" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="偏高" />
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="正常" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/newdata_text_bg_no"
+                    android:gravity="center"
+                    android:text="偏高" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

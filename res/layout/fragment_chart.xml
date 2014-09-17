@@ -5,13 +5,17 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:background="@color/app_green" >
 
         <ImageButton
+            android:id="@+id/chart_left"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/left" />
 
         <TextView
             android:id="@+id/timeTitle"
@@ -23,12 +27,16 @@
             android:text="2012" />
 
         <ImageButton
+            android:id="@+id/chart_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/right" />
     </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/chartlayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
@@ -54,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#ffffffff"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/chart_img_arc"
@@ -62,8 +70,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:src="@drawable/lifesense_arc_bg"
-                android:visibility="visible" />
-
+                android:visibility="gone" />
         </LinearLayout>
     </FrameLayout>
 
@@ -74,12 +81,28 @@
         android:gravity="center"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/line_gray"
+            android:gravity="center"
+            android:text="血压详情" />
+
         <LinearLayout
             android:id="@+id/ly_conpoment"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:background="@color/app_white"
             android:gravity="center"
             android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="2010/3/4" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -90,7 +113,7 @@
                     android:id="@+id/layout_halfRound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/lifesense_blood_arc"
+                    android:background="@drawable/xueya_group"
                     android:gravity="bottom|center"
                     android:orientation="vertical" >
 
@@ -113,8 +136,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:text=""
-                            android:textSize="40.0dip" />
+                            android:text="0"
+                            android:textSize="17.0dip" />
 
                         <TextView
                             android:id="@+id/blood_detail_unit_tv"
@@ -131,8 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/layout_halfRound"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/lifesense_home_needle_big" />
+                    android:layout_marginLeft="30dp"
+                    android:src="@drawable/pan_icon" />
             </RelativeLayout>
 
             <LinearLayout

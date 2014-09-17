@@ -1,9 +1,16 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-    <color name="app_green">#339900</color>
+    <color name="app_green">#3fc608</color>
     <color name="app_white">#FFFFFFFF</color>
-    
-    <color name="line_gray">#FFcfcfcf</color>
+    <color name="text_black">#373737</color>
+    <color name="text_gray">#d0d0d0</color>
+    <color name="line_gray">#929292</color>
+    <color name="bg_gray">#0f929292</color>
+    <color name="main_gray">#d4d4d4</color>
+    <color name="main_red">#ff5c3d</color>
+    <color name="main_blue">#1f65c4</color>
+    <color name="main_fen">#e63a6c</color>
+    <color name="main_newdata">#b240cb</color>
 
 </resources>
