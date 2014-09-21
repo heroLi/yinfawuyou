@@ -18,33 +18,43 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
+        android:id="@+id/chart_group"
         android:layout_height="30dp"
         android:orientation="horizontal" >
 
-        <TextView
+        <RadioButton
+            android:id="@+id/chart_week"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:text="周"
-            android:textColor="@color/app_green" />
+            android:textColor="@drawable/text_select" />
 
-        <TextView
+        <RadioButton
+            android:id="@+id/chart_month"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@null"
             android:gravity="center"
-            android:text="月" />
+            android:text="月"
+            android:textColor="@drawable/text_select" />
 
-        <TextView
+        <RadioButton
+            android:id="@+id/chart_year"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:button="@null"
             android:gravity="center"
-            android:text="年" />
-    </LinearLayout>
+            android:text="年"
+            android:textColor="@drawable/text_select" />
+    </RadioGroup>
 
     <LinearLayout
         android:id="@+id/chart_layout"

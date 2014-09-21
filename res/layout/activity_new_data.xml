@@ -114,6 +114,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xy_1"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -128,6 +129,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xy_2"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -142,9 +144,10 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xy_3"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
-                    android:background="@drawable/newdata_text_bg_ok"
+                    android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
                     android:text="正常" />
             </LinearLayout>
@@ -156,6 +159,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xy_4"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -170,6 +174,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xy_5"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -250,6 +255,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xt_1"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -264,6 +270,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xt_2"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -278,6 +285,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xt_3"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -358,6 +366,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xl_1"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -372,6 +381,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xl_2"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
@@ -386,6 +396,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/xl_3"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"

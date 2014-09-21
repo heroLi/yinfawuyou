@@ -3,6 +3,7 @@ package com.yifa.health_manage.fragment;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +50,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.ChartActivity;
 import com.yifa.health_manage.R;
 import com.yifa.health_manage.model.BloodValuesInfo;
+import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.MyLoger;
 import com.yifa.health_manage.util.SharePrefenceUtils;
@@ -74,7 +76,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 	private int type = 0;// 0周 1月2年
 
-	private TextView time_title, blood_text;
+	private TextView time_title, blood_text, blood_Flag, blood_mes, blood_time;
 
 	private int bgH, bgW, imageH, imageW;
 
@@ -131,6 +133,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					ChartActivity cahrt = (ChartActivity) getActivity();
+					cahrt.setListData(new ArrayList<BloodValuesInfo>());
+					initData(new ArrayList<BloodValuesInfo>());
 				}
 				time_title.setText(startTime + "-" + endTime);
 				if (startTime.equalsIgnoreCase(endTime)) {
@@ -160,6 +165,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		bloodLine = (LinearLayout) view.findViewById(R.id.blood_line);
 		time_title = (TextView) view.findViewById(R.id.timeTitle);
 		blood_text = (TextView) view.findViewById(R.id.blood_detail_number_tv);
+		blood_Flag = (TextView) view.findViewById(R.id.blood_detail_unit_tv);
+		blood_mes = (TextView) view.findViewById(R.id.text);
+		blood_time = (TextView) view.findViewById(R.id.time);
 		linearLayout = (LinearLayout) view.findViewById(R.id.layout_halfRound);
 		topLayout = (RelativeLayout) view.findViewById(R.id.topLayout);
 		chartLayout = (FrameLayout) view.findViewById(R.id.chartlayout);
@@ -167,22 +175,40 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		leftButton = (ImageButton) view.findViewById(R.id.chart_left);
 		rightButton = (ImageButton) view.findViewById(R.id.chart_right);
 
-		initListener();
+		DeviceFriendName name = new DeviceFriendName();
+		name.setId("12345");
+		name.setDevice_sn("123456");
 
-		SharePrefenceUtils.saveSugarFriendId(getActivity(), "12345");
+		SharePrefenceUtils.saveSugarFriendId(getActivity(), name);
+		SharePrefenceUtils.savePressureFriendId(getActivity(), name);
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
-			relative = SharePrefenceUtils.getSugarFriendId(getActivity());
+			relative = SharePrefenceUtils.getSugarFriendId(getActivity())
+					.getId();
 			topLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			chartLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
+			linearLayout.setBackgroundResource(R.drawable.xuetang_group);
+			blood_Flag.setText("mmol/L");
+			blood_mes.setText("血糖详情");
 
 		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
-			relative = SharePrefenceUtils.getPressureFriendId(getActivity());
+			relative = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getId();
+			device_sn = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getDevice_sn();
 			topLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
 			chartLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
+			blood_mes.setText("血压详情");
+			blood_Flag.setText("mmHg");
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
-			relative = SharePrefenceUtils.getHeartFriendId(getActivity());
+			relative = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getId();
+			device_sn = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getDevice_sn();
+			linearLayout.setBackgroundResource(R.drawable.xinlv_group);
 			topLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 			chartLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
+			blood_mes.setText("心率详情");
+			blood_Flag.setText("BPM");
 		}
 		// 初始化时间
 		initRequstTime(type);
@@ -197,6 +223,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		time_title.setText(startTime + "-" + endTime);
 
 		initLineSet();
+		initListener();
 	}
 
 	private void initListener() {
@@ -218,18 +245,37 @@ public class ChartFragment extends Fragment implements OnClickListener {
 	}
 
 	private void initData(List<BloodValuesInfo> mList) {
+		mLayout.removeAllViews();
 		series_line = new XYSeries("line");
 		series_high = new XYSeries("高压");
 		series_low = new XYSeries("低压");
 		series_high.clear();
 		series_low.clear();
+		series_line.clear();
 		mDataset = new XYMultipleSeriesDataset();
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1, Double.valueOf(mList.get(i).getValue()));
 			}
-			blood_text.setText(mList.get(mList.size() - 1).getValue());
+			if (mList.size() > 0) {
+				blood_text.setText(mList.get(mList.size() - 1).getValue());
+				series_line.add(mList.size(), 2);
+				series_line.add(mList.size(), 12);
+			}
+		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
+			for (int i = 0; i < mList.size(); i++) {
+				series_high.add(i + 1,
+						Double.valueOf(mList.get(i).getHigh_value()));
+			}
+
+			if (mList.size() > 0) {
+				blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
+						+ "/" + mList.get(mList.size() - 1).getLow_value());
+				series_line.add(mList.size(), 40);
+				series_line.add(mList.size(), 160);
+			}
 		} else {
+
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1,
 						Double.valueOf(mList.get(i).getHigh_value()));
@@ -240,14 +286,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						Double.valueOf(mList.get(i).getLow_value()));
 			}
 			mDataset.addSeries(series_low);
-			blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
-					+ "/" + mList.get(mList.size() - 1).getLow_value());
+			if (mList.size() > 0) {
+				blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
+						+ "/" + mList.get(mList.size() - 1).getLow_value());
+				series_line.add(mList.size(), 40);
+				series_line.add(mList.size(), 160);
+			}
+
 		}
 		mDataset.addSeries(series_high);
-
-		// 竖线
-		series_line.add(mList.size(), 40);
-		series_line.add(mList.size(), 160);
 		mDataset.addSeries(series_line);
 
 		// 曲线图的格式，包括颜色，值的范围，点和线的形状等等 都封装在
@@ -257,17 +304,21 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		r.setPointStyle(PointStyle.CIRCLE);
 		r.setPointStrokeWidth(10);
 		r.setFillPoints(true);
+		XYSeriesRenderer r1 = new XYSeriesRenderer();
+		r1.setColor(Color.WHITE);
+		r1.setPointStyle(PointStyle.CIRCLE);
+		r1.setPointStrokeWidth(10);
+		r1.setFillPoints(true);
 		XYSeriesRenderer r2 = new XYSeriesRenderer();
 		r2.setColor(Color.WHITE);
 		r2.setPointStyle(PointStyle.TRIANGLE);
 		r2.setFillPoints(true);
 		renderer = getRenderer();
 		renderer.addSeriesRenderer(r);
-		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
-			renderer.addSeriesRenderer(r2);// line
-		} else {
-			renderer.addSeriesRenderer(r2);
+		if (deviceType.equalsIgnoreCase("blood_presure")) {// 血ya
+			renderer.addSeriesRenderer(r1);
 		}
+		renderer.addSeriesRenderer(r2);
 		// 点击
 		renderer.setClickEnabled(true);
 		renderer.setSelectableBuffer(50);
@@ -287,12 +338,34 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				} else {
 					series_line.clear();
 
-					if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
+					if (deviceType.equalsIgnoreCase("blood_presure")) {// 血ya
+						XYSeries[] series = mDataset.getSeries();
+
+						double high = 0.0, low = 0.0;
+						for (XYSeries xySeries : series) {
+							if (xySeries.getTitle().equalsIgnoreCase("高压")) {
+								high = xySeries.getY(seriesSelection
+										.getSeriesIndex());
+							}
+							if (xySeries.getTitle().equalsIgnoreCase("低压")) {
+								low = xySeries.getY(seriesSelection
+										.getSeriesIndex());
+							}
+						}
+
+						blood_text.setText(high + "/" + low);
+						series_line.add(seriesSelection.getXValue(), 40);
+						series_line.add(seriesSelection.getXValue(), 160);
+					} else if (deviceType.equalsIgnoreCase("blood_glucose")) {
 						blood_text.setText(seriesSelection.getValue() + "");
+						series_line.add(seriesSelection.getXValue(), 2);
+						series_line.add(seriesSelection.getXValue(), 12);
 					} else {
+						blood_text.setText(seriesSelection.getValue() + "");
+						series_line.add(seriesSelection.getXValue(), 40);
+						series_line.add(seriesSelection.getXValue(), 160);
 					}
-					series_line.add(seriesSelection.getXValue(), 40);
-					series_line.add(seriesSelection.getXValue(), 160);
+					setOnClickTime((int) seriesSelection.getXValue());
 					view.repaint();
 					setImageShow((int) seriesSelection.getValue());
 				}
@@ -344,39 +417,100 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		renderer.setYTitle("mm\nhg");
 		renderer.setXTitle("");
 
-		renderer.setXAxisMax(8);
-		renderer.setXAxisMin(0);
-		renderer.setYAxisMax(160);
-		renderer.setYAxisMin(40);
-		// 轴上数字的数量
-		renderer.setXLabels(0);
-		renderer.setYLabels(0);
+		switch (type) {
+		case 0:
+			// 轴上数字的数量
+			renderer.setXLabels(0);
+			renderer.setYLabels(0);
 
-		renderer.addXTextLabel(1, "一");
-		renderer.addXTextLabel(2, "二");
-		renderer.addXTextLabel(3, "三");
-		renderer.addXTextLabel(4, "四");
-		renderer.addXTextLabel(5, "五");
-		renderer.addXTextLabel(6, "六");
-		renderer.addXTextLabel(7, "七");
+			renderer.setXAxisMax(8);
+			renderer.setXAxisMin(0);
+			renderer.addXTextLabel(1, "一");
+			renderer.addXTextLabel(2, "二");
+			renderer.addXTextLabel(3, "三");
+			renderer.addXTextLabel(4, "四");
+			renderer.addXTextLabel(5, "五");
+			renderer.addXTextLabel(6, "六");
+			renderer.addXTextLabel(7, "日");
 
-		renderer.addYTextLabel(40, "40");
-		renderer.addYTextLabel(80, "80");
-		renderer.addYTextLabel(120, "120");
-		renderer.addYTextLabel(160, "160");
+			break;
+		case 1:
+			// 轴上数字的数量
+			renderer.setXLabels(15);
+			renderer.setYLabels(0);
+
+			renderer.setXAxisMax(30);
+			renderer.setXAxisMin(0);
+
+			break;
+		case 2:
+			renderer.setXLabels(0);
+			renderer.setYLabels(0);
+
+			renderer.setXAxisMax(12);
+			renderer.setXAxisMin(0);
+
+			renderer.addXTextLabel(1, "1月");
+			renderer.addXTextLabel(2, "2月");
+			renderer.addXTextLabel(3, "3月");
+			renderer.addXTextLabel(4, "4月");
+			renderer.addXTextLabel(5, "5月");
+			renderer.addXTextLabel(6, "6月");
+			renderer.addXTextLabel(7, "7月");
+			renderer.addXTextLabel(8, "8月");
+			renderer.addXTextLabel(9, "9月");
+			renderer.addXTextLabel(10, "10月");
+			renderer.addXTextLabel(11, "11月");
+			renderer.addXTextLabel(12, "12月");
+			break;
+
+		default:
+			break;
+		}
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
+
+			renderer.setYTitle("mmol/L");
+			renderer.setYAxisMax(12);
+			renderer.setYAxisMin(2);
+
+			renderer.addYTextLabel(2, "2");
+			renderer.addYTextLabel(4, "4");
+			renderer.addYTextLabel(6, "6");
+			renderer.addYTextLabel(8, "8");
+			renderer.addYTextLabel(10, "10");
+			renderer.addYTextLabel(12, "12");
+		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
+			renderer.setYTitle("BPM");
+			renderer.setYAxisMax(160);
+			renderer.setYAxisMin(40);
+
+			renderer.addYTextLabel(40, "40");
+			renderer.addYTextLabel(80, "80");
+			renderer.addYTextLabel(120, "120");
+			renderer.addYTextLabel(160, "160");
+		} else {
+			renderer.setYTitle("mm\nHg");
+			renderer.setYAxisMax(160);
+			renderer.setYAxisMin(40);
+
+			renderer.addYTextLabel(40, "40");
+			renderer.addYTextLabel(80, "80");
+			renderer.addYTextLabel(120, "120");
+			renderer.addYTextLabel(160, "160");
+		}
 
 		// renderer.setZoomRate(100.0F);
 		renderer.setShowLegend(false);
 		// renderer.setAntialiasing(true);
-		renderer.setShowAxes(true);
-		// renderer.setShowCustomTextGrid(true);
-		// renderer.setExternalZoomEnabled(true);
+		// renderer.setShowAxes(true);
+		renderer.setShowCustomTextGrid(true);
+		renderer.setExternalZoomEnabled(false);
 		// renderer.setFitLegend(true);
 		// renderer.setXRoundedLabels(true);
 
 		renderer.setShowGridX(true);
 		// renderer.setShowAxes(false);
-		renderer.setPanEnabled(false); // 图表是否可以移动
+		renderer.setPanEnabled(true); // 图表是否可以移动
 		renderer.setZoomEnabled(false); // 图表是否可以缩放
 		renderer.setPanEnabled(false);
 		// renderer.setLegendHeight(100); // 图标文字距离底边的高度
@@ -524,6 +658,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				default:
 					break;
 				}
+				blood_time.setText(endTime);
 				new WebServiceUtils(getActivity(), mHandler).sendExecute(
 						new String[] {
 								SharePrefenceUtils.getAccount(getActivity()),
@@ -562,6 +697,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				default:
 					break;
 				}
+				blood_time.setText(endTime);
 				new WebServiceUtils(getActivity(), mHandler).sendExecute(
 						new String[] {
 								SharePrefenceUtils.getAccount(getActivity()),
@@ -586,20 +722,68 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		case 0:
 			int week = nowCalendar.get(Calendar.DAY_OF_WEEK);
 			loger.d(week);
+			timeType = "week";
 			endTime = AndroidUtils.getTime();
-			startTime = AndroidUtils.getDateBefore((week-2));
+			startTime = AndroidUtils.getDateBefore((week - 2));
+			if (week == 1) {
+				startTime = AndroidUtils.getDateBefore(6);
+			}
 			break;
 		case 1:
+			timeType = "month";
 			int month = nowCalendar.get(Calendar.DAY_OF_MONTH);
 			endTime = AndroidUtils.getTime();
 			startTime = AndroidUtils.getDateBefore(month);
 			break;
 		case 2:
+			timeType = "year";
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
 			String year = dateFormat
 					.format(new Date(System.currentTimeMillis()));
 			startTime = year;
 			endTime = year;
+			break;
+
+		default:
+			break;
+		}
+		blood_time.setText(endTime);
+
+	}
+
+	public void reflashData(int type2) {
+		this.type = type2;
+		initRequstTime(type);
+
+		new WebServiceUtils(getActivity(), mHandler).sendExecute(new String[] {
+				SharePrefenceUtils.getAccount(getActivity()), deviceType,
+				device_sn, relative, timeType, startTime, endTime },
+				WebServiceParmas.GET_BLOOD_DATA, WebServiceParmas.HTTP_POST,
+				"加载中...");
+	}
+
+	private void setOnClickTime(int click) {
+
+		switch (type) {
+		case 0:
+		case 1:
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd");
+			try {
+				calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
+						.getTime());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			calendar.add(Calendar.DAY_OF_MONTH, click);
+			DateFormat dateFormat = new DateFormat();
+			String time = (String) dateFormat.format("yyyy-MM-dd", calendar);
+			blood_time.setText(time);
+			break;
+		case 2:
+			blood_time.setText(startTime);
 			break;
 
 		default:

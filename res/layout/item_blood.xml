@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:text="正常"
                 android:textColor="@android:color/black"
+                android:drawableLeft="@drawable/chart_list_no"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -34,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/chart_list_no"
                 android:text="偏高"
                 android:layout_weight="1" />
 
@@ -42,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/chart_list_no"
                 android:text="偏低"
                 android:layout_weight="1" />
         </LinearLayout>

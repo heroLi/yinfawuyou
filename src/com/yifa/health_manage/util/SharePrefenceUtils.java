@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
+import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.UserInfo;
 
 public class SharePrefenceUtils {
@@ -95,39 +96,53 @@ public class SharePrefenceUtils {
 	/**
 	 * 保存血糖当前用户设备亲友的id
 	 * */
-	public static void saveSugarFriendId(Context c, String id) {
+	public static void saveSugarFriendId(Context c, DeviceFriendName id) {
 
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
-		editor.putString("fId", id);
+		editor.putString("fId", id.getId());
+		editor.putString("fName", id.getName());
+		editor.putString("fDeviceId", id.getDevice_sn());
 		editor.commit();
 	}
 
-	public static String getSugarFriendId(Context c) {
-
+	public static DeviceFriendName getSugarFriendId(Context c) {
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
-		return preferences.getString("fId", "");
+		DeviceFriendName name = new DeviceFriendName();
+		name.setDevice_sn(preferences.getString("fDeviceId", ""));
+		name.setName(preferences.getString("fName", ""));
+		name.setId(preferences.getString("fId", ""));
+
+		return name;
 	}
 
 	/**
 	 * 保存血压当前用户设备亲友的id
 	 * */
-	public static void savePressureFriendId(Context c, String id) {
+	public static void savePressureFriendId(Context c, DeviceFriendName id) {
 
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
-		editor.putString("Pressure", id);
+		editor.putString("Pressureid", id.getId());
+		editor.putString("PName", id.getName());
+		editor.putString("pDeviceId", id.getDevice_sn());
 		editor.commit();
 	}
 
-	public static String getPressureFriendId(Context c) {
+	public static DeviceFriendName getPressureFriendId(Context c) {
 
 		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
 				Context.MODE_PRIVATE);
-		return preferences.getString("Pressure", "");
+
+		DeviceFriendName name = new DeviceFriendName();
+		name.setDevice_sn(preferences.getString("Pressureid", ""));
+		name.setName(preferences.getString("PName", ""));
+		name.setId(preferences.getString("pDeviceId", ""));
+
+		return name;
 	}
 
 	/**

@@ -136,9 +136,7 @@ public class PressureFeagment extends Fragment {
 		linearLayout = (LinearLayout) view.findViewById(R.id.layout_halfRound);
 		arrow = (ImageView) view.findViewById(R.id.needle_iv);
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
-			relative = SharePrefenceUtils.getSugarFriendId(getActivity());
 		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
-			relative = SharePrefenceUtils.getPressureFriendId(getActivity());
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			relative = SharePrefenceUtils.getHeartFriendId(getActivity());
 		}

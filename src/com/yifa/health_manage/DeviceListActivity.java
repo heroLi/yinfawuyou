@@ -47,7 +47,7 @@ public class DeviceListActivity extends Activity implements
 	private LinearLayout layout1, layout2;
 
 	private TextView deviceId1, deviceId2, friend1, friend2, friend11,
-			friend12,title;
+			friend12, title;
 
 	private CheckBox deviceCheck1, deviceCheck2;
 
@@ -58,8 +58,8 @@ public class DeviceListActivity extends Activity implements
 	private String device_id;
 
 	private DevicesListInfo listnew;
-	
-	private MyLoger loger =MyLoger.getInstence("DeviceListActivity");
+
+	private MyLoger loger = MyLoger.getInstence("DeviceListActivity");
 
 	private List<DeviceInfo> list = new ArrayList<DeviceInfo>();
 
@@ -87,6 +87,9 @@ public class DeviceListActivity extends Activity implements
 					} else {
 
 						if (listnew.getData().size() == 2) {
+							if (listnew.getData().get(0).getRelative().size() <= 0) {
+								return;
+							}
 							deviceId1.setText(listnew.getData().get(0)
 									.getDevice_sn());
 							friend1.setText(listnew.getData().get(0)
@@ -105,6 +108,9 @@ public class DeviceListActivity extends Activity implements
 							layout2.setOnLongClickListener(DeviceListActivity.this);
 
 						} else if (listnew.getData().size() == 1) {
+							if (listnew.getData().get(0).getRelative().size() <= 0) {
+								return;
+							}
 							layout2.setVisibility(View.INVISIBLE);
 							isSum = 1;
 							deviceId1.setText(listnew.getData().get(0)

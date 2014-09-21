@@ -57,7 +57,7 @@ public class AndroidUtils {
 	/**
 	 * 得到几天前的时间
 	 */
-	public static String getDateBefore( int day) {
+	public static String getDateBefore(int day) {
 		Date data = new Date(System.currentTimeMillis());
 		Calendar now = Calendar.getInstance();
 		now.setTime(data);
@@ -79,5 +79,50 @@ public class AndroidUtils {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String time = dateFormat.format(now.getTime());
 		return time;
+	}
+
+	/**
+	 * 测试的返回值的等级
+	 * 
+	 * 血糖 0理想1可接受2不可接受
+	 * 
+	 * 血压L：0理想，1正常，2正常偏高，3轻度，4中度，5高度
+	 * */
+	public static int getBloodLevel(int type, int value) {
+
+		switch (type) {
+		case 0:// 血压
+			if (value < 120) {
+				return 0;
+			} else if (120 <= value && value < 129) {
+				return 1;
+			} else if (130 <= value && value < 139) {
+				return 2;
+			} else if (140 <= value && value < 159) {
+				return 3;
+			} else if (160 <= value && value < 179) {
+				return 4;
+			} else if (180 <= value) {
+				return 5;
+			}
+			break;
+		case 1:// 血糖
+			if (4 <= value && value < 8) {
+				return 0;
+			} else if (8 <= value && value < 11) {
+				return 1;
+			} else if (11 <= value) {
+				return 2;
+			}
+			break;
+		case 2:// 心率
+
+			break;
+
+		default:
+			break;
+		}
+
+		return 0;
 	}
 }
