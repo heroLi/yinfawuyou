@@ -94,16 +94,18 @@ public class DeviceListActivity extends Activity implements
 									.getDevice_sn());
 							friend1.setText(listnew.getData().get(0)
 									.getRelative().get(0).getName());
-							friend2.setText(listnew.getData().get(0)
-									.getRelative().get(1).getName());
 
-							deviceId2.setText(listnew.getData().get(1)
-									.getDevice_sn());
 							friend11.setText(listnew.getData().get(1)
 									.getRelative().get(0).getName());
-							friend12.setText(listnew.getData().get(1)
-									.getRelative().get(1).getName());
-							isSum = 2;
+							deviceId2.setText(listnew.getData().get(1)
+									.getDevice_sn());
+							if (listnew.getData().get(0).getRelative().size() == 2) {
+								friend2.setText(listnew.getData().get(0)
+										.getRelative().get(1).getName());
+								friend12.setText(listnew.getData().get(1)
+										.getRelative().get(1).getName());
+								isSum = 2;
+							}
 							layout1.setOnLongClickListener(DeviceListActivity.this);
 							layout2.setOnLongClickListener(DeviceListActivity.this);
 

@@ -92,8 +92,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.login_btn_no:
-			startActivity(new Intent(RegisterActivity.this,
-					RegisterMessageActivity.class));
+//			startActivity(new Intent(RegisterActivity.this,
+//					RegisterMessageActivity.class));
 			finish();
 			break;
 

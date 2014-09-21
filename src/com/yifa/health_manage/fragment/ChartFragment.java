@@ -632,7 +632,10 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				case 0:
 					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
 							.getTime());
-					calendar.add(Calendar.DATE, -7);
+					calendar.add(Calendar.DATE, -1);
+					startTime = (String) dateFormat.format("yyyy-MM-dd",
+							calendar);
+					calendar.add(Calendar.DATE, -6);
 					endTime = startTime;
 					startTime = (String) dateFormat.format("yyyy-MM-dd",
 							calendar);
@@ -640,6 +643,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				case 1:
 					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
 							.getTime());
+					calendar.add(Calendar.DATE, -1);
+					startTime = (String) dateFormat.format("yyyy-MM-dd",
+							calendar);
 					calendar.add(Calendar.MONTH, -1);
 					endTime = startTime;
 					startTime = (String) dateFormat.format("yyyy-MM-dd",
@@ -673,7 +679,10 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				case 0:
 					calendar.setTimeInMillis(simpleDateFormat.parse(endTime)
 							.getTime());
-					calendar.add(Calendar.DATE, 7);
+					calendar.add(Calendar.DATE, 1);
+					endTime = (String) dateFormat
+							.format("yyyy-MM-dd", calendar);
+					calendar.add(Calendar.DATE, 6);
 					startTime = endTime;
 					endTime = (String) dateFormat
 							.format("yyyy-MM-dd", calendar);
@@ -681,6 +690,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				case 1:
 					calendar.setTimeInMillis(simpleDateFormat.parse(endTime)
 							.getTime());
+					calendar.add(Calendar.DATE, 1);
+					endTime = (String) dateFormat
+							.format("yyyy-MM-dd", calendar);
 					calendar.add(Calendar.MONTH, 1);
 					startTime = endTime;
 					endTime = (String) dateFormat
@@ -733,7 +745,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			timeType = "month";
 			int month = nowCalendar.get(Calendar.DAY_OF_MONTH);
 			endTime = AndroidUtils.getTime();
-			startTime = AndroidUtils.getDateBefore(month);
+			startTime = AndroidUtils.getDateBefore(month - 1);
 			break;
 		case 2:
 			timeType = "year";
