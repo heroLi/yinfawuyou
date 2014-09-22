@@ -32,6 +32,7 @@ import com.yifa.health_manage.fragment.ChartFragment;
 import com.yifa.health_manage.model.BloodValuesInfo;
 import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.DevicesListInfo;
+import com.yifa.health_manage.util.MyLoger;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
@@ -42,6 +43,7 @@ import com.yifa.health_manage.util.WebServiceUtils;
 public class ChartActivity extends FragmentActivity implements OnClickListener,
 		OnCheckedChangeListener {
 
+	private MyLoger loger = MyLoger.getInstence("ChartActivity");
 	private ListView listView;
 	public List<BloodValuesInfo> mCurrentList = new ArrayList<BloodValuesInfo>();
 	public BloodListAdapter adapter;
@@ -68,6 +70,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case WebServiceParmas.GET_DEVICE_FRIEND:
+				loger.d(msg.obj.toString());
 				JSONObject jsonObject;
 				try {
 					jsonObject = new JSONObject(msg.obj.toString());
@@ -92,6 +95,12 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 				if (deviceType.equalsIgnoreCase("blood_glucose")) {
 					if (SharePrefenceUtils.getSugarFriendId(ChartActivity.this)
 							.getId().equalsIgnoreCase("")) {
+						listnew.getData()
+								.get(0)
+								.getRelative()
+								.get(0)
+								.setDevice_sn(
+										listnew.getData().get(0).getDevice_sn());
 						SharePrefenceUtils.saveSugarFriendId(
 								ChartActivity.this, listnew.getData().get(0)
 										.getRelative().get(0));
@@ -100,7 +109,13 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 					if (SharePrefenceUtils
 							.getPressureFriendId(ChartActivity.this).getId()
 							.equalsIgnoreCase("")) {
-						SharePrefenceUtils.saveSugarFriendId(
+						listnew.getData()
+								.get(0)
+								.getRelative()
+								.get(0)
+								.setDevice_sn(
+										listnew.getData().get(0).getDevice_sn());
+						SharePrefenceUtils.savePressureFriendId(
 								ChartActivity.this, listnew.getData().get(0)
 										.getRelative().get(0));
 					}
@@ -122,10 +137,16 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		setContentView(R.layout.activity_blood_layout);
 		deviceType = getIntent().getStringExtra("device_type");
 		initView();
-		new WebServiceUtils(this, mHandler).sendExecute(new String[] {
-				SharePrefenceUtils.getAccount(this), deviceType },
-				WebServiceParmas.GET_DEVICE_FRIEND, WebServiceParmas.HTTP_POST,
-				"加载中...");
+		if (deviceType.equalsIgnoreCase("heart_rate")) {
+			new WebServiceUtils(this, mHandler).sendExecute(new String[] {
+					SharePrefenceUtils.getAccount(this), "blood_presure" },
+					WebServiceParmas.GET_DEVICE_FRIEND,
+					WebServiceParmas.HTTP_POST, "加载中...");
+		} else
+			new WebServiceUtils(this, mHandler).sendExecute(new String[] {
+					SharePrefenceUtils.getAccount(this), deviceType },
+					WebServiceParmas.GET_DEVICE_FRIEND,
+					WebServiceParmas.HTTP_POST, "加载中...");
 	}
 
 	private void initView() {

@@ -175,15 +175,17 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		leftButton = (ImageButton) view.findViewById(R.id.chart_left);
 		rightButton = (ImageButton) view.findViewById(R.id.chart_right);
 
-		DeviceFriendName name = new DeviceFriendName();
-		name.setId("12345");
-		name.setDevice_sn("123456");
-
-		SharePrefenceUtils.saveSugarFriendId(getActivity(), name);
-		SharePrefenceUtils.savePressureFriendId(getActivity(), name);
+		// DeviceFriendName name = new DeviceFriendName();
+		// name.setId("12345");
+		// name.setDevice_sn("123456");
+		//
+		// SharePrefenceUtils.saveSugarFriendId(getActivity(), name);
+		// SharePrefenceUtils.savePressureFriendId(getActivity(), name);
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
 			relative = SharePrefenceUtils.getSugarFriendId(getActivity())
 					.getId();
+			device_sn = SharePrefenceUtils.getSugarFriendId(getActivity())
+					.getDevice_sn();
 			topLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			chartLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			linearLayout.setBackgroundResource(R.drawable.xuetang_group);
@@ -265,12 +267,12 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1,
-						Double.valueOf(mList.get(i).getHigh_value()));
+						Double.valueOf(mList.get(i).getValue()));
 			}
 
 			if (mList.size() > 0) {
-				blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
-						+ "/" + mList.get(mList.size() - 1).getLow_value());
+				blood_text.setText(mList.get(mList.size() - 1).getValue()
+						);
 				series_line.add(mList.size(), 40);
 				series_line.add(mList.size(), 160);
 			}
