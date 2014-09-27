@@ -63,7 +63,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 				}
 
 				break;
+			case -1:
 
+				// AndroidUtils.showToast(LoginActivity.this, "请保持网络连接");
+				break;
 			default:
 				break;
 			}

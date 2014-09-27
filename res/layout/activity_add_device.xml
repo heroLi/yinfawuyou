@@ -1,112 +1,89 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    
     android:background="@color/app_white" >
-    <include layout="@layout/activity_main_top"
-        android:id="@+id/top"/>
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/activity_main_top" />
+
     <LinearLayout
         android:id="@+id/namelayout"
         android:layout_width="match_parent"
-        android:layout_below="@id/top"
         android:layout_height="50dp"
+        android:layout_below="@id/top"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_top_bg"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_vers"
+            android:text="@string/user_device"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/login_edit_name"
+            android:id="@+id/bind_devices_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:background="#00000000"
             android:gravity="right"
-            android:layout_marginRight="5dp"
-            android:hint="@string/user_vers_ps" />
+            android:hint="@string/user_device_num" />
     </LinearLayout>
 
+    <!--
     <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/passwordLayout2"
+        android:id="@+id/passwordLayout"
         android:layout_below="@id/namelayout"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/login_middle_bg"
+        android:background="@drawable/edit_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_pass"
+            android:text="@string/user_device"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/login_edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:inputType="textPassword"
-            android:gravity="right"
-            android:layout_marginRight="5dp"
-            android:hint="@string/login_pass_ps" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_below="@id/passwordLayout2"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/login_bottom_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_pass_two"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/login_edit_password_two"
+            android:id="@+id/login_edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
-            android:inputType="textPassword"
             android:layout_marginRight="5dp"
-            android:hint="@string/user_passwprd_too" />
+            android:hint="@string/user_device_num" />
     </LinearLayout>
-    
+    -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        >
-        <Button 
-            android:id="@+id/register_btn_no"
+        android:orientation="horizontal" >
+
+
+        <Button
+            android:id="@+id/add_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/app_white"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/button_ok"
+            android:layout_weight="1"
             android:background="@drawable/button_bg"
-            />
-        
+            android:text="确定"
+            android:textColor="@color/app_white" />
     </LinearLayout>
 
 </RelativeLayout>

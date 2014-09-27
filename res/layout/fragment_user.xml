@@ -37,33 +37,9 @@
             android:background="#00000000" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/user_blood_g"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/login_middle_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/user_device_two"
-            android:textColor="@color/app_green"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:background="#00000000"
-            android:gravity="right" />
-    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/user_blood_s"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
@@ -149,6 +125,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:id="@+id/change_acconut"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/login_bottom_bg"
@@ -219,11 +196,11 @@
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:background="#00000000"
+            android:text="V1.0"
             android:gravity="right" />
     </LinearLayout>
 
@@ -256,10 +233,10 @@
         android:id="@+id/user_out_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/button_bg"
         android:text="@string/user_login_out"
         android:textColor="@color/app_white" />

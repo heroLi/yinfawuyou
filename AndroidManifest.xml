@@ -12,8 +12,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/appicon"
@@ -31,13 +31,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.yifa.health_manage.AddDeviceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_main_board_"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.yifa.health_manage.Main_board_Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_main_board_" >
+            android:label="@string/title_activity_main_board_"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.yifa.health_manage.Blood_pressure_Activity"
-            android:label="@string/title_activity_blood_pressure_" >
+            android:label="@string/title_activity_blood_pressure_"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.yifa.health_manage.LoginActivity"

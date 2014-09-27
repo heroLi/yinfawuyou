@@ -3,35 +3,39 @@ package com.yifa.health_manage;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.BaseAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.adapter.BloodListAdapter;
+import com.yifa.health_manage.adapter.FriendAdapter;
+import com.yifa.health_manage.db.DBManager;
 import com.yifa.health_manage.fragment.ChartFragment;
 import com.yifa.health_manage.model.BloodValuesInfo;
 import com.yifa.health_manage.model.DeviceFriendName;
+import com.yifa.health_manage.model.DeviceInfo;
 import com.yifa.health_manage.model.DevicesListInfo;
+import com.yifa.health_manage.model.UserInfo;
 import com.yifa.health_manage.util.MyLoger;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
@@ -57,6 +61,8 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 	private ImageButton menuList, menufriend;
 
 	private TextView title;
+
+	private DBManager dbManager = null;
 
 	private RadioGroup radioGroup;
 
@@ -120,7 +126,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 										.getRelative().get(0));
 					}
 				}
-
+				initDataBase();
 				break;
 
 			default:
@@ -136,6 +142,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_blood_layout);
 		deviceType = getIntent().getStringExtra("device_type");
+		dbManager = new DBManager(this);
 		initView();
 		if (deviceType.equalsIgnoreCase("heart_rate")) {
 			new WebServiceUtils(this, mHandler).sendExecute(new String[] {
@@ -165,6 +172,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		}
 		radioGroup.setOnCheckedChangeListener(this);
 		menuList.setOnClickListener(this);
+		menufriend.setOnClickListener(this);
 
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
 			title.setText("血糖");
@@ -194,6 +202,9 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 				listLayout.setVisibility(View.GONE);
 			}
 			break;
+		case R.id.activity_top_menu2:
+			showDialog(deviceType);
+			break;
 
 		default:
 			break;
@@ -206,58 +217,44 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 
 	private Dialog dialog = null;
 
-	private void showDialog() {
+	@SuppressLint("InflateParams")
+	private void showDialog(String type) {
+
+		List<UserInfo> agoList = dbManager.quaryAll(type);
+		loger.d("showDialog  " + agoList.size());
 		dialog = new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,
 				null);
 		ListView listView = (ListView) view.findViewById(R.id.myList);
+
+		final FriendAdapter adapter = new FriendAdapter(ChartActivity.this,
+				agoList);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				UserInfo info = (UserInfo) adapter.getItem(position);
+				DeviceFriendName dfName = new DeviceFriendName();
+				dfName.setDevice_sn(info.getDevice_sn());
+				dfName.setId(info.getFriend_id());
+				dfName.setName(info.getName());
+				if (deviceType.equalsIgnoreCase("blood_glucose")) {
+					SharePrefenceUtils.saveSugarFriendId(ChartActivity.this,
+							dfName);
+				} else {
+					SharePrefenceUtils.savePressureFriendId(ChartActivity.this,
+							dfName);
+				}
+				dialog.dismiss();
+				chartFragment.loadData();
+			}
+		});
+		listView.setAdapter(adapter);
 		dialog.setContentView(view);
 		dialog.show();
 
-	}
-
-	class FriendAdapter extends BaseAdapter {
-
-		private List<DeviceFriendName> mList;
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return mList.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return mList.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder = null;
-			if (convertView == null) {
-				holder = new ViewHolder();
-				convertView = LayoutInflater.from(ChartActivity.this).inflate(
-						R.layout.item_dialog, null);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			return convertView;
-		}
-
-	}
-
-	class ViewHolder {
-		TextView name;
-		ImageView photo, click;
 	}
 
 	@Override
@@ -283,5 +280,50 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		default:
 			break;
 		}
+	}
+
+	private void initDataBase() {
+
+		List<UserInfo> mList = new ArrayList<UserInfo>();
+		int i = 0;
+		for (DeviceInfo info : listnew.getData()) {
+			if (i != 0)
+				i = 2;
+			for (DeviceFriendName name : info.getRelative()) {
+				UserInfo userInfo = new UserInfo();
+				userInfo.setDevice_sn(info.getDevice_sn());
+				userInfo.setFriend_id(name.getId());
+				userInfo.setName(name.getName());
+				userInfo.setType(deviceType);
+				userInfo.setLayoutId(i + "");
+				i++;
+				mList.add(userInfo);
+			}
+		}
+
+		List<UserInfo> agoList = dbManager.quaryAll(deviceType);
+		if (agoList.size() <= 0) {
+			dbManager.insertAll(mList);
+		} else {
+			for (UserInfo userInfo : mList) {
+				if (!userInfo.getDevice_sn().equalsIgnoreCase("")
+						&& !userInfo.getFriend_id().equalsIgnoreCase("")) {
+					if (dbManager.quaryId(userInfo.getDevice_sn(),
+							userInfo.getFriend_id()) == null) {
+						dbManager.insert(deviceType, userInfo.getDevice_sn(),
+								userInfo.getFriend_id(), new UserInfo());
+					}
+				}
+			}
+
+		}
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		dbManager.close();
 	}
 }

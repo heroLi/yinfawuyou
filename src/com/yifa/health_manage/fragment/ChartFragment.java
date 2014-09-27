@@ -138,7 +138,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					initData(new ArrayList<BloodValuesInfo>());
 				}
 				time_title.setText(startTime + "-" + endTime);
-				if (startTime.equalsIgnoreCase(endTime)) {
+				if (startTime.equalsIgnoreCase(endTime) && type == 2) {
 					time_title.setText(startTime);
 				}
 				break;
@@ -231,12 +231,29 @@ public class ChartFragment extends Fragment implements OnClickListener {
 	private void initListener() {
 		leftButton.setOnClickListener(this);
 		rightButton.setOnClickListener(this);
+		loadData();
+
+	}
+
+	public void loadData() {
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {
+			relative = SharePrefenceUtils.getSugarFriendId(getActivity())
+					.getId();
+			device_sn = SharePrefenceUtils.getSugarFriendId(getActivity())
+					.getDevice_sn();
+		} else {
+			relative = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getId();
+			device_sn = SharePrefenceUtils.getPressureFriendId(getActivity())
+					.getDevice_sn();
+		}
 
 		new WebServiceUtils(getActivity(), mHandler).sendExecute(new String[] {
 				SharePrefenceUtils.getAccount(getActivity()), deviceType,
 				device_sn, relative, timeType, startTime, endTime },
 				WebServiceParmas.GET_BLOOD_DATA, WebServiceParmas.HTTP_POST,
 				"加载中...");
+
 	}
 
 	@Override
@@ -266,13 +283,11 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			}
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			for (int i = 0; i < mList.size(); i++) {
-				series_high.add(i + 1,
-						Double.valueOf(mList.get(i).getValue()));
+				series_high.add(i + 1, Double.valueOf(mList.get(i).getValue()));
 			}
 
 			if (mList.size() > 0) {
-				blood_text.setText(mList.get(mList.size() - 1).getValue()
-						);
+				blood_text.setText(mList.get(mList.size() - 1).getValue());
 				series_line.add(mList.size(), 40);
 				series_line.add(mList.size(), 160);
 			}

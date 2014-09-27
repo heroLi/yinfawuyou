@@ -65,7 +65,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 		newPass = (EditText) findViewById(R.id.change_newpass);
 		newPassTwo = (EditText) findViewById(R.id.change_newpass_two);
 		title = (TextView) findViewById(R.id.activity_top_title);
-		title.setText("设置新密码");
+		title.setText("修改密码");
 		commit = (Button) findViewById(R.id.commit);
 		commit.setOnClickListener(this);
 	}

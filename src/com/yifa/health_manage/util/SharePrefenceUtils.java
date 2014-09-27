@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -138,9 +140,9 @@ public class SharePrefenceUtils {
 				Context.MODE_PRIVATE);
 
 		DeviceFriendName name = new DeviceFriendName();
-		name.setDevice_sn(preferences.getString("Pressureid", ""));
+		name.setDevice_sn(preferences.getString("pDeviceId", ""));
 		name.setName(preferences.getString("PName", ""));
-		name.setId(preferences.getString("pDeviceId", ""));
+		name.setId(preferences.getString("Pressureid", ""));
 
 		return name;
 	}
@@ -169,7 +171,7 @@ public class SharePrefenceUtils {
 	 * */
 	public static void saveUserInfo(Context c, UserInfo user) {
 
-		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info1",
 				Context.MODE_PRIVATE);
 		Editor editor = preferences.edit();
 
@@ -185,16 +187,16 @@ public class SharePrefenceUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		editor.putString("UserInfo", userS);
+		editor.putString("UserInfo1", userS);
 		editor.commit();
 	}
 
 	public static UserInfo getUsetInfo(Context c) {
 
-		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info1",
 				Context.MODE_PRIVATE);
 
-		String s = preferences.getString("UserInfo", "");
+		String s = preferences.getString("UserInfo1", "");
 		if (s.equalsIgnoreCase("")) {
 			return null;
 		}
@@ -204,6 +206,62 @@ public class SharePrefenceUtils {
 		try {
 			inputStream2 = new ObjectInputStream(inputStream);
 			UserInfo user = (UserInfo) inputStream2.readObject();
+			return user;
+		} catch (StreamCorruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 保存用户信息
+	 * */
+	public static void saveUserInfoList(Context c, Map<String, UserInfo> map) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+		String userS = null;
+		try {
+			ObjectOutputStream outputStream = new ObjectOutputStream(output);
+			outputStream.writeObject(map);
+			userS = Base64.encodeToString(output.toByteArray(), Base64.DEFAULT);
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		editor.putString("UserInfo", userS);
+		editor.commit();
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, UserInfo> getUsetInfoList(Context c) {
+
+		SharedPreferences preferences = c.getSharedPreferences("confirm_info",
+				Context.MODE_PRIVATE);
+		Map<String, UserInfo> user = new HashMap<String, UserInfo>();
+		String s = preferences.getString("UserInfo", "");
+		if (s.equalsIgnoreCase("")) {
+			return user;
+		}
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(
+				Base64.decode(s.getBytes(), Base64.DEFAULT));
+		ObjectInputStream inputStream2;
+		try {
+			inputStream2 = new ObjectInputStream(inputStream);
+
+			user.putAll((Map<String, UserInfo>) inputStream2.readObject());
 			return user;
 		} catch (StreamCorruptedException e) {
 			// TODO Auto-generated catch block

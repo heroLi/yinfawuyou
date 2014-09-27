@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.yifa.health_manage.model.ResultResponse;
@@ -26,6 +27,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	private Button buttonOk, buttonNo;
 
 	private EditText nameEdit, emailEdit, passEdit, passTwoEdit;
+
+	private TextView title;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -70,6 +73,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		emailEdit = (EditText) findViewById(R.id.login_edit_email);
 		passEdit = (EditText) findViewById(R.id.login_edit_pass);
 		passTwoEdit = (EditText) findViewById(R.id.login_edit_password_two);
+		title = (TextView) findViewById(R.id.activity_top_title);
+		title.setText("注册");
 	}
 
 	private void initLisenter() {
@@ -92,8 +97,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.login_btn_no:
-//			startActivity(new Intent(RegisterActivity.this,
-//					RegisterMessageActivity.class));
+			// startActivity(new Intent(RegisterActivity.this,
+			// RegisterMessageActivity.class));
 			finish();
 			break;
 

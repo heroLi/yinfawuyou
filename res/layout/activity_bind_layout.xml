@@ -14,13 +14,20 @@
         android:layout_below="@id/top"
         android:orientation="horizontal"
         >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bind_no"
+             android:checked="true"
+            android:text="不绑定"
+            android:textColor="@color/app_green"
+            />
         
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bind_blood_presure"
             android:text="血压计"
-            android:checked="true"
             android:textColor="@color/app_green"
             />
         <RadioButton

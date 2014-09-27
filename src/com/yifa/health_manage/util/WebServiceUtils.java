@@ -88,16 +88,18 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			progressDialog.dismiss();
 		}
 		if (result == null) {
+			AndroidUtils.showToast(mContext, "请连接网络");
 			mHandler.sendEmptyMessage(-1);// 请求错误
 			return;
 		}
 		if ("超时".equalsIgnoreCase(result.toString())) {
-			mHandler.sendEmptyMessage(-2);// 请求超时
+			AndroidUtils.showToast(mContext, "请连接网络");
+			mHandler.sendEmptyMessage(-1);// 请求超时
 			return;
 		}
 		if ("无网络".equalsIgnoreCase(result.toString())) {
 			AndroidUtils.showToast(mContext, "请连接网络");
-			// mHandler.sendEmptyMessage(-3);// 无网络
+			mHandler.sendEmptyMessage(-1);// 无网络
 			return;
 		}
 		JSONObject jsonObject = null;

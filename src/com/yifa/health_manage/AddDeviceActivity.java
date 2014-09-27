@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -23,22 +21,17 @@ import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
 
 /**
- * 设备绑定界面
- * **/
-public class BindDeviceActivity extends Activity implements OnClickListener,
-		OnCheckedChangeListener {
-
-	private Button nextButton, topButton;
-
-	private EditText deviceName;
+ * 添加设备
+ * */
+public class AddDeviceActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 
-	private boolean isBind = false;
+	private Button addButton;
 
-	private RadioGroup group;
+	private EditText deviceName;
 
-	private String type = "blood_presure";
+	private String type;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -54,8 +47,7 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 				ResultResponse response = gson.fromJson(jsonObject.toString(),
 						ResultResponse.class);
 				if (response.isResult()) {
-					startActivity(new Intent(BindDeviceActivity.this,
-							Main_board_Activity.class));
+					setResult(11);
 					finish();
 				}
 			} catch (JSONException e) {
@@ -69,25 +61,26 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_bind_layout);
+		setContentView(R.layout.activity_add_device);
 		initView();
-		initLisenter();
+		type = getIntent().getStringExtra("deviceType");
 	}
 
 	private void initView() {
 
-		nextButton = (Button) findViewById(R.id.register_btn_next);
-		topButton = (Button) findViewById(R.id.register_btn_no);
+		addButton = (Button) findViewById(R.id.add_button);
 		deviceName = (EditText) findViewById(R.id.bind_devices_name);
 		title = (TextView) findViewById(R.id.activity_top_title);
-		title.setText("绑定设备");
-		group = (RadioGroup) findViewById(R.id.bind_group);
+
+		if (type.equalsIgnoreCase("blood_presure")) {
+			title.setText("添加血压计");
+		} else
+			title.setText("添加血糖仪");
+		initLisenter();
 	}
 
 	private void initLisenter() {
-		nextButton.setOnClickListener(this);
-		topButton.setOnClickListener(this);
-		group.setOnCheckedChangeListener(this);
+		addButton.setOnClickListener(this);
 
 	}
 
@@ -97,28 +90,18 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.register_btn_next:
-			if (isBind) {
-				if (!deviceName.getText().toString().trim()
-						.equalsIgnoreCase("")) {
-					new WebServiceUtils(this, mHandler)
-							.sendExecuteNo(
-									new String[] {
-											SharePrefenceUtils
-													.getAccount(BindDeviceActivity.this),
-											type,
-											deviceName.getText().toString()
-													.trim() },
-									WebServiceParmas.BIND_DEVICE,
-									WebServiceParmas.HTTP_POST);
-				} else {
-					AndroidUtils.showToast(this, "请填写设备编码");
-				}
+			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
+				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+						SharePrefenceUtils.getAccount(AddDeviceActivity.this),
+						type, deviceName.getText().toString().trim() },
+						WebServiceParmas.BIND_DEVICE,
+						WebServiceParmas.HTTP_POST);
 			} else {
-				startActivity(new Intent(this, Main_board_Activity.class));
+				AndroidUtils.showToast(this, "请填写设备编码");
 			}
 
 			break;
-		case R.id.register_btn_no:
+		case R.id.activity_top_title:
 			finish();
 			break;
 
@@ -128,24 +111,4 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 
 	}
 
-	@Override
-	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		switch (checkedId) {
-		case R.id.bind_blood_glucose:
-			type = "blood_glucose";
-			isBind = true;
-			break;
-		case R.id.bind_blood_presure:
-			type = "blood_presure";
-			isBind = true;
-			break;
-		case R.id.bind_no:
-			isBind = false;
-			break;
-
-		default:
-			break;
-		}
-
-	}
 }

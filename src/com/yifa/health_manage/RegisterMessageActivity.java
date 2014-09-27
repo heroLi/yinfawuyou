@@ -46,6 +46,7 @@ public class RegisterMessageActivity extends Activity implements
 
 	private RadioGroup saxGroup;
 
+
 	private EditText nameEdit, briEdit, heightEdit, weightEdit, yaoEdit;
 
 	@Override
@@ -85,13 +86,12 @@ public class RegisterMessageActivity extends Activity implements
 		saxGroup.setOnCheckedChangeListener(this);
 
 		if (SharePrefenceUtils.getUsetInfo(this) != null) {
-			if (SharePrefenceUtils.getUsetInfo(this).getImageUrl()==null
-					)
+			if (SharePrefenceUtils.getUsetInfo(this).getImageUrl() == null)
 				return;
 			byte[] b = Base64.decode(SharePrefenceUtils.getUsetInfo(this)
 					.getImageUrl().getBytes(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
-			if(bitmap!=null)
+			if (bitmap != null)
 				userPhoto.setImageBitmap(bitmap);
 		}
 
@@ -108,42 +108,12 @@ public class RegisterMessageActivity extends Activity implements
 			Uri uri = data.getData();
 			startPhotoZoom(uri);
 
-			// String[] filePathColumn = { MediaStore.Images.Media.DATA };
-			//
-			// Cursor cursor = getContentResolver().query(uri, filePathColumn,
-			// null, null, null);
-			// cursor.moveToFirst();
-			//
-			// int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-			// picturePath = cursor.getString(columnIndex);
-			// cursor.close();
-			// if (bit != null) {
-			// bit.recycle();
-			// bit = null;
-			// }
-			// bit = BitmapFactory.decodeFile(picturePath);
-			// userPhoto.setImageBitmap(bit);
 		} else if (resultCode == RESULT_OK && requestCode == CHOICE_CAMERA) {
 			if (bit != null) {
 				bit.recycle();
 				bit = null;
 			}
 			startPhotoZoom(Uri.fromFile(new File(path)));
-			// BitmapFactory.Options options = new BitmapFactory.Options();
-			// options.inJustDecodeBounds = false;
-			//
-			// options.outHeight = 1136;
-			// options.outWidth = 640;
-			//
-			// bit = BitmapFactory.decodeFile(path);
-			//
-			// // bit = BitmapFactory
-			// // .decodeFile(Environment
-			// // .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-			// // + "/image.jpg");
-			// Log.d("------------", bit.getHeight() + "--------" +
-			// bit.getWidth());
-			// userPhoto.setImageBitmap(bit);
 		} else {
 			if (data != null) {
 				setPicToView(data);
@@ -275,7 +245,8 @@ public class RegisterMessageActivity extends Activity implements
 			 * Bitmap dBitmap = BitmapFactory.decodeFile(tp); Drawable drawable
 			 * = new BitmapDrawable(dBitmap);
 			 */
-			userPhoto.setImageBitmap(photo);;
+			userPhoto.setImageBitmap(photo);
+			;
 		}
 	}
 

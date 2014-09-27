@@ -22,6 +22,7 @@ public class SqlliteHander {
 		return hander;
 	}
 	
+	
 	public  void createTable()
 	{
 		 SQLiteDatabase db = context.openOrCreateDatabase(DATABASE, Context.MODE_PRIVATE, null);  	
@@ -29,10 +30,12 @@ public class SqlliteHander {
 		 String MSQL ="create table if not exists T_MIMI_MATTER (matterId varchar(13) PRIMARY KEY,userId varchar(10),content varchar(2000),alias varchar(16),timestamp varchar(15),lastretime varchar(15),type varchar(1),recount varchar(10),file varchar(32),fileType varchar(1),vote varchar(20));";
 		 String FSQL ="create table if not exists T_MIMI_FOLLOW (matterId varchar(13) PRIMARY KEY,userId varchar(10),content varchar(2000),alias varchar(16),timestamp varchar(15),lastretime varchar(15),type varchar(1),recount varchar(10),file varchar(32),fileType varchar(1),vote varchar(20));";
 		 String DSQL ="create table if not exists T_MIMI_DRAFT (content varchar(2000),timestamp varchar(15));";
+		 String ISQL ="create table if not exists T_MIMI_DRAFT (content varchar(2000),timestamp varchar(15));";
 		 db.execSQL(USQL);  
 		 db.execSQL(MSQL);
 		 db.execSQL(FSQL); 
 		 db.execSQL(DSQL); 
+		 db.execSQL(ISQL); 
 		 db.close();
 	}
 /*	

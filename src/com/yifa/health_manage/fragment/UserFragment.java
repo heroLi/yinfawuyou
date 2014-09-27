@@ -33,7 +33,7 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private ImageView userPhoto;
 
-	private LinearLayout blood_p;
+	private LinearLayout blood_p,blood_s,changeAccount;
 
 	private RelativeLayout changePass;
 
@@ -53,6 +53,8 @@ public class UserFragment extends Fragment implements OnClickListener {
 	private void initView(View view) {
 		userPhoto = (ImageView) view.findViewById(R.id.user_photo);
 		blood_p = (LinearLayout) view.findViewById(R.id.user_blood_p);
+		changeAccount = (LinearLayout) view.findViewById(R.id.change_acconut);
+		blood_s = (LinearLayout) view.findViewById(R.id.user_blood_s);
 		userAccount = (TextView) view.findViewById(R.id.user_name_text);
 		changePass = (RelativeLayout) view.findViewById(R.id.user_account_pass);
 		outButton = (Button) view.findViewById(R.id.user_out_button);
@@ -62,7 +64,9 @@ public class UserFragment extends Fragment implements OnClickListener {
 	private void initListener() {
 		blood_p.setOnClickListener(this);
 		changePass.setOnClickListener(this);
+		changeAccount.setOnClickListener(this);
 		outButton.setOnClickListener(this);
+		blood_s.setOnClickListener(this);
 
 	}
 
@@ -97,12 +101,20 @@ public class UserFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.user_blood_p:
-			startActivity(new Intent(getActivity(), DeviceListActivity.class));
+			Intent intent = new Intent(getActivity(), DeviceListActivity.class);
+			intent.putExtra("type", "blood_presure");
+			startActivity(intent);
+			break;
+		case R.id.user_blood_s:
+			Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
+			intent2.putExtra("type", "blood_glucose");
+			startActivity(intent2);
 			break;
 		case R.id.user_account_pass:
 			startActivity(new Intent(getActivity(),
 					ChangePasswordActivity.class));
 			break;
+		case R.id.change_acconut:
 		case R.id.user_out_button:
 			getActivity().finish();
 			startActivity(new Intent(getActivity(), LoginActivity.class));

@@ -3,8 +3,10 @@
     android:layout_height="fill_parent"
     android:background="@color/app_white"
     android:orientation="vertical" >
-    <include layout="@layout/activity_main_top"
-        android:id="@+id/top"/>
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/activity_main_top" />
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -14,6 +16,8 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/edit_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -37,32 +41,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:visibility="gone"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/device_layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1px"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="1px" >
 
-            <TextView
+            <ImageView
+                android:id="@+id/friend_image1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/iamge_user" />
+
+            <EditText
                 android:id="@+id/device_friend1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
+                android:layout_toRightOf="@id/friend_image1"
                 android:background="@color/app_white"
                 android:gravity="center_vertical"
                 android:text="名字"
                 android:textColor="@android:color/black" />
 
             <ImageView
-                android:id="@+id/device_check1"
+                android:id="@+id/device_check1_im"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_no" />
         </RelativeLayout>
 
         <View
@@ -77,21 +89,30 @@
             android:layout_marginLeft="1px"
             android:orientation="horizontal" >
 
-            <TextView
+            <ImageView
+                android:id="@+id/friend_image2"
+                android:layout_width="50dp"
+                 android:background="@drawable/iamge_user" 
+                android:layout_height="50dp" />
+
+            <EditText
                 android:id="@+id/device_friend2_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/friend_image2"
                 android:background="@color/app_white"
                 android:text="名字"
                 android:textColor="@android:color/black" />
 
             <ImageView
-                android:id="@+id/device_check2"
+                android:id="@+id/device_check2_im"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_no" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -125,8 +146,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:visibility="gone"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -135,21 +156,30 @@
             android:layout_marginLeft="1px"
             android:orientation="horizontal" >
 
-            <TextView
+            <ImageView
+                android:id="@+id/friend_image3"
+                android:layout_width="50dp"
+                 android:background="@drawable/iamge_user" 
+                android:layout_height="50dp" />
+
+            <EditText
                 android:id="@+id/device1_friend1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
+                android:layout_toRightOf="@id/friend_image3"
                 android:background="@color/app_white"
                 android:gravity="center_vertical"
                 android:text="名字"
                 android:textColor="@android:color/black" />
 
             <ImageView
-                android:id="@+id/device_check_friend"
+                android:id="@+id/device2_check1_im"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_no" />
         </RelativeLayout>
 
         <View
@@ -163,11 +193,18 @@
             android:layout_marginLeft="1px"
             android:orientation="horizontal" >
 
-            <TextView
+            <ImageView
+                android:id="@+id/friend_image4"
+                android:layout_width="50dp"
+                 android:background="@drawable/iamge_user" 
+                android:layout_height="50dp" />
+
+            <EditText
                 android:id="@+id/device2_friend2_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/friend_image4"
                 android:background="@color/app_white"
                 android:text="名字"
                 android:textColor="@android:color/black" />
@@ -177,20 +214,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/click_no" />
         </RelativeLayout>
     </LinearLayout>
-    <Button 
-            android:id="@+id/commit"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/app_white"
-            android:layout_marginRight="15dp"
-            android:text="删除设备"
-            android:visibility="gone"
-            android:background="@drawable/button_bg"
-            />
+
+    <Button
+        android:id="@+id/commit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_bg"
+        android:text="删除设备"
+        android:textColor="@color/app_white"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -1,27 +1,6 @@
 package com.yifa.health_manage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
-import com.yifa.health_manage.fragment.AddressFragment;
-import com.yifa.health_manage.fragment.FindFragment;
-import com.yifa.health_manage.fragment.MeFragment;
-import com.yifa.health_manage.fragment.WeiXinFragment;
-import com.yifa.health_manage.service.HandlerThreads;
 
 public class Blood_pressure_Activity extends FragmentActivity   {
 //

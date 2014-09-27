@@ -64,7 +64,7 @@ public class NewDataActivity extends Activity {
 	private TextView data1, blood_xh, blood_xl, blood_lv, blood_t, data2,
 			data3;
 
-	private TextView xy1, xy2, xy3, xy4, xy5, xt1, xt2, xt3, xl1, xl2, xl3,
+	private TextView xy1, xy2, xy3, xy4, xy5,xy6, xt1, xt2, xt3, xl1, xl2, xl3,
 			title;
 
 	private RelativeLayout layout;
@@ -95,6 +95,7 @@ public class NewDataActivity extends Activity {
 		xy3 = (TextView) findViewById(R.id.xy_3);
 		xy4 = (TextView) findViewById(R.id.xy_4);
 		xy5 = (TextView) findViewById(R.id.xy_5);
+		xy6 = (TextView) findViewById(R.id.xy_6);
 		xt1 = (TextView) findViewById(R.id.xt_1);
 		xt2 = (TextView) findViewById(R.id.xt_2);
 		xt3 = (TextView) findViewById(R.id.xt_3);
@@ -132,6 +133,9 @@ public class NewDataActivity extends Activity {
 				break;
 			case 4:
 				xy5.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				break;
+			case 5:
+				xy6.setBackgroundResource(R.drawable.newdata_text_bg_ok);
 				break;
 			default:
 				break;

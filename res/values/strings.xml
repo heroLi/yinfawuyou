@@ -61,9 +61,9 @@
     <string name="user_message_text">个人信息</string>
     <string name="user_message_photo">头像</string>
     <string name="user_device_text">设备管理</string>
-    <string name="user_device_one">血压计</string>
+    <string name="user_device_one">血压仪</string>
     <string name="user_device_two">心率计</string>
-    <string name="user_device_three">血糖计</string>
+    <string name="user_device_three">血糖仪</string>
     <string name="user_account_text">账号管理</string>
     <string name="user_account_name">账号</string>
     <string name="user_account_pass">修改密码</string>
