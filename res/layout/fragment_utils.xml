@@ -8,12 +8,10 @@
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="fill_parent"
+        android:background="@drawable/home_top_img3"
         android:layout_height="140dip" >
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+       
 
     </FrameLayout>
 

@@ -123,14 +123,14 @@
                         android:id="@+id/blood_detail_level_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text=""
+                        android:text="正常"
                         android:textSize="20.0sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
                         android:layout_toRightOf="@+id/needle_iv" >
 
                         <TextView
@@ -156,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/layout_halfRound"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="45dp"
+                    android:visibility="invisible"
                     android:src="@drawable/pan_icon" />
             </RelativeLayout>
 

@@ -62,8 +62,8 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_device);
-		initView();
 		type = getIntent().getStringExtra("deviceType");
+		initView();
 	}
 
 	private void initView() {
@@ -89,7 +89,7 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.register_btn_next:
+		case R.id.add_button:
 			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
 				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
 						SharePrefenceUtils.getAccount(AddDeviceActivity.this),

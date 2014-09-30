@@ -125,7 +125,8 @@ public class DeviceListActivity extends Activity implements
 
 					Map<String, UserInfo> maps = SharePrefenceUtils
 							.getUsetInfoList(DeviceListActivity.this);
-					if (listnew == null) {
+					if (listnew == null||listnew.getData().size()<=0) {
+						addDevice.setVisibility(View.VISIBLE);
 						layout1.setVisibility(View.GONE);
 						layout2.setVisibility(View.GONE);
 						isSum = 0;
@@ -198,7 +199,17 @@ public class DeviceListActivity extends Activity implements
 										dbManager.insert(deviceType,
 												userInfo.getDevice_sn(),
 												userInfo.getFriend_id(),
-												new UserInfo());
+												userInfo);
+									} else {
+										if (!dbManager
+												.quaryId(
+														userInfo.getDevice_sn(),
+														userInfo.getFriend_id())
+												.getLayoutId()
+												.equalsIgnoreCase(
+														userInfo.getLayoutId())) {
+											dbManager.updateType(userInfo);
+										}
 									}
 								}
 							}
@@ -207,6 +218,8 @@ public class DeviceListActivity extends Activity implements
 
 						if (listnew.getData().size() == 2) {
 							addDevice.setVisibility(View.GONE);
+							layout2.setVisibility(View.VISIBLE);
+							layout1.setVisibility(View.VISIBLE);
 							if (listnew.getData().get(0).getRelative().size() <= 0) {
 								return;
 							}
@@ -230,10 +243,12 @@ public class DeviceListActivity extends Activity implements
 							layout2.setOnLongClickListener(DeviceListActivity.this);
 
 						} else if (listnew.getData().size() == 1) {
+							addDevice.setVisibility(View.VISIBLE);
 							if (listnew.getData().get(0).getRelative().size() <= 0) {
 								return;
 							}
 							layout2.setVisibility(View.INVISIBLE);
+							layout1.setVisibility(View.VISIBLE);
 							isSum = 1;
 							deviceId1.setText(listnew.getData().get(0)
 									.getDevice_sn());
@@ -244,9 +259,11 @@ public class DeviceListActivity extends Activity implements
 							layout1.setOnLongClickListener(DeviceListActivity.this);
 
 						} else {
+							addDevice.setVisibility(View.VISIBLE);
 							isSum = 1;
 							layout1.setVisibility(View.GONE);
 							layout2.setVisibility(View.GONE);
+							return;
 						}
 
 						// --------
@@ -303,59 +320,65 @@ public class DeviceListActivity extends Activity implements
 							}
 							friend2.setText(user2.getName());
 						}
-						if (listnew.getData().get(1).getRelative().size() == 1) {
-							UserInfo user1 = dbManager.quaryId(listnew
-									.getData().get(1).getDevice_sn(), listnew
-									.getData().get(1).getRelative().get(0)
-									.getId());
-							if (user1 != null) {
-								if (!user1.getImageUrl().equalsIgnoreCase("")) {
-									byte[] b = Base64.decode(user1
-											.getImageUrl().getBytes(),
-											Base64.DEFAULT);
-									Bitmap bitmap = BitmapFactory
-											.decodeByteArray(b, 0, b.length);
-									if (bitmap != null)
-										friendImage3.setImageBitmap(bitmap);
+						if (listnew.getData().size() == 2) {
+							if (listnew.getData().get(1).getRelative().size() == 1) {
+								UserInfo user1 = dbManager.quaryId(listnew
+										.getData().get(1).getDevice_sn(),
+										listnew.getData().get(1).getRelative()
+												.get(0).getId());
+								if (user1 != null) {
+									if (!user1.getImageUrl().equalsIgnoreCase(
+											"")) {
+										byte[] b = Base64.decode(user1
+												.getImageUrl().getBytes(),
+												Base64.DEFAULT);
+										Bitmap bitmap = BitmapFactory
+												.decodeByteArray(b, 0, b.length);
+										if (bitmap != null)
+											friendImage3.setImageBitmap(bitmap);
+									}
 								}
-							}
-							friend11.setText(user1.getName());
-						} else if (listnew.getData().get(1).getRelative()
-								.size() == 2) {
+								friend11.setText(user1.getName());
+							} else if (listnew.getData().get(1).getRelative()
+									.size() == 2) {
 
-							UserInfo user1 = dbManager.quaryId(listnew
-									.getData().get(1).getDevice_sn(), listnew
-									.getData().get(1).getRelative().get(0)
-									.getId());
-							if (user1 != null) {
-								if (!user1.getImageUrl().equalsIgnoreCase("")) {
-									byte[] b = Base64.decode(user1
-											.getImageUrl().getBytes(),
-											Base64.DEFAULT);
-									Bitmap bitmap = BitmapFactory
-											.decodeByteArray(b, 0, b.length);
-									if (bitmap != null)
-										friendImage3.setImageBitmap(bitmap);
+								UserInfo user1 = dbManager.quaryId(listnew
+										.getData().get(1).getDevice_sn(),
+										listnew.getData().get(1).getRelative()
+												.get(0).getId());
+								if (user1 != null) {
+									if (!user1.getImageUrl().equalsIgnoreCase(
+											"")) {
+										byte[] b = Base64.decode(user1
+												.getImageUrl().getBytes(),
+												Base64.DEFAULT);
+										Bitmap bitmap = BitmapFactory
+												.decodeByteArray(b, 0, b.length);
+										if (bitmap != null)
+											friendImage3.setImageBitmap(bitmap);
+									}
 								}
-							}
-							friend11.setText(user1.getName());
-							UserInfo user2 = dbManager.quaryId(listnew
-									.getData().get(1).getDevice_sn(), listnew
-									.getData().get(1).getRelative().get(1)
-									.getId());
-							if (user2 != null) {
-								if (!user2.getImageUrl().equalsIgnoreCase("")) {
-									byte[] b = Base64.decode(user2
-											.getImageUrl().getBytes(),
-											Base64.DEFAULT);
-									Bitmap bitmap = BitmapFactory
-											.decodeByteArray(b, 0, b.length);
-									if (bitmap != null)
-										friendImage4.setImageBitmap(bitmap);
+								friend11.setText(user1.getName());
+								UserInfo user2 = dbManager.quaryId(listnew
+										.getData().get(1).getDevice_sn(),
+										listnew.getData().get(1).getRelative()
+												.get(1).getId());
+								if (user2 != null) {
+									if (!user2.getImageUrl().equalsIgnoreCase(
+											"")) {
+										byte[] b = Base64.decode(user2
+												.getImageUrl().getBytes(),
+												Base64.DEFAULT);
+										Bitmap bitmap = BitmapFactory
+												.decodeByteArray(b, 0, b.length);
+										if (bitmap != null)
+											friendImage4.setImageBitmap(bitmap);
+									}
 								}
+								friend12.setText(user2.getName());
 							}
-							friend12.setText(user2.getName());
 						}
+
 						UserInfo current = null;
 						if (deviceType.equalsIgnoreCase("blood_glucose")) {
 							current = dbManager.quaryId(SharePrefenceUtils
@@ -410,6 +433,31 @@ public class DeviceListActivity extends Activity implements
 					ResultResponse response = gson.fromJson(
 							jsonObject2.toString(), ResultResponse.class);
 					if (response.isResult()) {
+						UserInfo delete = new UserInfo();
+						delete.setType(deviceType);
+						delete.setDevice_sn(device_id);
+						dbManager.deleteDevice(delete);
+						if (deviceType.equalsIgnoreCase("blood_presure")) {
+							SharePrefenceUtils
+									.getPressureFriendId(DeviceListActivity.this);
+							if (SharePrefenceUtils
+									.getPressureFriendId(
+											DeviceListActivity.this)
+									.getDevice_sn().equalsIgnoreCase(device_id)) {
+								SharePrefenceUtils.savePressureFriendId(
+										DeviceListActivity.this, new DeviceFriendName());
+							}
+						} else {
+							SharePrefenceUtils
+									.getSugarFriendId(DeviceListActivity.this);
+							if (SharePrefenceUtils
+									.getSugarFriendId(DeviceListActivity.this)
+									.getDevice_sn().equalsIgnoreCase(device_id)) {
+								SharePrefenceUtils.saveSugarFriendId(
+										DeviceListActivity.this, new DeviceFriendName());
+							}
+						}
+
 						finish();
 					}
 				} catch (JSONException e) {
@@ -563,14 +611,12 @@ public class DeviceListActivity extends Activity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 11 && requestCode == 1) {
-			new WebServiceUtils(DeviceListActivity.this, mHandler)
-					.sendExecuteNo(
-							new String[] {
-									SharePrefenceUtils
-											.getAccount(DeviceListActivity.this),
-									deviceType },
-							WebServiceParmas.GET_DEVICE_FRIEND,
-							WebServiceParmas.HTTP_POST);
+			new WebServiceUtils(DeviceListActivity.this, mHandler).sendExecute(
+					new String[] {
+							SharePrefenceUtils
+									.getAccount(DeviceListActivity.this),
+							deviceType }, WebServiceParmas.GET_DEVICE_FRIEND,
+					WebServiceParmas.HTTP_POST, "加载中...");
 			return;
 		}
 
@@ -622,14 +668,35 @@ public class DeviceListActivity extends Activity implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.commit:
-			new WebServiceUtils(DeviceListActivity.this, mHandler)
-					.sendExecuteNo(
-							new String[] {
-									SharePrefenceUtils
-											.getAccount(DeviceListActivity.this),
-									deviceType, device_id },
-							WebServiceParmas.DELETE_DEVICE,
-							WebServiceParmas.HTTP_POST);
+			if (deviceCheck1.isChecked()) {
+				new WebServiceUtils(DeviceListActivity.this, mHandler)
+						.sendExecuteNo(
+								new String[] {
+										SharePrefenceUtils
+												.getAccount(DeviceListActivity.this),
+										deviceType, device_id },
+								WebServiceParmas.DELETE_DEVICE,
+								WebServiceParmas.HTTP_POST);
+				if (deviceCheck2.isChecked()) {
+					new WebServiceUtils(DeviceListActivity.this, mHandler)
+							.sendExecuteNo(
+									new String[] {
+											SharePrefenceUtils
+													.getAccount(DeviceListActivity.this),
+											deviceType, device_id },
+									WebServiceParmas.DELETE_DEVICE,
+									WebServiceParmas.HTTP_POST);
+				}
+			} else if (deviceCheck2.isChecked()) {
+				new WebServiceUtils(DeviceListActivity.this, mHandler)
+						.sendExecuteNo(
+								new String[] {
+										SharePrefenceUtils
+												.getAccount(DeviceListActivity.this),
+										deviceType, device_id },
+								WebServiceParmas.DELETE_DEVICE,
+								WebServiceParmas.HTTP_POST);
+			}
 
 			break;
 		case R.id.friend_image1:

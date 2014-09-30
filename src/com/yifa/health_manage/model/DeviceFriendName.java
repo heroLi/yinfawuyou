@@ -3,10 +3,10 @@ package com.yifa.health_manage.model;
 import java.io.Serializable;
 
 public class DeviceFriendName implements Serializable {
-	private String name;
-	private String id;
+	private String name="";
+	private String id="";
 	
-	private String device_sn;
+	private String device_sn="";
 
 	public String getDevice_sn() {
 		return device_sn;

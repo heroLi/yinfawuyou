@@ -129,6 +129,28 @@ public class DBManager {
 		}
 	}
 
+	public void updateType(UserInfo info) {
+		if (db.isOpen()) {
+
+			ContentValues values = new ContentValues();
+			values.put("layout_id", info.getLayoutId());
+
+			db.update("Image_User", values, "device_sn=? and friend_id=?",
+					new String[] { info.getDevice_sn(), info.getFriend_id() });
+		}
+	}
+
+	public void deleteDevice(UserInfo info) {
+		db.delete("Image_User", "device_sn=? and device_type = ?",
+				new String[] { info.getDevice_sn(), info.getType() });
+
+	}
+
+	public void deleteAll(UserInfo info) {
+		db.delete("Image_User", null, null);
+
+	}
+
 	public void updateName(List<UserInfo> infos) {
 		if (db.isOpen()) {
 			try {

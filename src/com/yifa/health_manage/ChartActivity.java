@@ -186,6 +186,15 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		}
 		adapter = new BloodListAdapter(this, mCurrentList, type);
 		listView.setAdapter(adapter);
+
+		title.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				finish();
+			}
+		});
 	}
 
 	@Override
@@ -311,7 +320,17 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 					if (dbManager.quaryId(userInfo.getDevice_sn(),
 							userInfo.getFriend_id()) == null) {
 						dbManager.insert(deviceType, userInfo.getDevice_sn(),
-								userInfo.getFriend_id(), new UserInfo());
+								userInfo.getFriend_id(), userInfo);
+					}else{
+						if (!dbManager
+								.quaryId(
+										userInfo.getDevice_sn(),
+										userInfo.getFriend_id())
+								.getLayoutId()
+								.equalsIgnoreCase(
+										userInfo.getLayoutId())) {
+							dbManager.updateType(userInfo);
+						}
 					}
 				}
 			}

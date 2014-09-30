@@ -32,6 +32,7 @@ public class ProductFragment extends Fragment {
 		webView = (WebView) view.findViewById(R.id.myWeb);
 		webView.loadUrl("http://121.40.172.222/health/ad.php");
 		webView.getSettings().setJavaScriptEnabled(true);
+		webView.getSettings().setSupportZoom(true);
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {

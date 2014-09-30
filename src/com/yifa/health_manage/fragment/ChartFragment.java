@@ -76,7 +76,8 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 	private int type = 0;// 0周 1月2年
 
-	private TextView time_title, blood_text, blood_Flag, blood_mes, blood_time;
+	private TextView time_title, blood_text, blood_Flag, blood_mes, blood_time,
+			blood_level;
 
 	private int bgH, bgW, imageH, imageW;
 
@@ -126,9 +127,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					List<BloodValuesInfo> mList = gson.fromJson(
 							jsonArray.toString(), type);
 
-					ChartActivity cahrt = (ChartActivity) getActivity();
-					cahrt.setListData(mList);
-					initData(mList);
+					if (mList.size() <= 0) {
+						ChartActivity cahrt = (ChartActivity) getActivity();
+						cahrt.setListData(new ArrayList<BloodValuesInfo>());
+						initData(new ArrayList<BloodValuesInfo>());
+					} else {
+						ChartActivity cahrt = (ChartActivity) getActivity();
+						cahrt.setListData(mList);
+						initData(mList);
+					}
 
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -166,6 +173,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		time_title = (TextView) view.findViewById(R.id.timeTitle);
 		blood_text = (TextView) view.findViewById(R.id.blood_detail_number_tv);
 		blood_Flag = (TextView) view.findViewById(R.id.blood_detail_unit_tv);
+		blood_level = (TextView) view.findViewById(R.id.blood_detail_level_tv);
 		blood_mes = (TextView) view.findViewById(R.id.text);
 		blood_time = (TextView) view.findViewById(R.id.time);
 		linearLayout = (LinearLayout) view.findViewById(R.id.layout_halfRound);
@@ -188,7 +196,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					.getDevice_sn();
 			topLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			chartLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
-			linearLayout.setBackgroundResource(R.drawable.xuetang_group);
+			linearLayout.setBackgroundResource(R.drawable.xinlv_group);
 			blood_Flag.setText("mmol/L");
 			blood_mes.setText("血糖详情");
 
@@ -258,7 +266,6 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 
 	}
@@ -280,7 +287,14 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				blood_text.setText(mList.get(mList.size() - 1).getValue());
 				series_line.add(mList.size(), 2);
 				series_line.add(mList.size(), 12);
-			}
+				initBloodLevel(AndroidUtils
+						.getBloodLevel(1, Integer.valueOf(mList.get(
+								mList.size() - 1).getValue())));
+				setImageShow(Integer.valueOf(mList.get(mList.size() - 1)
+						.getValue()));
+			}else
+				series_high.add(0,0);
+
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			for (int i = 0; i < mList.size(); i++) {
 				series_high.add(i + 1, Double.valueOf(mList.get(i).getValue()));
@@ -290,7 +304,12 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				blood_text.setText(mList.get(mList.size() - 1).getValue());
 				series_line.add(mList.size(), 40);
 				series_line.add(mList.size(), 160);
-			}
+				initBloodLevel(AndroidUtils
+						.getBloodLevel(0, Integer.valueOf(mList.get(
+								mList.size() - 1).getValue())));
+			}else
+				series_high.add(0,0);
+
 		} else {
 
 			for (int i = 0; i < mList.size(); i++) {
@@ -303,12 +322,16 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						Double.valueOf(mList.get(i).getLow_value()));
 			}
 			mDataset.addSeries(series_low);
+
 			if (mList.size() > 0) {
 				blood_text.setText(mList.get(mList.size() - 1).getHigh_value()
 						+ "/" + mList.get(mList.size() - 1).getLow_value());
 				series_line.add(mList.size(), 40);
 				series_line.add(mList.size(), 160);
-			}
+				initBloodLevel(AndroidUtils.getBloodLevel(0, Integer
+						.valueOf(mList.get(mList.size() - 1).getHigh_value())));
+			}else
+				series_high.add(0,0);
 
 		}
 		mDataset.addSeries(series_high);
@@ -354,7 +377,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				if (seriesSelection == null) {
 				} else {
 					series_line.clear();
-
+					arrow.setVisibility(View.INVISIBLE);
 					if (deviceType.equalsIgnoreCase("blood_presure")) {// 血ya
 						XYSeries[] series = mDataset.getSeries();
 
@@ -371,16 +394,24 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						}
 
 						blood_text.setText(high + "/" + low);
+
+						initBloodLevel(AndroidUtils
+								.getBloodLevel(0, (int) high));
 						series_line.add(seriesSelection.getXValue(), 40);
 						series_line.add(seriesSelection.getXValue(), 160);
 					} else if (deviceType.equalsIgnoreCase("blood_glucose")) {
 						blood_text.setText(seriesSelection.getValue() + "");
 						series_line.add(seriesSelection.getXValue(), 2);
 						series_line.add(seriesSelection.getXValue(), 12);
+						initBloodLevel(AndroidUtils.getBloodLevel(1,
+								(int) seriesSelection.getValue()));
+						setImageShow((int) seriesSelection.getValue());
 					} else {
 						blood_text.setText(seriesSelection.getValue() + "");
 						series_line.add(seriesSelection.getXValue(), 40);
 						series_line.add(seriesSelection.getXValue(), 160);
+						initBloodLevel(AndroidUtils.getBloodLevel(0,
+								(int) seriesSelection.getValue()));
 					}
 					setOnClickTime((int) seriesSelection.getXValue());
 					view.repaint();
@@ -433,7 +464,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 		renderer.setYTitle("mm\nhg");
 		renderer.setXTitle("");
-
+		renderer.setPanLimits(new double[] { 0, 12, 2, 12 });
 		switch (type) {
 		case 0:
 			// 轴上数字的数量
@@ -449,16 +480,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			renderer.addXTextLabel(5, "五");
 			renderer.addXTextLabel(6, "六");
 			renderer.addXTextLabel(7, "日");
-
+			renderer.setPanLimits(new double[] { 0, 8, 2, 12 });
 			break;
 		case 1:
+			renderer.setXAxisMin(0.5);
+			renderer.setXAxisMax(15.5);
 			// 轴上数字的数量
 			renderer.setXLabels(15);
 			renderer.setYLabels(0);
-
-			renderer.setXAxisMax(30);
-			renderer.setXAxisMin(0);
-
+			renderer.setPanLimits(new double[] { 0, 31, 2, 12 });
 			break;
 		case 2:
 			renderer.setXLabels(0);
@@ -529,7 +559,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		// renderer.setShowAxes(false);
 		renderer.setPanEnabled(true); // 图表是否可以移动
 		renderer.setZoomEnabled(false); // 图表是否可以缩放
-		renderer.setPanEnabled(false);
+
+		renderer.setZoomEnabled(false, false);
+		renderer.setZoomLimits(new double[] { 0, 0, 0, 0 });
 		// renderer.setLegendHeight(100); // 图标文字距离底边的高度
 
 		// renderer.setYLabelsAlign(Align.RIGHT);// 右对齐
@@ -577,13 +609,13 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				imageH = arrow.getHeight();
 				imageW = arrow.getWidth();
 
-				Log.d("demo", bgH + "");
-				Log.d("demo", bgW + "");
-				Log.d("demo", imageH + "");
-				Log.d("demo", imageW + "");
-				handler.sendEmptyMessage(0);
+				loger.d("bgH" + bgH);
+				loger.d("bgW" + bgW);
+				loger.d("imageH" + imageH);
+				loger.d("imageW" + imageW);
+				// handler.sendEmptyMessage(0);
 			}
-		}, 1000);
+		}, 500);
 	}
 
 	private int middle = 100;
@@ -591,13 +623,52 @@ public class ChartFragment extends Fragment implements OnClickListener {
 	private int totol = 100;
 
 	private void setImageShow(int values) {
+
+		bgH = linearLayout.getHeight();
+		bgW = linearLayout.getWidth();
+
+		imageH = arrow.getHeight();
+		imageW = arrow.getWidth();
+		float banjingH = bgH - imageH - 45 * density;
+		float banjingW = bgW / 2 - imageW - 40 * density;
+		float hh = banjingH * values / middle;
+		double angle = 0;
+		float topH = 0, topW = 0;
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {// xuetang
 
+			switch (AndroidUtils.getBloodLevel(1, values)) {
+			case 0:
+				angle = 30;// 参数为以弧度表示的角
+				topH = Math.abs((float) 1 / 2 * banjingH);
+				double ss = Math.cos(angle);
+				double sss = Math.sin(angle);
+				topW = (float) (banjingW - Math.cos(angle * (Math.PI / 180))
+						* banjingW);
+				break;
+			case 1:
+				angle = 90;
+				topH = (float) banjingH;
+				topW = (float) banjingW;
+				break;
+			case 2:
+				angle = 150;
+				topH = Math.abs((float) Math.sin(angle * (Math.PI / 180))
+						* banjingH);
+				topW = (float) (banjingW + Math.cos(angle * (Math.PI / 180))
+						* banjingW);
+				break;
+
+			default:
+				break;
+			}
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 
 		} else {
 			totol = 140;
 		}
+
+		loger.d("topH" + topH);
+		loger.d("topW" + topW);
 
 		double jiao = Math.asin((double) values / middle);
 
@@ -606,30 +677,26 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
 		String s = df.format(jiao);
 
-		float banjing = bgH - imageH - 30 * density;
-		float hh = banjing * values / middle;
-		double ww = Math.sqrt(banjing * banjing - (banjing * values / middle)
-				* (banjing * values / middle));
-		Log.d("demo", "hh" + hh);
-		Log.d("demo", "ww" + ww);
-		RotateAnimation animation = new RotateAnimation(0f, Float.valueOf(s),
+		RotateAnimation animation = new RotateAnimation(0f, (float) angle,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
 				0.5f);// 按中心旋转
-		animation.setDuration(2000);
+		animation.setDuration(100);
 		// (bgH- imageH-30*density)
 		// TranslateAnimation translateAnimation = new TranslateAnimation(0f,
 		// (bgW
 		// / 2 - imageW / 2 - 30 * density), 0f,
 		// -(bgH - imageH * 3 / 2 - 30 * density));
 		TranslateAnimation translateAnimation = new TranslateAnimation(0f,
-				(float) ww, 0f, -hh);
-		translateAnimation.setDuration(1000);
+				(float) topW, 0f, -topH);
+		translateAnimation.setDuration(100);
+
 		AnimationSet animationSet = new AnimationSet(false);
 		animationSet.addAnimation(animation);
 		animationSet.addAnimation(translateAnimation);
 		animationSet.setFillAfter(true);
 
 		arrow.startAnimation(animationSet);
+		arrow.setVisibility(View.VISIBLE);
 	}
 
 	@SuppressLint("SimpleDateFormat")
@@ -819,5 +886,49 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			break;
 		}
 
+	}
+
+	private void initBloodLevel(int type) {
+		if (deviceType.equalsIgnoreCase("blood_presure")) {
+			switch (type) {
+			case 0:
+				blood_level.setText("理想");
+				break;
+			case 1:
+				blood_level.setText("正常");
+				break;
+			case 2:
+				blood_level.setText("偏高");
+				break;
+			case 3:
+				blood_level.setText("轻度");
+				break;
+			case 4:
+				blood_level.setText("中度");
+				break;
+			case 5:
+				blood_level.setText("高度");
+				break;
+
+			default:
+				break;
+			}
+
+		} else {
+			switch (type) {
+			case 0:
+				blood_level.setText("理想");
+				break;
+			case 1:
+				blood_level.setText("正常");
+				break;
+			case 2:
+				blood_level.setText("偏高");
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 }
