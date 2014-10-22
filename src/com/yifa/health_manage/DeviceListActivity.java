@@ -123,15 +123,20 @@ public class DeviceListActivity extends Activity implements
 					listnew = gson.fromJson(jsonObject.toString(),
 							DevicesListInfo.class);
 
-					Map<String, UserInfo> maps = SharePrefenceUtils
-							.getUsetInfoList(DeviceListActivity.this);
-					if (listnew == null||listnew.getData().size()<=0) {
+					// Map<String, UserInfo> maps = SharePrefenceUtils
+					// .getUsetInfoList(DeviceListActivity.this);
+					if (listnew == null || listnew.getData().size() <= 0) {
 						addDevice.setVisibility(View.VISIBLE);
 						layout1.setVisibility(View.GONE);
 						layout2.setVisibility(View.GONE);
 						isSum = 0;
 					} else {
-
+						if (listnew.getData().get(0).getRelative() == null
+								|| listnew.getData().get(0).getRelative()
+										.size() <= 0) {
+							addDevice.setVisibility(View.VISIBLE);
+							return;
+						}
 						if (deviceType.equalsIgnoreCase("blood_glucose")) {
 							if (SharePrefenceUtils
 									.getSugarFriendId(DeviceListActivity.this)
@@ -445,7 +450,8 @@ public class DeviceListActivity extends Activity implements
 											DeviceListActivity.this)
 									.getDevice_sn().equalsIgnoreCase(device_id)) {
 								SharePrefenceUtils.savePressureFriendId(
-										DeviceListActivity.this, new DeviceFriendName());
+										DeviceListActivity.this,
+										new DeviceFriendName());
 							}
 						} else {
 							SharePrefenceUtils
@@ -454,7 +460,8 @@ public class DeviceListActivity extends Activity implements
 									.getSugarFriendId(DeviceListActivity.this)
 									.getDevice_sn().equalsIgnoreCase(device_id)) {
 								SharePrefenceUtils.saveSugarFriendId(
-										DeviceListActivity.this, new DeviceFriendName());
+										DeviceListActivity.this,
+										new DeviceFriendName());
 							}
 						}
 

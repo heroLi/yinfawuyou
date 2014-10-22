@@ -55,9 +55,9 @@ public class StartFragment extends Fragment {
 		ViewGroup group = (ViewGroup) view.findViewById(R.id.viewGroup);
 		viewPager = (ViewPager) view.findViewById(R.id.viewPager);
 		// 载入图片资源ID
-		imgIdArray = new int[] { R.drawable.look_deug_home_top_img1,
-				R.drawable.look_deug_home_top_img2,
-				R.drawable.look_deug_home_top_img3 };
+		imgIdArray = new int[] { R.drawable.home_top_img3,
+				R.drawable.home_top_img3,
+				R.drawable.home_top_img3 };
 
 		// 将点点加入到ViewGroup中
 		tips = new ImageView[imgIdArray.length];
@@ -66,9 +66,9 @@ public class StartFragment extends Fragment {
 			imageView.setLayoutParams(new LayoutParams(10, 10));
 			tips[i] = imageView;
 			if (i == 0) {
-				tips[i].setBackgroundResource(R.drawable.arrow_buttom);
+				tips[i].setBackgroundResource(R.drawable.page_ok);
 			} else {
-				tips[i].setBackgroundResource(R.drawable.arrow_buttom);
+				tips[i].setBackgroundResource(R.drawable.page_no);
 			}
 
 			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(

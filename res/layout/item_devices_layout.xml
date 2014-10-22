@@ -24,7 +24,6 @@
             android:id="@+id/device_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
@@ -47,7 +46,6 @@
             android:id="@+id/device_check1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
@@ -70,7 +68,6 @@
             android:id="@+id/device_check2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 

@@ -273,6 +273,6 @@ public class SharePrefenceUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return user;
 	}
 }

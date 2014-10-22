@@ -21,6 +21,8 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 	private String[] params;
 	private String titleString = "";
 	private boolean isDialog = false;
+	
+	private MyLoger loger = MyLoger.getInstence("WebServiceUtils");
 
 	private ProgressDialog progressDialog = null;
 
@@ -110,8 +112,8 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 					ResultResponse.class);
 			if (response.isResult()) {
 			}
-
-			AndroidUtils.showToast(mContext, response.getInfo());
+			loger.d(result.toString());
+//			AndroidUtils.showToast(mContext, response.getInfo());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

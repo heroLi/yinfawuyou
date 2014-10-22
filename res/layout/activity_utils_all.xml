@@ -11,8 +11,8 @@
         android:id="@+id/user_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_below="@id/top"
+        android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -33,12 +33,14 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:id="@+id/user_sax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal" >
 
                 <RadioButton
+                    android:id="@+id/sax_man"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -46,6 +48,7 @@
                     android:textColor="@color/app_green" />
 
                 <RadioButton
+                    android:id="@+id/sax_women"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="女"
@@ -71,13 +74,14 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/login_edit_password_two"
+                android:id="@+id/user_bri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:background="#00000000"
+                android:inputType="number"
                 android:gravity="right"
-                android:hint="1990.01.10" />
+                android:hint="30" />
         </LinearLayout>
     </LinearLayout>
 
@@ -88,7 +92,6 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal" >
-
 
         <Button
             android:id="@+id/register_btn_next"
@@ -125,12 +128,14 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/user_hight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:gravity="right"
+                android:inputType="number"
                 android:hint="170" />
 
             <TextView
@@ -159,11 +164,13 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/user_wight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#00000000"
+                android:inputType="number"
                 android:gravity="right"
                 android:hint="79" />
 
@@ -193,10 +200,12 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/user_yaowei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:inputType="number"
                 android:background="#00000000"
                 android:gravity="right"
                 android:hint="78" />

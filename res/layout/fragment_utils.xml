@@ -8,11 +8,8 @@
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="fill_parent"
-        android:background="@drawable/home_top_img3"
-        android:layout_height="140dip" >
-
-       
-
+        android:layout_height="140dip"
+        android:background="@drawable/home_top_img3" >
     </FrameLayout>
 
     <LinearLayout
@@ -30,9 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_all"
             android:drawableLeft="@drawable/utils_icon1"
             android:gravity="center_vertical"
+            android:text="@string/utils_all"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -67,7 +64,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:background="#00000000" />
+            android:background="#00000000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:gravity="right" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,9 +89,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_item2"
             android:drawableLeft="@drawable/utils_icon3"
             android:gravity="center_vertical"
+            android:text="@string/utils_item2"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -95,6 +100,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="#00000000"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:gravity="right" />
     </LinearLayout>
 
@@ -111,9 +124,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_item3"
             android:drawableLeft="@drawable/utils_icon4"
             android:gravity="center_vertical"
+            android:text="@string/utils_item3"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -122,6 +135,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="#00000000"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:gravity="right" />
     </LinearLayout>
 
@@ -138,9 +159,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_item4"
             android:drawableLeft="@drawable/utils_icon5"
             android:gravity="center_vertical"
+            android:text="@string/utils_item4"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -149,6 +170,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="#00000000"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:gravity="right" />
     </LinearLayout>
 
@@ -165,9 +194,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_item5"
             android:drawableLeft="@drawable/utils_icon6"
             android:gravity="center_vertical"
+            android:text="@string/utils_item5"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -176,6 +205,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="#00000000"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:gravity="right" />
     </LinearLayout>
 
@@ -192,9 +229,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="@string/utils_item6"
             android:drawableLeft="@drawable/utils_icon7"
             android:gravity="center_vertical"
+            android:text="@string/utils_item6"
             android:textColor="@color/app_green"
             android:textSize="15sp" />
 
@@ -203,6 +240,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="#00000000"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:gravity="right" />
     </LinearLayout>
 

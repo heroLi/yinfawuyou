@@ -98,6 +98,10 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 
 					return;
 				}
+				if (listnew.getData().get(0).getRelative() == null
+						|| listnew.getData().get(0).getRelative().size() <= 0) {
+					return;
+				}
 				if (deviceType.equalsIgnoreCase("blood_glucose")) {
 					if (SharePrefenceUtils.getSugarFriendId(ChartActivity.this)
 							.getId().equalsIgnoreCase("")) {

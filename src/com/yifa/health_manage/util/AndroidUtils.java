@@ -87,6 +87,8 @@ public class AndroidUtils {
 	 * 血糖 0理想1可接受2不可接受
 	 * 
 	 * 血压L：0理想，1正常，2正常偏高，3轻度，4中度，5高度
+	 * 
+	 * 心率，0理想1偏高2偏低
 	 * */
 	public static int getBloodLevel(int type, int value) {
 
@@ -116,7 +118,13 @@ public class AndroidUtils {
 			}
 			break;
 		case 2:// 心率
-
+			if (45 <= value && value < 100) {
+				return 0;
+			} else if (100 <= value) {
+				return 1;
+			} else if (value < 45) {
+				return 2;
+			}
 			break;
 
 		default:

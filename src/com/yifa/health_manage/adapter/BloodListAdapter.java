@@ -83,7 +83,7 @@ public class BloodListAdapter extends BaseAdapter {
 					Integer.valueOf(mList.get(position).getValue()));
 			holder.data.setText(mList.get(position).getValue() + "BPM");
 		}
-		holder.time.setText(mList.get(position).getData());
+		holder.time.setText(mList.get(position).getDatetime());
 		Drawable left = mContext.getResources().getDrawable(
 				R.drawable.chart_list_ok);
 		switch (level) {

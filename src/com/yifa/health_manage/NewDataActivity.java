@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,8 +66,8 @@ public class NewDataActivity extends Activity {
 	private TextView data1, blood_xh, blood_xl, blood_lv, blood_t, data2,
 			data3;
 
-	private TextView xy1, xy2, xy3, xy4, xy5,xy6, xt1, xt2, xt3, xl1, xl2, xl3,
-			title;
+	private TextView xy1, xy2, xy3, xy4, xy5, xy6, xt1, xt2, xt3, xl1, xl2,
+			xl3, title;
 
 	private RelativeLayout layout;
 
@@ -105,6 +107,13 @@ public class NewDataActivity extends Activity {
 		title = (TextView) findViewById(R.id.activity_top_title);
 		layout = (RelativeLayout) findViewById(R.id.top);
 		title.setText("最新数据");
+		title.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		layout.setBackgroundColor(Color.parseColor("#b240cb"));
 	}
 
