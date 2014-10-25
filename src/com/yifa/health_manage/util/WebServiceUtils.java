@@ -155,6 +155,9 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 		case WebServiceParmas.GET_BLOOD_DATA:
 			obj = WebServiceParmas.getDevicesData(httpType, params);
 			break;
+		case WebServiceParmas.GET_IMAGE_URL:
+			obj = WebServiceParmas.getImageURl(httpType, params);
+			break;
 
 		default:
 			break;

@@ -37,6 +37,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.yifa.health_manage.FrontPagerWebactivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_main_board_"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.yifa.health_manage.Main_board_Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main_board_"

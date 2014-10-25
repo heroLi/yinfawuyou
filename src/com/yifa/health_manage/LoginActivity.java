@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.yifa.health_manage.db.DBManager;
+import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;
@@ -31,6 +33,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private TextView noLogin, forgetPass;
 	private Button loginButton;
 	private EditText nameEdit, passEdit;
+	private DBManager dbManager = null;
 
 	private CheckBox isLogin;
 	private Handler mHandler = new Handler() {
@@ -50,6 +53,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 					ResultResponse response = gson.fromJson(
 							jsonObject.toString(), ResultResponse.class);
 					if (response.isResult()) {
+						if (!SharePrefenceUtils.getAccount(LoginActivity.this)
+								.equalsIgnoreCase(
+										nameEdit.getText().toString().trim())) {
+							dbManager.deleteAll();
+							SharePrefenceUtils.saveSugarFriendId(LoginActivity.this, new DeviceFriendName());
+							SharePrefenceUtils.savePressureFriendId(LoginActivity.this, new DeviceFriendName());
+						}
 						SharePrefenceUtils.saveAccount(LoginActivity.this,
 								nameEdit.getText().toString().trim());
 						SharePrefenceUtils.savePassword(LoginActivity.this,
@@ -81,6 +91,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login_layout);
 		initView();
+		dbManager = new DBManager(this);
 		initListener();
 
 	}
@@ -146,6 +157,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		}
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		dbManager.close();
 	}
 
 	private boolean isVerify() {

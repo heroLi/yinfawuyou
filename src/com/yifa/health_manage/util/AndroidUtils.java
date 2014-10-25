@@ -121,9 +121,9 @@ public class AndroidUtils {
 			if (45 <= value && value < 100) {
 				return 0;
 			} else if (100 <= value) {
-				return 1;
-			} else if (value < 45) {
 				return 2;
+			} else if (value < 45) {
+				return 1;
 			}
 			break;
 

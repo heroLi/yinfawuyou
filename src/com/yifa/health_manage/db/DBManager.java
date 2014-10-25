@@ -146,7 +146,7 @@ public class DBManager {
 
 	}
 
-	public void deleteAll(UserInfo info) {
+	public void deleteAll() {
 		db.delete("Image_User", null, null);
 
 	}

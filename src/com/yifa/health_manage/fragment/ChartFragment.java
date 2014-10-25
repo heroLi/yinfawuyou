@@ -287,8 +287,18 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		mDataset = new XYMultipleSeriesDataset();
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
 			for (int i = 0; i < mList.size(); i++) {
-				series_high.add(initDateTime(mList.get(i).getDatetime()),
-						Double.valueOf(mList.get(i).getValue()));
+				if (type == 0) {
+					int a = initDateTime(mList.get(i).getDatetime());
+					if (a == 0) {
+						a = 7;
+					} else if (a == 9) {
+						a = 2;
+					}
+					series_high.add(a, Double.valueOf(mList.get(i).getValue()));
+				} else {
+					series_high.add(initDateTime(mList.get(i).getDatetime()),
+							Double.valueOf(mList.get(i).getValue()));
+				}
 			}
 			if (mList.size() > 0) {
 				blood_text.setText(mList.get(mList.size() - 1).getValue());
@@ -304,8 +314,19 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			for (int i = 0; i < mList.size(); i++) {
-				series_high.add(initDateTime(mList.get(i).getDatetime()),
-						Double.valueOf(mList.get(i).getValue()));
+				if (type == 0) {
+					int a = initDateTime(mList.get(i).getDatetime());
+					if (a == 0) {
+						a = 7;
+					} else if (a == 9) {
+						a = 2;
+					}
+					series_high.add(a, Double.valueOf(mList.get(i).getValue()));
+				} else {
+					series_high.add(initDateTime(mList.get(i).getDatetime()),
+							Double.valueOf(mList.get(i).getValue()));
+				}
+
 			}
 
 			if (mList.size() > 0) {
@@ -322,14 +343,26 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		} else {
 
 			for (int i = 0; i < mList.size(); i++) {
-				series_high.add(initDateTime(mList.get(i).getDatetime()),
-						Double.valueOf(mList.get(i).getHigh_value()));
+
+				if (type == 0) {
+					int a = initDateTime(mList.get(i).getDatetime());
+					if (a == 0) {
+						a = 7;
+					} else if (a == 9) {
+						a = 2;
+					}
+					series_high.add(a,
+							Double.valueOf(mList.get(i).getHigh_value()));
+					series_low.add(a,
+							Double.valueOf(mList.get(i).getLow_value()));
+				} else {
+					series_high.add(initDateTime(mList.get(i).getDatetime()),
+							Double.valueOf(mList.get(i).getHigh_value()));
+					series_low.add(initDateTime(mList.get(i).getDatetime()),
+							Double.valueOf(mList.get(i).getLow_value()));
+				}
 			}
 
-			for (int i = 0; i < mList.size(); i++) {
-				series_low.add(initDateTime(mList.get(i).getDatetime()),
-						Double.valueOf(mList.get(i).getLow_value()));
-			}
 			mDataset.addSeries(series_low);
 
 			if (mList.size() > 0) {
@@ -395,11 +428,16 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						for (XYSeries xySeries : series) {
 							if (xySeries.getTitle().equalsIgnoreCase("高压")) {
 								high = xySeries.getY(seriesSelection
-										.getSeriesIndex());
+										.getPointIndex());
+								loger.d(seriesSelection.getPointIndex()
+										+ "---high");
 							}
 							if (xySeries.getTitle().equalsIgnoreCase("低压")) {
 								low = xySeries.getY(seriesSelection
-										.getSeriesIndex());
+										.getPointIndex());
+								loger.d(seriesSelection.getPointIndex()
+										+ "---low");
+
 							}
 						}
 
@@ -612,80 +650,6 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 	private int totol = 100;
 
-	private void setImageShow(int values) {
-
-		imageH = arrow.getHeight();
-		imageW = arrow.getWidth();
-		float banjingH = bgH - imageH - 45 * density;
-		float banjingW = bgW / 2 - imageW - 40 * density;
-		float hh = banjingH * values / middle;
-		double angle = 0;
-		float topH = 0, topW = 0;
-		if (deviceType.equalsIgnoreCase("blood_glucose")) {// xuetang
-
-			switch (AndroidUtils.getBloodLevel(1, values)) {
-			case 0:
-				angle = 30;// 参数为以弧度表示的角
-				topH = Math.abs((float) 1 / 2 * banjingH);
-				double ss = Math.cos(angle);
-				double sss = Math.sin(angle);
-				topW = (float) (banjingW - Math.cos(angle * (Math.PI / 180))
-						* banjingW);
-				break;
-			case 1:
-				angle = 90;
-				topH = (float) banjingH;
-				topW = (float) banjingW;
-				break;
-			case 2:
-				angle = 150;
-				topH = Math.abs((float) Math.sin(angle * (Math.PI / 180))
-						* banjingH);
-				topW = (float) (banjingW + Math.cos(angle * (Math.PI / 180))
-						* banjingW);
-				break;
-
-			default:
-				break;
-			}
-		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
-
-		} else {
-			totol = 140;
-		}
-
-		loger.d("topH" + topH);
-		loger.d("topW" + topW);
-
-		double jiao = Math.asin((double) values / middle);
-
-		jiao = Math.toDegrees(jiao);
-		jiao = 180 * (values / totol);
-		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
-		String s = df.format(jiao);
-
-		RotateAnimation animation = new RotateAnimation(0f, (float) angle,
-				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-				0.5f);// 按中心旋转
-		animation.setDuration(100);
-		// (bgH- imageH-30*density)
-		// TranslateAnimation translateAnimation = new TranslateAnimation(0f,
-		// (bgW
-		// / 2 - imageW / 2 - 30 * density), 0f,
-		// -(bgH - imageH * 3 / 2 - 30 * density));
-		TranslateAnimation translateAnimation = new TranslateAnimation(0f,
-				(float) topW, 0f, -topH);
-		translateAnimation.setDuration(100);
-
-		AnimationSet animationSet = new AnimationSet(false);
-		animationSet.addAnimation(animation);
-		animationSet.addAnimation(translateAnimation);
-		animationSet.setFillAfter(true);
-
-		arrow.startAnimation(animationSet);
-		// arrow.setVisibility(View.VISIBLE);
-	}
-
 	@SuppressLint("SimpleDateFormat")
 	@SuppressWarnings({ "deprecation", "static-access" })
 	@Override
@@ -719,9 +683,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 							calendar);
 					calendar.add(Calendar.DATE, 1);
 					calendar.add(Calendar.MONTH, -1);
-					endTime = startTime;
-					startTime = (String) dateFormat.format("yyyy-MM-dd",
-							calendar);
+					// endTime = startTime;
+					// startTime = (String) dateFormat.format("yyyy-MM-dd",
+					// calendar);
+					int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+					startTime = (String) dateFormat.format("yyyy-MM", calendar)
+							+ "-" + 01;
+					endTime = (String) dateFormat.format("yyyy-MM", calendar)
+							+ "-" + day;
+
 					break;
 				case 2:
 
@@ -767,9 +737,11 @@ public class ChartFragment extends Fragment implements OnClickListener {
 							.format("yyyy-MM-dd", calendar);
 					calendar.add(Calendar.DATE, -1);
 					calendar.add(Calendar.MONTH, 1);
-					startTime = endTime;
-					endTime = (String) dateFormat
-							.format("yyyy-MM-dd", calendar);
+					int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+					startTime = (String) dateFormat.format("yyyy-MM", calendar)
+							+ "-" + 01;
+					endTime = (String) dateFormat.format("yyyy-MM", calendar)
+							+ "-" + day;
 					break;
 				case 2:
 					calendar.setTimeInMillis(simpleDateFormat2.parse(endTime)
@@ -851,6 +823,21 @@ public class ChartFragment extends Fragment implements OnClickListener {
 
 		switch (type) {
 		case 0:
+			Calendar calendar0 = Calendar.getInstance();
+			SimpleDateFormat simpleDateFormat0 = new SimpleDateFormat(
+					"yyyy-MM-dd");
+			try {
+				calendar0.setTimeInMillis(simpleDateFormat0.parse(startTime)
+						.getTime());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			calendar0.add(Calendar.DAY_OF_WEEK, click-1);
+			DateFormat dateFormat0 = new DateFormat();
+			String time0 = (String) dateFormat0.format("yyyy-MM-dd", calendar0);
+			blood_time.setText(time0);
+			break;
 		case 1:
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
@@ -921,7 +908,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		calendar.setTime(date);
 		switch (type) {
 		case 0:
-			return calendar.get(Calendar.DAY_OF_WEEK) + 1;
+			return calendar.get(Calendar.DAY_OF_WEEK)-1;
 		case 1:
 			return calendar.get(Calendar.DAY_OF_MONTH);
 		case 2:

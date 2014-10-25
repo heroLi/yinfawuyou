@@ -1,5 +1,7 @@
 package com.yifa.health_manage;
 
+import net.tsz.afinal.FinalBitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ public class Main_board_Activity extends FragmentActivity implements
 
 	private Fragment startFragment, productFragment, utilsFragment,
 			userFragment, nowFragment;
+	private FinalBitmap bitmap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,10 @@ public class Main_board_Activity extends FragmentActivity implements
 		setContentView(R.layout.activity_main_board_layout);
 		initView();
 		initListener();
-		startFragment = new StartFragment();
+		bitmap = FinalBitmap.create(this);
+		
+		bitmap.configDiskCacheSize(1024);
+		startFragment = new StartFragment(bitmap);
 		nowFragment = startFragment;
 		getSupportFragmentManager().beginTransaction()
 				.add(R.id.main_content_layout, startFragment)
@@ -49,7 +55,7 @@ public class Main_board_Activity extends FragmentActivity implements
 		switch (checkedId) {
 		case R.id.main_start:
 			if (startFragment == null) {
-				startFragment = new StartFragment();
+				startFragment = new StartFragment(bitmap);
 			}
 			showFragment(nowFragment, startFragment);
 			break;

@@ -21,9 +21,11 @@ public class WebServiceParmas {
 	public static final int DELETE_DEVICE = GET_DEVICE_FRIEND + 1;
 	public static final int NEW_DATA = DELETE_DEVICE + 1;
 	public static final int GET_BLOOD_DATA = NEW_DATA + 1;
+	public static final int GET_IMAGE_URL = GET_BLOOD_DATA + 1;
 
-//	private static final String Url = "http://112.124.126.43/health/json.php";//demo
-	private static final String Url = "http://121.40.172.222/health/json.php";//正式
+	// private static final String Url =
+	// "http://112.124.126.43/health/json.php";//demo
+	private static final String Url = "http://121.40.172.222/health/json.php";// 正式
 
 	/**
 	 * type:login username: xxxx, pwd: xxxx
@@ -261,6 +263,24 @@ public class WebServiceParmas {
 			entity.put("device_type", parmas[0]);
 			entity.put("relative_id", parmas[1]);
 			entity.put("relative_name", parmas[2]);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		obj = Connection.getConnection(Url, httpType, entity);
+
+		return obj;
+	}
+
+	/**
+	 * 获取iamge数据 { type:modify_rative, device_type:xxx, relative_id,xxxx,(search
+	 * by id) relative_name,xxx(for change) }
+	 **/
+	public static Object getImageURl(int httpType, String[] parmas) {
+		Object obj = null;
+		JSONObject entity = new JSONObject();
+		try {
+			entity.put("type", "getad");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

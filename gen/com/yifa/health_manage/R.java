@@ -204,7 +204,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int layout2=0x7f080022;
         public static final int layout_halfRound=0x7f08007b;
         public static final int level=0x7f08009b;
+        public static final int level2=0x7f0800a1;
         public static final int level_high=0x7f08009c;
+        public static final int level_high1=0x7f0800a2;
+        public static final int level_high2=0x7f0800a3;
+        public static final int level_high3=0x7f0800a4;
         public static final int level_low=0x7f08009d;
         public static final int linearLayout1=0x7f080085;
         public static final int listLayuot=0x7f08000a;
@@ -320,6 +324,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int item_blood=0x7f03001c;
         public static final int item_devices_layout=0x7f03001d;
         public static final int item_dialog=0x7f03001e;
+        public static final int item_image=0x7f03001f;
+        public static final int item_list_blood=0x7f030020;
     }
     public static final class raw {
         public static final int bsk=0x7f040000;

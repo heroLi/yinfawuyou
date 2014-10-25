@@ -55,15 +55,33 @@ public class BloodListAdapter extends BaseAdapter {
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.item_blood, parent, false);
-			holder.data = (TextView) convertView.findViewById(R.id.data);
-			holder.time = (TextView) convertView.findViewById(R.id.time);
-			holder.level = (TextView) convertView.findViewById(R.id.level);
-			holder.level_h = (TextView) convertView
-					.findViewById(R.id.level_high);
-			holder.level_l = (TextView) convertView
-					.findViewById(R.id.level_low);
+			if (type == 0) {
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.item_list_blood, parent, false);
+				holder.data = (TextView) convertView.findViewById(R.id.data);
+				holder.time = (TextView) convertView.findViewById(R.id.time);
+				holder.level = (TextView) convertView.findViewById(R.id.level);
+				holder.level_h = (TextView) convertView
+						.findViewById(R.id.level2);
+				holder.level_l = (TextView) convertView
+						.findViewById(R.id.level_high);
+				holder.level_1 = (TextView) convertView
+						.findViewById(R.id.level_high1);
+				holder.level_2 = (TextView) convertView
+						.findViewById(R.id.level_high2);
+				holder.level_3 = (TextView) convertView
+						.findViewById(R.id.level_high3);
+			} else {
+				convertView = LayoutInflater.from(mContext).inflate(
+						R.layout.item_blood, parent, false);
+				holder.data = (TextView) convertView.findViewById(R.id.data);
+				holder.time = (TextView) convertView.findViewById(R.id.time);
+				holder.level = (TextView) convertView.findViewById(R.id.level);
+				holder.level_h = (TextView) convertView
+						.findViewById(R.id.level_high);
+				holder.level_l = (TextView) convertView
+						.findViewById(R.id.level_low);
+			}
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -100,13 +118,16 @@ public class BloodListAdapter extends BaseAdapter {
 					null, null);
 			break;
 		case 3:
-
+			holder.level_1.setCompoundDrawablesWithIntrinsicBounds(left, null,
+					null, null);
 			break;
 		case 4:
-
+			holder.level_2.setCompoundDrawablesWithIntrinsicBounds(left, null,
+					null, null);
 			break;
 		case 5:
-
+			holder.level_3.setCompoundDrawablesWithIntrinsicBounds(left, null,
+					null, null);
 			break;
 
 		default:
