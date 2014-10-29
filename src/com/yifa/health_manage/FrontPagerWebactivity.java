@@ -33,22 +33,22 @@ public class FrontPagerWebactivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.fragment_product);
-		title = (TextView) findViewById(R.id.activity_top_title);
+//		title = (TextView) findViewById(R.id.activity_top_title);
 		webView = (WebView) findViewById(R.id.myWeb);
-		title.setText("活动页面");
+//		title.setText("活动页面");
 
 
 		initWeb();
 
 		String url = getIntent().getStringExtra("url");
 		webView.loadUrl(url);
-		title.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+//		title.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				finish();
+//			}
+//		});
 	}
 
 	@SuppressLint("SetJavaScriptEnabled")

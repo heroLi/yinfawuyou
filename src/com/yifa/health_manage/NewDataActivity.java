@@ -1,6 +1,7 @@
 package com.yifa.health_manage;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ import com.yifa.health_manage.util.WebServiceUtils;
 public class NewDataActivity extends Activity {
 
 	private String friendId = "12345";
+	private List<NewDataInfo> mData = new ArrayList<NewDataInfo>();
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -50,9 +52,83 @@ public class NewDataActivity extends Activity {
 					}.getType();
 					List<NewDataInfo> mList = gson.fromJson(
 							jsonArray.toString(), type);
-					initData(mList);
+					if (isFrist) {
+						mData.addAll(mList);
+					} else {
+						mData.set(1, mList.get(1));
+					}
+					// initData(mList);
 				} catch (JSONException e) {
 					e.printStackTrace();
+				}
+				if (!SharePrefenceUtils
+						.getPressureFriendId(NewDataActivity.this).getId()
+						.equalsIgnoreCase("")) {
+
+					if (isFlag) {
+						new WebServiceUtils(NewDataActivity.this, mHandler)
+								.sendExecuteNo(
+										new String[] {
+												SharePrefenceUtils
+														.getAccount(NewDataActivity.this),
+												SharePrefenceUtils
+														.getPressureFriendId(
+																NewDataActivity.this)
+														.getId() },
+										WebServiceParmas.NEW_DATA_2,
+										WebServiceParmas.HTTP_POST);
+						isFlag = false;
+					}
+				}
+				if (!isFrist) {
+					initData(mData);
+				}
+				break;
+			case WebServiceParmas.NEW_DATA_2:
+				if (msg.obj.toString().equalsIgnoreCase("")) {
+					return;
+				}
+				JSONObject jsonObject2;
+				try {
+					jsonObject2 = new JSONObject(msg.obj.toString());
+					JSONArray jsonArray = jsonObject2.getJSONArray("data");
+					if (jsonArray == null)
+						return;
+					Gson gson = new Gson();
+					Type type = new TypeToken<List<NewDataInfo>>() {
+					}.getType();
+					List<NewDataInfo> mList = gson.fromJson(
+							jsonArray.toString(), type);
+					if (!isFrist) {
+						mData.addAll(mList);
+					} else {
+						mData.set(0, mList.get(0));
+						mData.set(2, mList.get(2));
+					}
+					// initData(mList);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				if (!SharePrefenceUtils.getSugarFriendId(NewDataActivity.this)
+						.getId().equalsIgnoreCase("")) {
+
+					if (isFlag) {
+						new WebServiceUtils(NewDataActivity.this, mHandler)
+								.sendExecuteNo(
+										new String[] {
+												SharePrefenceUtils
+														.getAccount(NewDataActivity.this),
+												SharePrefenceUtils
+														.getSugarFriendId(
+																NewDataActivity.this)
+														.getId() },
+										WebServiceParmas.NEW_DATA,
+										WebServiceParmas.HTTP_POST);
+						isFlag = false;
+					}
+				}
+				if (isFrist) {
+					initData(mData);
 				}
 				break;
 
@@ -70,6 +146,9 @@ public class NewDataActivity extends Activity {
 			xl3, title;
 
 	private RelativeLayout layout;
+	private boolean isFlag = true;
+
+	private boolean isFrist = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +156,22 @@ public class NewDataActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_data);
 		initView();
-		new WebServiceUtils(this, mHandler).sendExecuteNo(
-				new String[] {
-						SharePrefenceUtils.getAccount(NewDataActivity.this),
-						friendId }, WebServiceParmas.NEW_DATA,
-				WebServiceParmas.HTTP_POST);
+		if (!SharePrefenceUtils.getSugarFriendId(this).getId()
+				.equalsIgnoreCase("")) {
+			isFrist = true;
+			new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+					SharePrefenceUtils.getAccount(NewDataActivity.this),
+					SharePrefenceUtils.getSugarFriendId(this).getId() },
+					WebServiceParmas.NEW_DATA, WebServiceParmas.HTTP_POST);
+		} else if (!SharePrefenceUtils.getPressureFriendId(this).getId()
+				.equalsIgnoreCase("")) {
+			isFrist = false;
+			new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+					SharePrefenceUtils.getAccount(NewDataActivity.this),
+					SharePrefenceUtils.getPressureFriendId(this).getId() },
+					WebServiceParmas.NEW_DATA_2, WebServiceParmas.HTTP_POST);
+		}
+
 	}
 
 	private void initView() {
@@ -176,10 +266,10 @@ public class NewDataActivity extends Activity {
 					Integer.valueOf(mList.get(2).getValue()));
 			switch (level) {
 			case 0:
-				xl1.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xl2.setBackgroundResource(R.drawable.newdata_text_bg_ok);
 				break;
 			case 1:
-				xl2.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xl1.setBackgroundResource(R.drawable.newdata_text_bg_ok);
 				break;
 			case 2:
 				xl3.setBackgroundResource(R.drawable.newdata_text_bg_ok);

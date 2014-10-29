@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.tsz.afinal.FinalBitmap;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,8 +80,9 @@ public class StartFragment extends Fragment {
 				Gson gson = new Gson();
 				Type type = new TypeToken<List<ImageResponse>>() {
 				}.getType();
+				JSONArray array = jsonObject.getJSONArray("data");
 				List<ImageResponse> response = gson.fromJson(
-						jsonObject.toString(), type);
+						array.toString(), type);
 				adapter.setImages(response);
 				adapter.notifyDataSetChanged();
 				initPoint();

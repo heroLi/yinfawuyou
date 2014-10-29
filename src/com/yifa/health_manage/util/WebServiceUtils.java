@@ -104,6 +104,7 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			mHandler.sendEmptyMessage(-1);// 无网络
 			return;
 		}
+		loger.d(result.toString());
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(result.toString());
@@ -112,7 +113,7 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 					ResultResponse.class);
 			if (response.isResult()) {
 			}
-			loger.d(result.toString());
+			
 //			AndroidUtils.showToast(mContext, response.getInfo());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -150,6 +151,9 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			obj = WebServiceParmas.deleteDevicesFriend(httpType, params);
 			break;
 		case WebServiceParmas.NEW_DATA:
+			obj = WebServiceParmas.getDayData(httpType, params);
+			break;
+		case WebServiceParmas.NEW_DATA_2:
 			obj = WebServiceParmas.getDayData(httpType, params);
 			break;
 		case WebServiceParmas.GET_BLOOD_DATA:
