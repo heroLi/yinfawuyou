@@ -112,9 +112,9 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			ResultResponse response = gson.fromJson(jsonObject.toString(),
 					ResultResponse.class);
 			if (response.isResult()) {
+			}else{
+				AndroidUtils.showToast(mContext, response.getInfo());
 			}
-			
-//			AndroidUtils.showToast(mContext, response.getInfo());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

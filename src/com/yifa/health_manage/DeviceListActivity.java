@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,6 +80,8 @@ public class DeviceListActivity extends Activity implements
 	private CheckBox deviceCheck1, deviceCheck2;
 
 	private int friendType = 0;
+
+	private String friendName1, friendName2, friendName3, friendName4;
 
 	private Button delete;
 
@@ -232,7 +236,7 @@ public class DeviceListActivity extends Activity implements
 									.getDevice_sn());
 							friend1.setText(listnew.getData().get(0)
 									.getRelative().get(0).getName());
-							if(listnew.getData().get(1).getRelative().size() > 0){
+							if (listnew.getData().get(1).getRelative().size() > 0) {
 								friend11.setText(listnew.getData().get(1)
 										.getRelative().get(0).getName());
 								deviceId2.setText(listnew.getData().get(1)
@@ -241,12 +245,13 @@ public class DeviceListActivity extends Activity implements
 							if (listnew.getData().get(0).getRelative().size() == 2) {
 								friend2.setText(listnew.getData().get(0)
 										.getRelative().get(1).getName());
-								if(listnew.getData().get(1).getRelative().size() > 0){
+								if (listnew.getData().get(1).getRelative()
+										.size() > 0) {
 									friend12.setText(listnew.getData().get(1)
 											.getRelative().get(1).getName());
 									isSum = 2;
 								}
-								
+
 							}
 							layout1.setOnLongClickListener(DeviceListActivity.this);
 							layout2.setOnLongClickListener(DeviceListActivity.this);
@@ -433,6 +438,10 @@ public class DeviceListActivity extends Activity implements
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				friendName1 = friend1.getText().toString().trim();
+				friendName2 = friend2.getText().toString().trim();
+				friendName3 = friend11.getText().toString().trim();
+				friendName4 = friend12.getText().toString().trim();
 				break;
 
 			case WebServiceParmas.DELETE_DEVICE:
@@ -578,6 +587,66 @@ public class DeviceListActivity extends Activity implements
 		friendImage3.setOnClickListener(this);
 		friendImage4.setOnClickListener(this);
 		addDevice.setOnClickListener(this);
+		friend1.addTextChangedListener(new TextWatcher() {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			public void afterTextChanged(Editable s) {
+				if (s.toString().trim().equalsIgnoreCase("")) {
+					friend1.setText(friendName1);
+				}
+			}
+		});
+		friend2.addTextChangedListener(new TextWatcher() {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+			
+			public void afterTextChanged(Editable s) {
+				if (s.toString().trim().equalsIgnoreCase("")) {
+					friend2.setText(friendName2);
+				}
+			}
+		});
+		friend11.addTextChangedListener(new TextWatcher() {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+			
+			public void afterTextChanged(Editable s) {
+				if (s.toString().trim().equalsIgnoreCase("")) {
+					friend11.setText(friendName3);
+				}
+			}
+		});
+		friend12.addTextChangedListener(new TextWatcher() {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+			
+			public void afterTextChanged(Editable s) {
+				if (s.toString().trim().equalsIgnoreCase("")) {
+					friend12.setText(friendName4);
+				}
+			}
+		});
 	}
 
 	@Override

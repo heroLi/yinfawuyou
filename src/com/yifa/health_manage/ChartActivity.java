@@ -232,7 +232,9 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 
 	@SuppressLint("InflateParams")
 	private void showDialog(String type) {
-
+		if(type.equalsIgnoreCase("heart_rate")){
+			type="blood_presure";
+		}
 		List<UserInfo> agoList = dbManager.quaryAll(type);
 		loger.d("showDialog  " + agoList.size());
 		dialog = new Dialog(this);

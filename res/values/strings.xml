@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">银发无忧</string>
+    <string name="app_ver">V1.1</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_board_">Main_board_Activity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -61,7 +62,7 @@
     <string name="user_message_text">个人信息</string>
     <string name="user_message_photo">头像</string>
     <string name="user_device_text">设备管理</string>
-    <string name="user_device_one">血压仪</string>
+    <string name="user_device_one">血压计</string>
     <string name="user_device_two">心率计</string>
     <string name="user_device_three">血糖仪</string>
     <string name="user_account_text">账号管理</string>

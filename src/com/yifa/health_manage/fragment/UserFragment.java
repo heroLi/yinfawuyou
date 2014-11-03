@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.yifa.health_manage.ChangePasswordActivity;
 import com.yifa.health_manage.DeviceListActivity;
+import com.yifa.health_manage.FrontPagerWebactivity;
 import com.yifa.health_manage.LoginActivity;
 import com.yifa.health_manage.R;
 import com.yifa.health_manage.model.UserInfo;
@@ -33,7 +34,7 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private ImageView userPhoto;
 
-	private LinearLayout blood_p,blood_s,changeAccount;
+	private LinearLayout blood_p, blood_s, changeAccount, feedBack, verGengxin;
 
 	private RelativeLayout changePass;
 
@@ -53,6 +54,8 @@ public class UserFragment extends Fragment implements OnClickListener {
 	private void initView(View view) {
 		userPhoto = (ImageView) view.findViewById(R.id.user_photo);
 		blood_p = (LinearLayout) view.findViewById(R.id.user_blood_p);
+		feedBack = (LinearLayout) view.findViewById(R.id.feedBack);
+		verGengxin = (LinearLayout) view.findViewById(R.id.ver_gengxin);
 		changeAccount = (LinearLayout) view.findViewById(R.id.change_acconut);
 		blood_s = (LinearLayout) view.findViewById(R.id.user_blood_s);
 		userAccount = (TextView) view.findViewById(R.id.user_name_text);
@@ -63,6 +66,8 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private void initListener() {
 		blood_p.setOnClickListener(this);
+		feedBack.setOnClickListener(this);
+		verGengxin.setOnClickListener(this);
 		changePass.setOnClickListener(this);
 		changeAccount.setOnClickListener(this);
 		outButton.setOnClickListener(this);
@@ -118,6 +123,19 @@ public class UserFragment extends Fragment implements OnClickListener {
 		case R.id.user_out_button:
 			getActivity().finish();
 			startActivity(new Intent(getActivity(), LoginActivity.class));
+			break;
+		case R.id.feedBack:
+			Intent intent1 = new Intent(getActivity(),
+					FrontPagerWebactivity.class);
+			intent1.putExtra("url",
+					"http://121.40.172.222/health2/site/feedback");
+			startActivity(intent1);
+			break;
+		case R.id.ver_gengxin:
+			Intent intent3 = new Intent(getActivity(),
+					FrontPagerWebactivity.class);
+			intent3.putExtra("url", "http://121.40.172.222/health2/site/app");
+			startActivity(intent3);
 			break;
 
 		default:

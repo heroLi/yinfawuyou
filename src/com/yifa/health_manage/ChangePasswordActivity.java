@@ -43,6 +43,8 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 				ResultResponse response = gson.fromJson(jsonObject.toString(),
 						ResultResponse.class);
 				if (response.isResult()) {
+					AndroidUtils.showToast(ChangePasswordActivity.this,
+							"密码修改成功");
 					finish();
 				}
 			} catch (JSONException e) {
@@ -68,6 +70,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 		title.setText("修改密码");
 		commit = (Button) findViewById(R.id.commit);
 		commit.setOnClickListener(this);
+		title.setOnClickListener(this);
 	}
 
 	@Override
@@ -87,7 +90,9 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
 								WebServiceParmas.HTTP_POST);
 			}
 			break;
-
+		case R.id.activity_top_title:
+			finish();
+			break;
 		default:
 			break;
 		}

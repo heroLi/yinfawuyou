@@ -30,7 +30,7 @@ import com.yifa.health_manage.util.WebServiceUtils;
  * **/
 public class LoginActivity extends Activity implements OnClickListener {
 
-	private TextView noLogin, forgetPass;
+	private TextView noLogin, forgetPass, title;
 	private Button loginButton;
 	private EditText nameEdit, passEdit;
 	private DBManager dbManager = null;
@@ -57,8 +57,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 								.equalsIgnoreCase(
 										nameEdit.getText().toString().trim())) {
 							dbManager.deleteAll();
-							SharePrefenceUtils.saveSugarFriendId(LoginActivity.this, new DeviceFriendName());
-							SharePrefenceUtils.savePressureFriendId(LoginActivity.this, new DeviceFriendName());
+							SharePrefenceUtils.saveSugarFriendId(
+									LoginActivity.this, new DeviceFriendName());
+							SharePrefenceUtils.savePressureFriendId(
+									LoginActivity.this, new DeviceFriendName());
 						}
 						SharePrefenceUtils.saveAccount(LoginActivity.this,
 								nameEdit.getText().toString().trim());
@@ -99,6 +101,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private void initView() {
 		noLogin = (TextView) findViewById(R.id.no_login_name);
 		forgetPass = (TextView) findViewById(R.id.login_forget_pass);
+		title = (TextView) findViewById(R.id.activity_top_title);
 		loginButton = (Button) findViewById(R.id.login_button);
 		nameEdit = (EditText) findViewById(R.id.login_edit_name);
 		passEdit = (EditText) findViewById(R.id.login_edit_password);
@@ -110,6 +113,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		if (!SharePrefenceUtils.getPassword(this).equalsIgnoreCase("")) {
 			passEdit.setText(SharePrefenceUtils.getPassword(this));
 		}
+		title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 	}
 
 	private void initListener() {
