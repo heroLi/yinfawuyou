@@ -11,23 +11,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="17dp"
             android:text="血压"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/data1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="当天（2013-1-3）"
-            android:textSize="18sp" />
+            android:text=""
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +60,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="高压" />
+                    android:text="高压"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/blood_xh"
@@ -67,12 +69,14 @@
                     android:layout_height="20dp"
                     android:background="@drawable/edit_bg"
                     android:gravity="center"
-                    android:text="100" />
+                    android:text="0"
+                    android:textSize="@dimen/text_size" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mmHg" />
+                    android:text="mmHg"
+                    android:textSize="@dimen/text_size" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,7 +89,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="低压" />
+                    android:text="低压"
+                    android:textSize="@dimen/text_size" />
 
                 <TextView
                     android:id="@+id/blood_xl"
@@ -93,12 +98,14 @@
                     android:layout_height="20dp"
                     android:background="@drawable/edit_bg"
                     android:gravity="center"
-                    android:text="100" />
+                    android:text="100"
+                    android:textSize="@dimen/text_size" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="mmHg" />
+                    android:text="mmHg"
+                    android:textSize="@dimen/text_size" />
             </LinearLayout>
         </LinearLayout>
 
@@ -181,6 +188,7 @@
                     android:gravity="center"
                     android:text="中度" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,23 +209,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="17dp"
             android:text="血糖"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/data2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="当天（2013-1-3）"
-            android:textSize="18sp" />
+            android:text=""
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -249,12 +258,14 @@
                 android:layout_height="20dp"
                 android:background="@drawable/edit_bg"
                 android:gravity="center"
-                android:text="100" />
+                android:text="0"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mmol/L" />
+                android:text="mmol/L"
+                android:textSize="@dimen/text_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -312,23 +323,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="18dp"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="17dp"
             android:text="心率"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/data3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="当天（2013-1-3）"
-            android:textSize="18sp" />
+            android:text=""
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -352,7 +364,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="心率" />
+                android:text="心率"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:id="@+id/blood_lv"
@@ -360,12 +373,14 @@
                 android:layout_height="20dp"
                 android:background="@drawable/edit_bg"
                 android:gravity="center"
-                android:text="100" />
+                android:text="0"
+                android:textSize="@dimen/text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BPM" />
+                android:text="BPM"
+                android:textSize="@dimen/text_size" />
         </LinearLayout>
 
         <LinearLayout

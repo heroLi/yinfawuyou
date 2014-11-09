@@ -12,5 +12,6 @@
     <color name="main_blue">#1f65c4</color>
     <color name="main_fen">#e63a6c</color>
     <color name="main_newdata">#b240cb</color>
+    <color name="button_press">#45606060</color>
 
 </resources>

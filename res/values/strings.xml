@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">银发无忧</string>
-    <string name="app_ver">V1.1</string>
+    <string name="app_ver">V1.0.141105</string>
+
+    <integer name="vercode">10141105</integer>
+
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_board_">Main_board_Activity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -31,7 +34,7 @@
     <string name="login_pass">密码</string>
     <string name="login_pass_ps">6-30位数字或字母</string>
     <string name="login_chick_text">一个月内免登录</string>
-    <string name="login_forget_pass">忘记密码</string>
+    <string name="login_forget_pass">忘记密码?</string>
     <string name="login_no">还没有账号，马上注册</string>
     <string name="login_pass_two">重复密码</string>
     <string name="login_email">Email</string>
@@ -57,8 +60,8 @@
     <string name="utils_item4">运动心率</string>
     <string name="utils_item5">每日所需总热量</string>
     <string name="utils_item6">基础代谢计算</string>
-    
-     <!-- 我的 -->
+
+    <!-- 我的 -->
     <string name="user_message_text">个人信息</string>
     <string name="user_message_photo">头像</string>
     <string name="user_device_text">设备管理</string>

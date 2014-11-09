@@ -104,7 +104,7 @@
             android:textColor="@color/app_white"
             android:layout_marginRight="15dp"
             android:text="@string/button_ok"
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_select"
             />
         
     </LinearLayout>

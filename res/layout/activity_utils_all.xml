@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="18dp"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/login_top_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:text="@string/user_sax"
                 android:textColor="@color/app_green"
                 android:textSize="18sp" />
@@ -36,6 +36,7 @@
                 android:id="@+id/user_sax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
                 android:gravity="right"
                 android:orientation="horizontal" >
 
@@ -59,8 +60,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/login_middle_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -68,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:text="年龄"
                 android:textColor="@color/app_green"
                 android:textSize="18sp" />
@@ -77,11 +78,10 @@
                 android:id="@+id/user_bri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="7dp"
                 android:background="#00000000"
-                android:inputType="number"
                 android:gravity="right"
-                 />
+                android:inputType="number" />
         </LinearLayout>
     </LinearLayout>
 
@@ -97,9 +97,9 @@
             android:id="@+id/register_btn_next"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button_bg"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:background="@drawable/button_select"
             android:text="@string/button_commit"
             android:textColor="@color/app_white" />
     </LinearLayout>
@@ -113,8 +113,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/login_middle_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -122,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:text="@string/user_hight"
                 android:textColor="@color/app_green"
                 android:textSize="18sp" />
@@ -135,12 +135,12 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:gravity="right"
-                android:inputType="number"
-                />
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/pending_left"
                 android:text="cm"
                 android:textColor="@color/app_green"
                 android:textSize="15sp" />
@@ -149,8 +149,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/login_middle_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -158,7 +158,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:text="@string/user_whgit"
                 android:textColor="@color/app_green"
                 android:textSize="18sp" />
@@ -170,13 +170,13 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:inputType="number"
                 android:gravity="right"
-                 />
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
                 android:text="kg"
                 android:textColor="@color/app_green"
                 android:textSize="15sp" />
@@ -185,8 +185,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:background="@drawable/login_bottom_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -194,7 +194,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="7dp"
                 android:text="@string/user_waist"
                 android:textColor="@color/app_green"
                 android:textSize="18sp" />
@@ -205,14 +205,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:inputType="number"
                 android:background="#00000000"
                 android:gravity="right"
-                />
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
                 android:text="cm"
                 android:textColor="@color/app_green"
                 android:textSize="15sp" />

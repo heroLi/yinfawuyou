@@ -23,6 +23,7 @@ public class WebServiceParmas {
 	public static final int GET_BLOOD_DATA = NEW_DATA + 1;
 	public static final int GET_IMAGE_URL = GET_BLOOD_DATA + 1;
 	public static final int NEW_DATA_2 = GET_IMAGE_URL + 1;
+	public static final int VEN_CODE = NEW_DATA_2 + 1;
 
 	// private static final String Url =
 	// "http://112.124.126.43/health/json.php";//demo
@@ -282,6 +283,23 @@ public class WebServiceParmas {
 		JSONObject entity = new JSONObject();
 		try {
 			entity.put("type", "getad");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		obj = Connection.getConnection(Url, httpType, entity);
+
+		return obj;
+	}
+
+	/**
+	 * 更新版本
+	 **/
+	public static Object getVerCode(int httpType, String[] parmas) {
+		Object obj = null;
+		JSONObject entity = new JSONObject();
+		try {
+			entity.put("type", "getversion");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

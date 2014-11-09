@@ -162,6 +162,9 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 		case WebServiceParmas.GET_IMAGE_URL:
 			obj = WebServiceParmas.getImageURl(httpType, params);
 			break;
+		case WebServiceParmas.VEN_CODE:
+			obj = WebServiceParmas.getVerCode(httpType, params);
+			break;
 
 		default:
 			break;

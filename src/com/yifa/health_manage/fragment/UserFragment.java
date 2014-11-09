@@ -1,9 +1,13 @@
 package com.yifa.health_manage.fragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -17,13 +21,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.yifa.health_manage.ChangePasswordActivity;
 import com.yifa.health_manage.DeviceListActivity;
 import com.yifa.health_manage.FrontPagerWebactivity;
 import com.yifa.health_manage.LoginActivity;
 import com.yifa.health_manage.R;
 import com.yifa.health_manage.model.UserInfo;
+import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;
+import com.yifa.health_manage.util.WebServiceParmas;
+import com.yifa.health_manage.util.WebServiceUtils;
 
 /**
  * 我的界面
@@ -41,6 +49,29 @@ public class UserFragment extends Fragment implements OnClickListener {
 	private TextView userAccount;
 
 	private Button outButton;
+
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			try {
+				JSONObject jsonObject = new JSONObject(msg.obj.toString());
+				String vercode = jsonObject.getString("version");
+
+				if (vercode.equalsIgnoreCase(getResources().getString(
+						R.string.app_ver))) {
+					AndroidUtils.showToast(getActivity(), "已是最新版本");
+				} else {
+					Intent intent3 = new Intent(getActivity(),
+							FrontPagerWebactivity.class);
+					intent3.putExtra("url",
+							"http://121.40.172.222/health2/site/app");
+					startActivity(intent3);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		};
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,10 +163,11 @@ public class UserFragment extends Fragment implements OnClickListener {
 			startActivity(intent1);
 			break;
 		case R.id.ver_gengxin:
-			Intent intent3 = new Intent(getActivity(),
-					FrontPagerWebactivity.class);
-			intent3.putExtra("url", "http://121.40.172.222/health2/site/app");
-			startActivity(intent3);
+
+			new WebServiceUtils(getActivity(), handler).sendExecute(
+					new String[] {}, WebServiceParmas.VEN_CODE,
+					WebServiceParmas.HTTP_POST, "记载中");
+
 			break;
 
 		default:

@@ -149,10 +149,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 				} else {
 					SharePrefenceUtils.saveAutoLogin(this, false);
 				}
-				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+				new WebServiceUtils(this, mHandler).sendExecute(new String[] {
 						nameEdit.getText().toString().trim(),
 						passEdit.getText().toString().trim() },
-						WebServiceParmas.LOGIN, WebServiceParmas.HTTP_POST);
+						WebServiceParmas.LOGIN, WebServiceParmas.HTTP_POST,
+						"登录中...");
 			}
 
 			break;

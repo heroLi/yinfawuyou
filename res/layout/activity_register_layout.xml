@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_below="@id/top"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/login_top_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_name"
+            android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
         <EditText
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:hint="@string/login_name_ps" />
     </LinearLayout>
 
@@ -38,8 +39,8 @@
         android:id="@+id/passwordLayout"
         android:layout_below="@id/namelayout"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:background="@drawable/login_middle_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -48,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_email"
+             android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
         <EditText
@@ -56,7 +58,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:hint="@string/login_email" />
     </LinearLayout>
     <LinearLayout
@@ -64,8 +66,8 @@
         android:id="@+id/passwordLayout2"
         android:layout_below="@id/passwordLayout"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:background="@drawable/login_middle_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -74,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_pass"
+             android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
         <EditText
@@ -83,15 +86,15 @@
             android:background="#00000000"
             android:gravity="right"
             android:inputType="textPassword"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:hint="@string/login_pass_ps" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_below="@id/passwordLayout2"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:background="@drawable/login_bottom_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -100,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_pass_two"
+             android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
         <EditText
@@ -109,7 +113,7 @@
             android:background="#00000000"
             android:gravity="right"
             android:inputType="textPassword"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:hint="@string/login_pass_ps" />
     </LinearLayout>
     
@@ -124,25 +128,25 @@
         <Button 
             android:id="@+id/login_btn_no"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="47dp"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="18dp"
             android:textColor="@color/app_white"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="18dp"
             android:text="@string/button_no"
             
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_select"
             />
         <Button 
            android:id="@+id/login_btn_next"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="47dp"
             android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
             android:textColor="@color/app_white"
             android:text="@string/button_next"
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_select"
             />
         
     </LinearLayout>

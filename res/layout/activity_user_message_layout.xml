@@ -23,7 +23,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_bg_shape"
             android:text="@string/button_top"
             android:textColor="@color/app_white" />
 
@@ -34,7 +34,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/button_bg"
+            android:background="@drawable/button_bg_shape"
             android:text="@string/button_next"
             android:textColor="@color/app_white" />
     </LinearLayout>
