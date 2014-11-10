@@ -86,7 +86,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -110,20 +110,23 @@
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:text="2010/3/4" />
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="bottom" >
 
                 <com.yifa.health_manage.view.MyLinearLayout
                     android:id="@+id/layout_halfRound"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                     >
+                    
                 </com.yifa.health_manage.view.MyLinearLayout>
 
                 <LinearLayout

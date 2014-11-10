@@ -199,7 +199,11 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			topLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			chartLayout.setBackgroundColor(Color.parseColor("#1f65c4"));
 			linearLayoutTop.setBackgroundColor(Color.parseColor("#1f65c4"));
-			myLinearLayout.setBackImage(R.drawable.xinlv_group);
+			DisplayMetrics dm = getResources().getDisplayMetrics();
+			if (dm.widthPixels < 700) {
+				myLinearLayout.setBackImage(R.drawable.xinlv_group_small);
+			} else
+				myLinearLayout.setBackImage(R.drawable.xinlv_group);
 			blood_Flag.setText("mmol/L");
 			blood_mes.setText("血糖详情");
 
@@ -208,7 +212,11 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					.getId();
 			device_sn = SharePrefenceUtils.getPressureFriendId(getActivity())
 					.getDevice_sn();
-			myLinearLayout.setBackImage(R.drawable.xueya_group);
+			DisplayMetrics dm = getResources().getDisplayMetrics();
+			if (dm.widthPixels < 700) {
+				myLinearLayout.setBackImage(R.drawable.xueya_group_small);
+			} else
+				myLinearLayout.setBackImage(R.drawable.xueya_group);
 			topLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
 			chartLayout.setBackgroundColor(Color.parseColor("#ff5c3d"));
 			linearLayoutTop.setBackgroundColor(Color.parseColor("#ff5c3d"));
@@ -219,7 +227,12 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					.getId();
 			device_sn = SharePrefenceUtils.getPressureFriendId(getActivity())
 					.getDevice_sn();
-			myLinearLayout.setBackImage(R.drawable.xinlv_group);
+			DisplayMetrics dm = getResources().getDisplayMetrics();
+			if (dm.widthPixels < 700) {
+				myLinearLayout.setBackImage(R.drawable.xinlv_group_small);
+			} else
+				myLinearLayout.setBackImage(R.drawable.xinlv_group);
+
 			topLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 			chartLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 			linearLayoutTop.setBackgroundColor(Color.parseColor("#e63a6c"));
@@ -833,7 +846,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			calendar0.add(Calendar.DAY_OF_WEEK, click-1);
+			calendar0.add(Calendar.DAY_OF_WEEK, click - 1);
 			DateFormat dateFormat0 = new DateFormat();
 			String time0 = (String) dateFormat0.format("yyyy-MM-dd", calendar0);
 			blood_time.setText(time0);
@@ -908,7 +921,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		calendar.setTime(date);
 		switch (type) {
 		case 0:
-			return calendar.get(Calendar.DAY_OF_WEEK)-1;
+			return calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		case 1:
 			return calendar.get(Calendar.DAY_OF_MONTH);
 		case 2:
