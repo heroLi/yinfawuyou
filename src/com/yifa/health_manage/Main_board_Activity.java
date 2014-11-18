@@ -22,7 +22,7 @@ public class Main_board_Activity extends FragmentActivity implements
 
 	private Fragment startFragment, productFragment, utilsFragment,
 			userFragment, nowFragment;
-	private FinalBitmap bitmap;
+	public  FinalBitmap bitmap=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,6 @@ public class Main_board_Activity extends FragmentActivity implements
 		initView();
 		initListener();
 		bitmap = FinalBitmap.create(this);
-		
 		bitmap.configDiskCacheSize(1024);
 		startFragment = new StartFragment(bitmap);
 		nowFragment = startFragment;
@@ -55,6 +54,8 @@ public class Main_board_Activity extends FragmentActivity implements
 		switch (checkedId) {
 		case R.id.main_start:
 			if (startFragment == null) {
+				if(bitmap==null)
+					bitmap = FinalBitmap.create(Main_board_Activity.this);
 				startFragment = new StartFragment(bitmap);
 			}
 			showFragment(nowFragment, startFragment);

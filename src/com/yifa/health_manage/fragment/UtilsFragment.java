@@ -18,7 +18,8 @@ import com.yifa.health_manage.UtilsAllActivity;
  * */
 public class UtilsFragment extends Fragment implements OnClickListener {
 
-	private LinearLayout allUtils;
+	private LinearLayout allUtils, layout0, layout1, layout2, layout3, layout4,
+			layout5;
 
 	private TextView text1, text2, text3, text4, text5, text6;
 
@@ -32,6 +33,12 @@ public class UtilsFragment extends Fragment implements OnClickListener {
 
 	private void initView(View view) {
 		allUtils = (LinearLayout) view.findViewById(R.id.utils_all);
+		layout0 = (LinearLayout) view.findViewById(R.id.layout0);
+		layout1 = (LinearLayout) view.findViewById(R.id.layout1);
+		layout2 = (LinearLayout) view.findViewById(R.id.layout2);
+		layout3 = (LinearLayout) view.findViewById(R.id.layout3);
+		layout4 = (LinearLayout) view.findViewById(R.id.layout4);
+		layout5 = (LinearLayout) view.findViewById(R.id.layout5);
 		text1 = (TextView) view.findViewById(R.id.text1);
 		text2 = (TextView) view.findViewById(R.id.text2);
 		text3 = (TextView) view.findViewById(R.id.text3);
@@ -39,6 +46,12 @@ public class UtilsFragment extends Fragment implements OnClickListener {
 		text5 = (TextView) view.findViewById(R.id.text5);
 		text6 = (TextView) view.findViewById(R.id.text6);
 		allUtils.setOnClickListener(this);
+		layout0.setOnClickListener(this);
+		layout1.setOnClickListener(this);
+		layout2.setOnClickListener(this);
+		layout3.setOnClickListener(this);
+		layout4.setOnClickListener(this);
+		layout5.setOnClickListener(this);
 	}
 
 	@Override
@@ -56,7 +69,33 @@ public class UtilsFragment extends Fragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		startActivityForResult(
-				new Intent(getActivity(), UtilsAllActivity.class), 10);
+		Intent intent = new Intent(getActivity(), UtilsAllActivity.class);
+		switch (v.getId()) {
+		case R.id.layout0:
+			intent.putExtra("type", 0);
+			break;
+		case R.id.layout1:
+			intent.putExtra("type", 1);
+			break;
+		case R.id.layout2:
+			intent.putExtra("type", 2);
+			break;
+		case R.id.layout3:
+			intent.putExtra("type", 3);
+			break;
+		case R.id.layout4:
+			intent.putExtra("type", 4);
+			break;
+		case R.id.layout5:
+			intent.putExtra("type", 5);
+			break;
+		case R.id.utils_all:
+			intent.putExtra("type", 6);
+			break;
+
+		default:
+			break;
+		}
+		startActivity(intent);
 	}
 }

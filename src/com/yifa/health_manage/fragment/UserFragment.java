@@ -1,4 +1,4 @@
-package com.yifa.health_manage.fragment;
+ package com.yifa.health_manage.fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -151,9 +151,11 @@ public class UserFragment extends Fragment implements OnClickListener {
 					ChangePasswordActivity.class));
 			break;
 		case R.id.change_acconut:
-		case R.id.user_out_button:
 			getActivity().finish();
 			startActivity(new Intent(getActivity(), LoginActivity.class));
+			break;
+		case R.id.user_out_button:
+			getActivity().finish();
 			break;
 		case R.id.feedBack:
 			Intent intent1 = new Intent(getActivity(),
@@ -166,7 +168,7 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 			new WebServiceUtils(getActivity(), handler).sendExecute(
 					new String[] {}, WebServiceParmas.VEN_CODE,
-					WebServiceParmas.HTTP_POST, "记载中");
+					WebServiceParmas.HTTP_POST, "加载中...");
 
 			break;
 

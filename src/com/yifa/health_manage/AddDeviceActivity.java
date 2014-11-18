@@ -31,7 +31,7 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 
 	private EditText deviceName;
 
-	private String type;
+	private String type, deviceId;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -47,6 +47,7 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 				ResultResponse response = gson.fromJson(jsonObject.toString(),
 						ResultResponse.class);
 				if (response.isResult()) {
+					AndroidUtils.showToast(AddDeviceActivity.this, response.getInfo());
 					setResult(11);
 					finish();
 				}
@@ -61,9 +62,12 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_device);
+		setContentView(R.layout.activity_add_devices_new);
 		type = getIntent().getStringExtra("deviceType");
+		deviceId = getIntent().getStringExtra("deviceId");
 		initView();
+		if (deviceId != null)
+			deviceName.setText(deviceId);
 	}
 
 	private void initView() {
@@ -71,7 +75,13 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 		addButton = (Button) findViewById(R.id.add_button);
 		deviceName = (EditText) findViewById(R.id.bind_devices_name);
 		title = (TextView) findViewById(R.id.activity_top_title);
+		title.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		if (type.equalsIgnoreCase("blood_presure")) {
 			title.setText("添加血压计");
 		} else

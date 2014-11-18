@@ -5,7 +5,6 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,14 +21,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -587,63 +586,85 @@ public class DeviceListActivity extends Activity implements
 		friendImage3.setOnClickListener(this);
 		friendImage4.setOnClickListener(this);
 		addDevice.setOnClickListener(this);
-		friend1.addTextChangedListener(new TextWatcher() {
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+		friend1.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				friend1.setFocusable(true);
+				friend1.setFocusableInTouchMode(true);
+				return false;
 			}
+		});
+		friend2.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				friend2.setFocusable(true);
+				friend2.setFocusableInTouchMode(true);
+				return false;
+			}
+		});
+		friend11.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				friend11.setFocusable(true);
+				friend11.setFocusableInTouchMode(true);
+				return false;
+			}
+		});
+		friend12.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				friend12.setFocusable(true);
+				friend12.setFocusableInTouchMode(true);
+				return false;
+			}
+		});
+		friend1.setOnFocusChangeListener(new OnFocusChangeListener() {
 
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				loger.d("friend1------"+hasFocus);
+				loger.d("friend1------"+hasFocus);
+				if (!hasFocus) {
+					if (friend1.getText().toString().trim().equalsIgnoreCase("")) {
+						friend1.setText(friendName1);
+					}
+				}
 			}
+		});
+		friend2.setOnFocusChangeListener(new OnFocusChangeListener() {
 
-			public void afterTextChanged(Editable s) {
-				if (s.toString().trim().equalsIgnoreCase("")) {
-					friend1.setText(friendName1);
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus) {
+					if (friend2.toString().trim().equalsIgnoreCase("")) {
+						friend2.setText(friendName2);
+					}
 				}
 			}
 		});
-		friend2.addTextChangedListener(new TextWatcher() {
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-			
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-			
-			public void afterTextChanged(Editable s) {
-				if (s.toString().trim().equalsIgnoreCase("")) {
-					friend2.setText(friendName2);
+		friend11.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus) {
+					if (friend11.toString().trim().equalsIgnoreCase("")) {
+						friend11.setText(friendName3);
+					}
 				}
 			}
 		});
-		friend11.addTextChangedListener(new TextWatcher() {
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-			
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-			
-			public void afterTextChanged(Editable s) {
-				if (s.toString().trim().equalsIgnoreCase("")) {
-					friend11.setText(friendName3);
-				}
-			}
-		});
-		friend12.addTextChangedListener(new TextWatcher() {
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-			
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-			
-			public void afterTextChanged(Editable s) {
-				if (s.toString().trim().equalsIgnoreCase("")) {
-					friend12.setText(friendName4);
+		friend12.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus) {
+					if (friend12.toString().trim().equalsIgnoreCase("")) {
+						friend12.setText(friendName4);
+					}
 				}
 			}
 		});
@@ -797,7 +818,8 @@ public class DeviceListActivity extends Activity implements
 			break;
 		case R.id.activity_top_menu2:
 
-			Intent intent = new Intent(this, AddDeviceActivity.class);
+			Intent intent = new Intent(this, MipcaActivityCapture.class);
+			// Intent intent = new Intent(this, CaptureActivity.class);
 			intent.putExtra("deviceType", deviceType);
 
 			startActivityForResult(intent, 1);

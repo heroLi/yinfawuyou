@@ -7,7 +7,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.text.Selection;
+import android.text.Spannable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -109,6 +110,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 		if (!SharePrefenceUtils.getAccount(this).equalsIgnoreCase("")) {
 			nameEdit.setText(SharePrefenceUtils.getAccount(this));
+			CharSequence text = nameEdit.getText().toString().trim();
+			nameEdit.setSelection(text.length());
 		}
 		if (!SharePrefenceUtils.getPassword(this).equalsIgnoreCase("")) {
 			passEdit.setText(SharePrefenceUtils.getPassword(this));

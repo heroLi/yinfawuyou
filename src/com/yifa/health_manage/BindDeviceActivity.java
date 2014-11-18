@@ -38,29 +38,77 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 
 	private RadioGroup group;
 
+	private String name, pass, email;
+
 	private String type = "blood_presure";
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-
-			if (msg.obj.toString().equalsIgnoreCase("")) {
-				return;
-			}
-			JSONObject jsonObject;
-			try {
-				jsonObject = new JSONObject(msg.obj.toString());
-
-				Gson gson = new Gson();
-				ResultResponse response = gson.fromJson(jsonObject.toString(),
-						ResultResponse.class);
-				if (response.isResult()) {
-					startActivity(new Intent(BindDeviceActivity.this,
-							Main_board_Activity.class));
-					finish();
+			switch (msg.what) {
+			case WebServiceParmas.BIND_DEVICE:
+				if (msg.obj.toString().equalsIgnoreCase("")) {
+					return;
 				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSONObject jsonObject;
+				try {
+					jsonObject = new JSONObject(msg.obj.toString());
+
+					Gson gson = new Gson();
+					ResultResponse response = gson.fromJson(
+							jsonObject.toString(), ResultResponse.class);
+					if (response.isResult()) {
+						startActivity(new Intent(BindDeviceActivity.this,
+								Main_board_Activity.class));
+						finish();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case WebServiceParmas.REGISTER:
+				if (msg.obj.toString().equalsIgnoreCase("")) {
+					return;
+				}
+				try {
+					JSONObject jsonObject2 = new JSONObject(msg.obj.toString());
+					Gson gson = new Gson();
+					ResultResponse response = gson.fromJson(
+							jsonObject2.toString(), ResultResponse.class);
+					if (response.isResult()) {
+						if (isBind) {
+							if (!deviceName.getText().toString().trim()
+									.equalsIgnoreCase("")) {
+								new WebServiceUtils(BindDeviceActivity.this,
+										mHandler)
+										.sendExecuteNo(
+												new String[] {
+														SharePrefenceUtils
+																.getAccount(BindDeviceActivity.this),
+														type,
+														deviceName.getText()
+																.toString()
+																.trim() },
+												WebServiceParmas.BIND_DEVICE,
+												WebServiceParmas.HTTP_POST);
+							} else {
+								startActivity(new Intent(
+										BindDeviceActivity.this,
+										Main_board_Activity.class));
+							}
+						} else {
+
+							startActivity(new Intent(BindDeviceActivity.this,
+									Main_board_Activity.class));
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				break;
+			default:
+				break;
+
 			}
 		};
 	};
@@ -71,7 +119,16 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bind_layout);
 		initView();
+		initIntent();
 		initLisenter();
+
+	}
+
+	private void initIntent() {
+		name = getIntent().getStringExtra("name");
+		pass = getIntent().getStringExtra("password");
+		email = getIntent().getStringExtra("email");
+
 	}
 
 	private void initView() {
@@ -97,26 +154,10 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.register_btn_next:
-			if (isBind) {
-				if (!deviceName.getText().toString().trim()
-						.equalsIgnoreCase("")) {
-					new WebServiceUtils(this, mHandler)
-							.sendExecuteNo(
-									new String[] {
-											SharePrefenceUtils
-													.getAccount(BindDeviceActivity.this),
-											type,
-											deviceName.getText().toString()
-													.trim() },
-									WebServiceParmas.BIND_DEVICE,
-									WebServiceParmas.HTTP_POST);
-				} else {
-					AndroidUtils.showToast(this, "请填写设备编码");
-				}
-			} else {
-				startActivity(new Intent(this, Main_board_Activity.class));
-			}
 
+			new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+					name.trim(), pass.trim(), email.trim() },
+					WebServiceParmas.REGISTER, WebServiceParmas.HTTP_POST);
 			break;
 		case R.id.register_btn_no:
 			finish();

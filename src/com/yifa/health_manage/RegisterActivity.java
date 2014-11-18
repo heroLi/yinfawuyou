@@ -18,6 +18,7 @@ import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
+import com.yifa.health_manage.util.YhyyUtil;
 
 /**
  * 注册
@@ -63,6 +64,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_register_layout);
 		initView();
 		initLisenter();
+		title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 	}
 
 	private void initView() {
@@ -89,11 +91,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		case R.id.login_btn_next:
 
 			if (isVerify()) {
-				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
-						nameEdit.getText().toString().trim(),
-						passEdit.getText().toString().trim(),
-						emailEdit.getText().toString().trim() },
-						WebServiceParmas.REGISTER, WebServiceParmas.HTTP_POST);
+				Intent intent = new Intent(RegisterActivity.this,
+						BindDeviceActivity.class);
+				intent.putExtra("name", nameEdit.getText().toString().trim());
+				intent.putExtra("password", passEdit.getText().toString()
+						.trim());
+				intent.putExtra("email", emailEdit.getText().toString().trim());
+				startActivity(intent);
 			}
 			break;
 		case R.id.login_btn_no:
@@ -128,6 +132,10 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		if (!passEdit.getText().toString().trim()
 				.equalsIgnoreCase(passTwoEdit.getText().toString().trim())) {
 			AndroidUtils.showToast(this, "两次密码不一致");
+			return false;
+		}
+		if (!YhyyUtil.isMobileNo(nameEdit.getText().toString().trim())) {
+			AndroidUtils.showToast(this, "请输入正确的手机号");
 			return false;
 		}
 		return true;

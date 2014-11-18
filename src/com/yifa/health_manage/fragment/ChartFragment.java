@@ -184,7 +184,6 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		arrow = (ImageView) view.findViewById(R.id.needle_iv);
 		leftButton = (ImageButton) view.findViewById(R.id.chart_left);
 		rightButton = (ImageButton) view.findViewById(R.id.chart_right);
-
 		// DeviceFriendName name = new DeviceFriendName();
 		// name.setId("12345");
 		// name.setDevice_sn("123456");
@@ -232,7 +231,6 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				myLinearLayout.setBackImage(R.drawable.xinlv_group_small);
 			} else
 				myLinearLayout.setBackImage(R.drawable.xinlv_group);
-
 			topLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 			chartLayout.setBackgroundColor(Color.parseColor("#e63a6c"));
 			linearLayoutTop.setBackgroundColor(Color.parseColor("#e63a6c"));

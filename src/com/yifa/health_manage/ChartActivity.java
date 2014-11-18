@@ -3,16 +3,20 @@ package com.yifa.health_manage;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,8 +27,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.adapter.BloodListAdapter;
@@ -139,6 +145,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 
 		};
 	};
+	private RelativeLayout layout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +155,14 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		deviceType = getIntent().getStringExtra("device_type");
 		dbManager = new DBManager(this);
 		initView();
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {
+			layout.setBackgroundColor(Color.parseColor("#1f65c4"));
+
+		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
+			layout.setBackgroundColor(Color.parseColor("#ff5c3d"));
+		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
+			layout.setBackgroundColor(Color.parseColor("#e63a6c"));
+		}
 		if (deviceType.equalsIgnoreCase("heart_rate")) {
 			new WebServiceUtils(this, mHandler).sendExecute(new String[] {
 					SharePrefenceUtils.getAccount(this), "blood_presure" },
@@ -166,6 +181,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		menufriend = (ImageButton) findViewById(R.id.activity_top_menu2);
 		title = (TextView) findViewById(R.id.activity_top_title);
 		radioGroup = (RadioGroup) findViewById(R.id.chart_group);
+		layout = (RelativeLayout) findViewById(R.id.main_layout);
 		menuList.setVisibility(View.VISIBLE);
 		menufriend.setVisibility(View.VISIBLE);
 
@@ -232,8 +248,8 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 
 	@SuppressLint("InflateParams")
 	private void showDialog(String type) {
-		if(type.equalsIgnoreCase("heart_rate")){
-			type="blood_presure";
+		if (type.equalsIgnoreCase("heart_rate")) {
+			type = "blood_presure";
 		}
 		List<UserInfo> agoList = dbManager.quaryAll(type);
 		loger.d("showDialog  " + agoList.size());
@@ -276,7 +292,6 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.chart_week:
-
 			if (chartFragment != null) {
 				chartFragment.reflashData(0);
 			}
@@ -327,14 +342,11 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 							userInfo.getFriend_id()) == null) {
 						dbManager.insert(deviceType, userInfo.getDevice_sn(),
 								userInfo.getFriend_id(), userInfo);
-					}else{
+					} else {
 						if (!dbManager
-								.quaryId(
-										userInfo.getDevice_sn(),
-										userInfo.getFriend_id())
-								.getLayoutId()
-								.equalsIgnoreCase(
-										userInfo.getLayoutId())) {
+								.quaryId(userInfo.getDevice_sn(),
+										userInfo.getFriend_id()).getLayoutId()
+								.equalsIgnoreCase(userInfo.getLayoutId())) {
 							dbManager.updateType(userInfo);
 						}
 					}

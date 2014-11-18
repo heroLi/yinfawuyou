@@ -28,14 +28,18 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 
 	private RadioGroup saxGroup;
 
-	private TextView title;
+	private TextView title, message, messageName, item_ps;
 
 	private ImageButton left;
 	private EditText nameEdit, briEdit, heightEdit, weightEdit, yaoEdit;
 
 	private boolean sax = true;// true-man false -woman
 
-	private int height, weight, yao;
+	private int height, weight, yao, type;
+
+	private final int type0 = 0, type1 = 1, type2 = 2, type3 = 3, type4 = 4,
+			type5 = 5, type6 = 6;
+	private TextView text1, text2, text3, text4, text5, text6;
 
 	private int brisday;
 
@@ -47,16 +51,67 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_utils_all);
 		initView();
+		type = getIntent().getIntExtra("type", 0);
+		switch (type) {
+		case type0:
+			title.setText("体重检测");
+			messageName.setText("体重检测");
+			item_ps.setText(R.string.utils_wight);
+			break;
+		case type1:
+			title.setText("一分钟肥胖检测");
+			messageName.setText("一分钟肥胖检测");
+			item_ps.setText(R.string.utils_1fenzhong);
+			break;
+		case type2:
+			messageName.setText("标准体重计算器");
+			title.setText("标准体重");
+			item_ps.setText(R.string.utils_biaozhun);
+			break;
+		case type3:
+			title.setText("运动心率");
+			messageName.setText("运动心率");
+			item_ps.setText(R.string.utils_yundong);
+			break;
+		case type4:
+			title.setText("每日所需总热量");
+			messageName.setText("每日所需总热量");
+			item_ps.setText(R.string.utils_reliang);
+			break;
+		case type5:
+			title.setText("基础代谢计算");
+			messageName.setText("基础代谢");
+			item_ps.setText(R.string.utils_jichudaixie);
+			break;
+		case type6:
+			title.setText("全部检测");
+			messageName.setText("全部检测");
+			item_ps.setText(R.string.utils_all_mes);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void initView() {
 		title = (TextView) findViewById(R.id.activity_top_title);
+		item_ps = (TextView) findViewById(R.id.jiashao);
+		messageName = (TextView) findViewById(R.id.mess_name);
+		message = (TextView) findViewById(R.id.text);
 		saxGroup = (RadioGroup) findViewById(R.id.user_sax);
 		briEdit = (EditText) findViewById(R.id.user_bri);
 		heightEdit = (EditText) findViewById(R.id.user_hight);
 		weightEdit = (EditText) findViewById(R.id.user_wight);
 		yaoEdit = (EditText) findViewById(R.id.user_yaowei);
 		okButton = (Button) findViewById(R.id.register_btn_next);
+
+		text1 = (TextView) findViewById(R.id.text1);
+		text2 = (TextView) findViewById(R.id.text2);
+		text3 = (TextView) findViewById(R.id.text3);
+		text4 = (TextView) findViewById(R.id.text4);
+		text5 = (TextView) findViewById(R.id.text5);
+		text6 = (TextView) findViewById(R.id.text6);
 		title.setText("全部检测");
 
 		saxGroup.setOnCheckedChangeListener(this);
@@ -71,18 +126,50 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 			finish();
 			break;
 		case R.id.register_btn_next:
+
 			if (isCheck()) {
 				initDate();
-				Intent intent = new Intent();
-				intent.putExtra("data", getUserData());
-				setResult(100, intent);
-				finish();
 			}
+			String meass="";
+			switch (type) {
+			case type0:
+				meass = getObesityInt() + "BMI";
+				break;
+			case type1:
+				meass = getObesity();
+				break;
+			case type2:
+				meass = getWeight();
+				break;
+			case type3:
+				meass= getSportHeart();
+				break;
+			case type4:
+				meass = getHotValue();
+				break;
+			case type5:
+				meass = getJiChuDaiXie()+"BMR";
+				break;
+			case type6:
+				setAll(getUserData());
+				break;
+			default:
+				break;
+			}
+			message.setText(meass);
 			break;
-
 		default:
 			break;
 		}
+	}
+
+	private void setAll(String[] ss) {
+		text1.setText(ss[0]);
+		text2.setText(ss[1]);
+		text3.setText(ss[2]);
+		text4.setText(ss[3]);
+		text5.setText(ss[4]);
+		text6.setText(ss[5]);
 
 	}
 
@@ -146,7 +233,7 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 	private String getObesity() {
 
 		String value = "失败";
-		float a = weight*10000 / (height * height);
+		float a = weight * 10000 / (height * height);
 
 		if (a < 18) {
 			value = "偏瘦";
@@ -167,7 +254,7 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 
 	// 体重指数
 	private double getObesityInt() {
-		double a = weight*10000/ (height * height);
+		double a = weight * 10000 / (height * height);
 		return a;
 	}
 

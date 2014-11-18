@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">银发无忧</string>
-    <string name="app_ver">V1.0.141105</string>
+    <string name="app_ver">V1.0.141117</string>
 
-    <integer name="vercode">10141105</integer>
+    <integer name="vercode">10141116</integer>
+    <integer name="vercode_ne">3</integer>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_board_">Main_board_Activity</string>
@@ -17,7 +18,7 @@
     <string name="blood_pressure_date">日期</string>
     <string name="blood_pressure_high">收缩压</string>
     <string name="blood_pressure_low">舒张压</string>
-
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
     <!-- button -->
 
     <string name="button_next">下一步</string>
@@ -30,7 +31,7 @@
     <!-- 登录 -->
     <string name="login_title">登录</string>
     <string name="login_name">账号</string>
-    <string name="login_name_ps">手机号</string>
+    <string name="login_name_ps">用户名</string>
     <string name="login_pass">密码</string>
     <string name="login_pass_ps">6-30位数字或字母</string>
     <string name="login_chick_text">一个月内免登录</string>
@@ -47,7 +48,7 @@
     <string name="user_whgit">体重</string>
     <string name="user_waist">腰围</string>
     <string name="user_device">型号</string>
-    <string name="user_device_num">输入十六位编码</string>
+    <string name="user_device_num">输入编码</string>
     <string name="user_vers">验证码</string>
     <string name="user_vers_ps">4位验证码</string>
     <string name="user_passwprd_too">请重复密码</string>
@@ -76,6 +77,13 @@
     <string name="user_about_feed">意见反馈</string>
     <string name="user_about_verson">版本号</string>
     <string name="user_about_update">版本更新</string>
-    <string name="user_login_out">退出登录</string>
+    <string name="user_login_out">退出</string>
+    <string name="utils_wight">\t\t体重指数计算器是体重与身高之比值,知道它很重要,可以了解你的健康情况,你的体重是不是标准体重、超重和肥胖等。您只需要输入身高与体重,即可计算出你的体重指数.</string>
+    <string name="utils_1fenzhong">\t\t肥胖检测工具，输入您的身高和体重，可以帮您计算出您现在身体体重是否正常、是否肥胖。</string>
+    <string name="utils_biaozhun">\t\t标准体重是反应和衡量一个人健康状况的重要标志之一。过胖和过瘦都不利于健康，也不会给人以健美感。不同体型的大量统计材料表明，反映正常体重较理想和简单的指标，可用身高体重的关系来表示。</string>
+    <string name="utils_yundong">\t\t运动心率，即人体在运动时保持的心率状态。不管是有氧运动，还是无氧运动。都有一个合适的心率才能达到较佳的运动效果。</string>
+    <string name="utils_reliang">\t\t每日所需总热量，即一个正常人每日所需的热量，和他的体重有关。每日摄取热量和体重比的关系，约为1千卡/小时，即4.186千焦/小时。</string>
+    <string name="utils_jichudaixie">\t\t基础代谢(basal metabolism,BM)是指人体维持生命的所有器官所需要的最低能量需要。测定方法是在人体在清醒而又极端安静的状态下，不受肌肉活动、环境温度、食物及精神紧张等影响时的能量代谢率。</string>
+    <string name="utils_all_mes">\t\t主要检测人的综合体质，如体重指数、标准体重、运动心率、每日所需总热量等。</string>
 
 </resources>

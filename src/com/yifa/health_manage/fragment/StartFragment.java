@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yifa.health_manage.ChartActivity;
 import com.yifa.health_manage.FrontPagerWebactivity;
+import com.yifa.health_manage.Main_board_Activity;
 import com.yifa.health_manage.NewDataActivity;
 import com.yifa.health_manage.R;
 import com.yifa.health_manage.model.ImageResponse;
@@ -40,8 +41,8 @@ import com.yifa.health_manage.util.WebServiceUtils;
  * */
 public class StartFragment extends Fragment {
 
-	public StartFragment(FinalBitmap container) {
-		this.finalBitmap = container;
+	public StartFragment(FinalBitmap Bitmap) {
+		this.finalBitmap =Bitmap;
 	}
 
 	/**
@@ -161,7 +162,6 @@ public class StartFragment extends Fragment {
 
 					}
 				});
-
 	}
 
 	class ViewpagerOnChangeListener implements OnPageChangeListener {
@@ -280,10 +280,10 @@ public class StartFragment extends Fragment {
 		for (int i = 0; i < pagers.size(); i++) {
 			if (i == arg) {
 				((ImageView) pagers.get(i))
-						.setImageResource(R.drawable.page_ok);
+						.setBackgroundResource(R.drawable.page_ok);
 			} else {
 				((ImageView) pagers.get(i))
-						.setImageResource(R.drawable.page_no);
+						.setBackgroundResource(R.drawable.page_no);
 			}
 		}
 	}

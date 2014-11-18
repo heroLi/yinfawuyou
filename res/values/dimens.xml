@@ -3,7 +3,7 @@
     <dimen name="text_size">18sp</dimen>
     <dimen name="text_small">15sp</dimen>
     <dimen name="left">15dp</dimen>
-    <dimen name="pending_left">7dp</dimen>
+    <dimen name="pending_left">8dp</dimen>
     <dimen name="top">15dp</dimen>
 
 </resources>
