@@ -67,6 +67,27 @@ public class MyLinearLayout extends View implements Runnable {
 		new Thread(this).start();
 
 	}
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO Auto-generated method stub
+		/** 
+         * 获得此ViewGroup上级容器为其推荐的宽和高，以及计算模式 
+         */ 
+		int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);  
+        int sizeHeight = MeasureSpec.getSize(heightMeasureSpec); 
+        //获得bitmap的宽高
+        int bitmapWidth=0;
+        int bitmapHeight=0;
+		if(oilBm!=null){
+			bitmapWidth = oilBm.getWidth();
+			bitmapHeight = oilBm.getHeight();
+		}
+		if(bitmapWidth!=0&&bitmapHeight!=0)
+			setMeasuredDimension(bitmapWidth, bitmapHeight);
+		else{
+			setMeasuredDimension(sizeWidth, sizeHeight);
+		}
+	}
 
 	@Override
 	public void run() {

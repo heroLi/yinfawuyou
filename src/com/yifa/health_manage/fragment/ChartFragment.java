@@ -547,6 +547,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			// 轴上数字的数量
 			renderer.setXLabels(15);
 			renderer.setYLabels(0);
+			
+//			renderer.addXTextLabel(1, "1");
+//			renderer.addXTextLabel(2, "2");
+//			renderer.addXTextLabel(3, "3");
+//			renderer.addXTextLabel(4, "4");
+//			renderer.addXTextLabel(5, "5");
+//			renderer.addXTextLabel(6, "6");
+//			renderer.addXTextLabel(7, "7");
+			
 			renderer.setPanLimits(new double[] { 0, 31, 2, 12 });
 			break;
 		case 2:
@@ -615,7 +624,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		// renderer.setFitLegend(true);
 		// renderer.setXRoundedLabels(true);
 
-		renderer.setShowGridX(true);
+		renderer.setShowGrid(true);
 		// renderer.setShowAxes(false);
 		renderer.setPanEnabled(true); // 图表是否可以移动
 		renderer.setZoomEnabled(false); // 图表是否可以缩放
