@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yifa.health_manage"
-    android:versionCode="@integer/vercode_ne"
+    android:versionCode="3"
     android:versionName="@string/app_ver" >
 
     <uses-sdk
@@ -38,6 +38,12 @@
         </activity>
         <activity
             android:name="com.yifa.health_manage.AddDeviceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_main_board_"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.AboutUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main_board_"
             android:screenOrientation="portrait" >
