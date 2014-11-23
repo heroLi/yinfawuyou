@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_name"
             android:layout_marginLeft="@dimen/pending_left"
+            android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
@@ -30,7 +31,9 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
+            android:textColor="@color/text_gray"
             android:layout_marginRight="7dp"
+            android:textColorHint="@color/text_hint"
             android:hint="@string/login_name_ps" />
     </LinearLayout>
 
@@ -50,6 +53,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_email"
              android:layout_marginLeft="@dimen/pending_left"
+              android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
@@ -58,6 +62,8 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
+            android:textColorHint="@color/text_hint"
+            android:textColor="@color/text_gray"
             android:layout_marginRight="7dp"
             android:hint="@string/login_email" />
     </LinearLayout>
@@ -76,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_pass"
+             android:textColor="@color/text_black"
              android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
@@ -86,7 +93,9 @@
             android:background="#00000000"
             android:gravity="right"
             android:inputType="textPassword"
+            android:textColorHint="@color/text_hint"
             android:layout_marginRight="7dp"
+            android:textColor="@color/text_gray"
             android:hint="@string/login_pass_ps" />
     </LinearLayout>
     <LinearLayout
@@ -103,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_pass_two"
+             android:textColor="@color/text_black"
              android:layout_marginLeft="@dimen/pending_left"
             android:textSize="18sp" />
 
@@ -112,6 +122,8 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="right"
+            android:textColorHint="@color/text_hint"
+            android:textColor="@color/text_gray"
             android:inputType="textPassword"
             android:layout_marginRight="7dp"
             android:hint="@string/login_pass_ps" />
@@ -134,7 +146,7 @@
             android:textColor="@color/app_white"
             android:layout_marginRight="18dp"
             android:text="@string/button_no"
-            
+            android:textSize="18sp"
             android:background="@drawable/button_select"
             />
         <Button 
@@ -146,6 +158,7 @@
             android:layout_marginLeft="18dp"
             android:textColor="@color/app_white"
             android:text="@string/button_next"
+            android:textSize="18sp"
             android:background="@drawable/button_select"
             />
         

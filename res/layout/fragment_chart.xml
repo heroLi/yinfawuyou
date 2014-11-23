@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/left" />
+            android:background="@drawable/chart_left_press" />
 
         <TextView
             android:id="@+id/timeTitle"
@@ -34,7 +34,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:background="@drawable/right" />
+            android:background="@drawable/chart_right_selelct" />
     </RelativeLayout>
 
     <FrameLayout
@@ -94,26 +94,28 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="28dp"
-            android:background="@color/line_gray"
-            android:textSize="15sp"
+            android:background="@color/text_hint"
             android:gravity="center"
-            android:text="血压详情" />
+            android:text="血压详情"
+            android:textColor="@color/text_black"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:id="@+id/ly_conpoment"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:background="@color/app_white"
             android:gravity="center"
+            android:background="@color/app_white"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:textSize="15sp"
                 android:gravity="center"
-                android:text="2010/3/4" />
+                android:text="2010/3/4"
+                android:textColor="@color/text_black"
+                android:textSize="15sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -123,17 +125,15 @@
                 <com.yifa.health_manage.view.MyLinearLayout
                     android:id="@+id/layout_halfRound"
                     android:layout_width="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
-                     >
-                    
+                    android:layout_centerHorizontal="true" >
                 </com.yifa.health_manage.view.MyLinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
-                    android:gravity="center"
+                    android:gravity="center|bottom"
                     android:orientation="vertical" >
 
                     <TextView
@@ -141,13 +141,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="正常"
+                        android:textColor="@color/text_black"
                         android:textSize="20.0sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginBottom="75dp"
                         android:layout_toRightOf="@+id/needle_iv" >
 
                         <TextView
@@ -156,6 +157,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:text="0"
+                            android:textColor="@color/text_black"
                             android:textSize="17.0dip" />
 
                         <TextView
@@ -163,6 +165,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="mmHg"
+                            android:textColor="@color/text_black"
                             android:textSize="15.0sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -190,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:gravity="left"
+                    android:textColor="@color/text_black"
                     android:text=""
                     android:textSize="20.0dip" />
             </LinearLayout>

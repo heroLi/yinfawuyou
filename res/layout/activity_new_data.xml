@@ -20,15 +20,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:text="血压"
-            android:textSize="15sp" />
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/data1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:layout_marginRight="18dp"
             android:text=""
-            android:textSize="15sp" />
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,12 +64,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="高压"
+                    android:textColor="@color/text_black"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/blood_xh"
                     android:layout_width="40dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
+                    android:textColor="@color/text_black"
                     android:background="@drawable/edit_bg"
                     android:gravity="center"
                     android:text="0"
@@ -76,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="mmHg"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/text_size" />
             </LinearLayout>
 
@@ -90,14 +96,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="低压"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/text_size" />
 
                 <TextView
                     android:id="@+id/blood_xl"
                     android:layout_width="40dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/edit_bg"
                     android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/text_black"
                     android:text="100"
                     android:textSize="@dimen/text_size" />
 
@@ -105,6 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="mmHg"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/text_size" />
             </LinearLayout>
         </LinearLayout>
@@ -126,6 +136,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="理想" />
             </LinearLayout>
 
@@ -141,6 +152,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                     android:textColor="@color/app_white"
                     android:text="正常" />
             </LinearLayout>
 
@@ -156,6 +168,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="偏高" />
             </LinearLayout>
 
@@ -171,6 +184,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="轻度" />
             </LinearLayout>
 
@@ -186,6 +200,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="中度" />
             </LinearLayout>
 
@@ -199,6 +214,7 @@
                     android:id="@+id/xy_6"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
+                    android:textColor="@color/app_white"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
                     android:text="高度" />
@@ -218,15 +234,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:text="血糖"
-            android:textSize="15sp" />
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/data2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:layout_marginRight="18dp"
             android:text=""
-            android:textSize="15sp" />
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -250,20 +269,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                 android:textSize="18sp"
                 android:text="血糖" />
 
             <TextView
                 android:id="@+id/blood_t"
                 android:layout_width="40dp"
-                android:layout_height="20dp"
+                android:layout_height="25dp"
                 android:background="@drawable/edit_bg"
                 android:gravity="center"
                 android:text="0"
+                android:paddingBottom="2dp"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
                 android:text="mmol/L"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
@@ -285,6 +309,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="理想" />
             </LinearLayout>
 
@@ -300,6 +325,9 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/app_white"
+                    android:paddingRight="4dp"
                     android:text="可接受" />
             </LinearLayout>
 
@@ -315,6 +343,9 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/app_white"
+                    android:paddingRight="4dp"
                     android:text="不可接受" />
             </LinearLayout>
         </LinearLayout>
@@ -331,16 +362,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
+            android:textColor="@color/text_black"
             android:text="心率"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/data3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:layout_marginRight="18dp"
+            android:textColor="@color/text_black"
             android:text=""
-            android:textSize="15sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -365,20 +399,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="心率"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size" />
 
             <TextView
                 android:id="@+id/blood_lv"
                 android:layout_width="40dp"
-                android:layout_height="20dp"
+                android:layout_height="25dp"
                 android:background="@drawable/edit_bg"
                 android:gravity="center"
+                android:paddingBottom="2dp"
                 android:text="0"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
                 android:text="BPM"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
@@ -400,6 +438,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
+                    android:textColor="@color/app_white"
                     android:text="偏低" />
             </LinearLayout>
 
@@ -413,6 +452,7 @@
                     android:id="@+id/xl_2"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
+                    android:textColor="@color/app_white"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
                     android:text="正常" />
@@ -428,6 +468,7 @@
                     android:id="@+id/xl_3"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
+                    android:textColor="@color/app_white"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
                     android:text="偏高" />

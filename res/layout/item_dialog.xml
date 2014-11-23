@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_white"
+    android:background="#00000000"
     android:orientation="vertical" >
 
     <View
@@ -12,12 +12,14 @@
     <RelativeLayout
         android:id="@+id/device_layout2"
         android:layout_width="match_parent"
-        android:layout_height="45dp" >
+        android:layout_height="55dp" >
 
         <ImageView
             android:id="@+id/photo"
             android:layout_width="45dp"
-            android:background="@drawable/iamge_user"
+            android:background="@drawable/father"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
             android:layout_height="45dp" />
 
         <TextView
@@ -26,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/photo"
-            android:background="@color/app_white"
+            android:layout_marginLeft="5dp"
+            android:textSize="18sp"
             android:text="名字"
             android:textColor="@android:color/black" />
 
@@ -35,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:background="@drawable/click_no" />
     </RelativeLayout>

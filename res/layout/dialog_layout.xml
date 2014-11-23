@@ -1,36 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_white"
+    android:background="#00000000"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/device_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1px"
-        android:background="@color/app_green"
-        android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/layout_bg_round"
+        android:orientation="vertical"
+        android:paddingBottom="4dp"
+         >
 
-        <TextView
-            android:id="@+id/device_id"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:gravity="center_vertical"
-            android:text="切换亲友"
-            android:textColor="@color/app_white" />
-
-        <CheckBox
-            android:id="@+id/device_check"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/device_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:visibility="gone" />
-    </RelativeLayout>
+            android:layout_marginLeft="1px"
+            android:background="@drawable/layout_top_round_green"
+            android:orientation="horizontal" >
 
-    <ListView
-        android:id="@+id/myList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/device_id"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="切换亲友"
+                android:textSize="18sp"
+                android:textColor="@color/app_white" />
+
+            <CheckBox
+                android:id="@+id/device_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/myList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:listSelector="@drawable/list_select" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -34,7 +34,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="周"
-            android:textColor="@drawable/text_select" />
+            android:textColor="@drawable/text_select_xueya" />
 
         <RadioButton
             android:id="@+id/chart_month"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="月"
-            android:textColor="@drawable/text_select" />
+            android:textColor="@drawable/text_select_xueya" />
 
         <RadioButton
             android:id="@+id/chart_year"
@@ -56,7 +56,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="年"
-            android:textColor="@drawable/text_select" />
+            android:textColor="@drawable/text_select_xueya" />
     </RadioGroup>
 
     <LinearLayout

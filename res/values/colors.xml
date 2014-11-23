@@ -3,8 +3,10 @@
     <color name="black_overlay">#66000000</color>
     <color name="app_green">#3fc608</color>
     <color name="app_white">#FFFFFFFF</color>
-    <color name="text_black">#373737</color>
-    <color name="text_gray">#d0d0d0</color>
+    <color name="text_black">#363636</color>
+    <color name="text_gray">#929292</color>
+    <color name="text_gray_f">#9f929292</color>
+    <color name="text_hint">#d4d4d4</color>
     <color name="line_gray">#929292</color>
     <color name="bg_gray">#0f929292</color>
     <color name="main_gray">#d4d4d4</color>

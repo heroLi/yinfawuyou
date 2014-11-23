@@ -10,33 +10,36 @@
     <RadioGroup
         android:id="@+id/bind_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/top"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal" >
+
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/bind_no"
-             android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/click_button_bg"
+            android:checked="true"
             android:text="不绑定"
-            android:textColor="@color/app_green"
-            />
-        
+            android:textColor="@color/app_green" />
+
         <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/bind_blood_presure"
-            android:text="血压计"
-            android:textColor="@color/app_green"
-            />
-        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/click_button_bg"
+            android:text="血压计"
+            android:textColor="@color/app_green" />
+
+        <RadioButton
             android:id="@+id/bind_blood_glucose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/click_button_bg"
             android:text="血糖计"
-            android:textColor="@color/app_green"
-            />
+            android:textColor="@color/app_green" />
     </RadioGroup>
 
     <LinearLayout
@@ -55,6 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user_device"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
@@ -64,6 +69,8 @@
             android:layout_marginRight="5dp"
             android:background="#00000000"
             android:gravity="right"
+            android:textColorHint="@color/text_hint"
+            android:textColor="@color/text_gray"
             android:hint="@string/user_device_num" />
     </LinearLayout>
 
@@ -114,6 +121,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_select"
             android:text="@string/button_top"
+            android:textSize="18sp"
             android:textColor="@color/app_white" />
 
         <Button
@@ -123,6 +131,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+             android:textSize="18sp"
             android:background="@drawable/button_select"
             android:text="@string/button_over"
             android:textColor="@color/app_white" />

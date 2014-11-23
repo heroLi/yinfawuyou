@@ -9,246 +9,264 @@
         layout="@layout/activity_main_top" />
 
     <LinearLayout
-        android:id="@+id/layout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:layout_marginTop="@dimen/pending_left"
-        android:background="@drawable/edit_bg"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:visibility="gone" >
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/device_layout"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="1px"
-            android:background="@color/app_green"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/device_id"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginLeft="7dp"
-                android:gravity="center_vertical"
-                android:text=""
-                android:textColor="@color/app_white" />
-
-            <CheckBox
-                android:id="@+id/device_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/device_layout1"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="1px" >
-
-            <ImageView
-                android:id="@+id/friend_image1"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/iamge_user" />
-
-            <EditText
-                android:id="@+id/device_friend1_name"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/friend_image1"
-                android:background="@color/app_white"
-                android:gravity="center_vertical"
-                android:text="名字"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size" />
-
-            <ImageView
-                android:id="@+id/device_check1_im"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_no" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line_gray" />
-
-        <RelativeLayout
-            android:id="@+id/device_layout2"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginLeft="1px"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/friend_image2"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/iamge_user" />
-
-            <EditText
-                android:id="@+id/device_friend2_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/friend_image2"
-                android:background="@color/app_white"
-                android:text="名字"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size" />
-
-            <ImageView
-                android:id="@+id/device_check2_im"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_no" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:layout_marginTop="@dimen/left"
-        android:background="@drawable/edit_bg"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1px"
-            android:background="@color/app_green"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="@dimen/left"
+            android:layout_marginRight="@dimen/left"
+            android:layout_marginTop="@dimen/pending_left"
+            android:background="@drawable/edit_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:visibility="gone" >
 
-            <TextView
-                android:id="@+id/device_id2"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/device_layout"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="7dp"
-                android:gravity="center_vertical"
-                android:text=""
-                android:textColor="@color/app_white"
-                android:textSize="@dimen/text_size" />
+                android:layout_marginLeft="1px"
+                android:background="@drawable/layout_top_round_green"
+                android:orientation="horizontal" >
 
-            <CheckBox
-                android:id="@+id/device2_check2"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/device_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/app_white" />
+
+                <CheckBox
+                    android:id="@+id/device_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="7dp"
+                    android:button="@drawable/delete_chick_bg"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/device_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1px" >
+
+                <ImageView
+                    android:id="@+id/friend_image1"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/father" />
+
+                <EditText
+                    android:id="@+id/device_friend1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/friend_image1"
+                    android:background="@color/app_white"
+                    android:gravity="center_vertical"
+                    android:text="名字"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/device_check1_im"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/click_no" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_gray" />
+
+            <RelativeLayout
+                android:id="@+id/device_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1px"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/friend_image2"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/mother" />
+
+                <EditText
+                    android:id="@+id/device_friend2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/friend_image2"
+                    android:background="@color/app_white"
+                    android:text="名字"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/device_check2_im"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/click_no" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/left"
+            android:layout_marginRight="@dimen/left"
+            android:layout_marginTop="@dimen/left"
+            android:background="@drawable/edit_bg"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:visibility="gone" />
-        </RelativeLayout>
+                android:layout_marginLeft="1px"
+                android:background="@drawable/layout_top_round_green"
+                android:orientation="horizontal" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="1px"
-            android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/device_id2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/app_white"
+                    android:textSize="@dimen/text_size" />
 
-            <ImageView
-                android:id="@+id/friend_image3"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/iamge_user" />
+                <CheckBox
+                    android:id="@+id/device2_check2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="7dp"
+                    android:button="@drawable/delete_chick_bg"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
-            <EditText
-                android:id="@+id/device1_friend1_name"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="1px"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/friend_image3"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/father" />
+
+                <EditText
+                    android:id="@+id/device1_friend1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/friend_image3"
+                    android:background="@color/app_white"
+                    android:gravity="center_vertical"
+                    android:text="名字"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/device2_check1_im"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/click_no" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/friend_image3"
-                android:background="@color/app_white"
-                android:gravity="center_vertical"
-                android:text="名字"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size" />
+                android:layout_marginLeft="1px"
+                android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/device2_check1_im"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_no" />
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/friend_image4"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/mother" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line_gray" />
+                <EditText
+                    android:id="@+id/device2_friend2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/friend_image4"
+                    android:background="@color/app_white"
+                    android:text="名字"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="1px"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/friend_image4"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/iamge_user" />
-
-            <EditText
-                android:id="@+id/device2_friend2_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/friend_image4"
-                android:background="@color/app_white"
-                android:text="名字"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size" />
-
-            <ImageView
-                android:id="@+id/device2_check2_im"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/click_no" />
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/device2_check2_im"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/click_no" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/commit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="@dimen/left"
         android:layout_marginRight="@dimen/left"
-        android:layout_marginTop="50dp"
         android:background="@drawable/button_bg_shape"
         android:text="删除设备"
         android:textColor="@color/app_white"
+        android:textSize="18sp"
         android:visibility="gone" />
 
 </LinearLayout>

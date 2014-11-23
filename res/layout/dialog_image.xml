@@ -1,26 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_white"
+    android:background="@drawable/layout_bg_round"
     android:gravity="center"
     android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/app_green"
+        android:background="@drawable/layout_top_round_green"
         android:gravity="center_vertical"
         android:text="头像"
+        android:textSize="18sp"
+        android:paddingLeft="7dp"
         android:textColor="@color/app_white" />
 
     <TextView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
         android:background="@color/app_white"
         android:gravity="center_vertical"
         android:text="相册"
+        android:textSize="18sp"
+        android:layout_marginLeft="7dp"
         android:textColor="@android:color/black" />
 
     <View
@@ -32,8 +35,9 @@
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
-        android:background="@color/app_white"
+        android:background="#00000000"
+        android:textSize="18sp"
+        android:layout_marginLeft="7dp"
         android:gravity="center_vertical"
         android:text="相机"
         android:textColor="@android:color/black" />

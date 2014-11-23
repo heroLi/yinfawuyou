@@ -18,195 +18,214 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/user_top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@drawable/login_top_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@string/user_sax"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
-
-                    <RadioGroup
-                        android:id="@+id/user_sax"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:gravity="right"
-                        android:orientation="horizontal" >
-
-                        <RadioButton
-                            android:id="@+id/sax_man"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="男"
-                            android:textColor="@color/app_green" />
-
-                        <RadioButton
-                            android:id="@+id/sax_women"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="女"
-                            android:textColor="@color/app_green" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@drawable/login_middle_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="年龄"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
-
-                    <EditText
-                        android:id="@+id/user_bri"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:background="#00000000"
-                        android:gravity="right"
-                        android:inputType="number" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/user_top"
+                android:background="@drawable/utils_bg"
+                android:gravity="center"
                 android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@drawable/login_middle_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="@dimen/left"
+                    android:background="@drawable/layout_bg_tra"
+                    android:orientation="vertical" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@string/user_hight"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
-
-                    <EditText
-                        android:id="@+id/user_hight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
                         android:background="#00000000"
-                        android:gravity="right"
-                        android:inputType="number" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/pending_left"
-                        android:text="cm"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="@string/user_sax"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@drawable/login_middle_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                        <RadioGroup
+                            android:id="@+id/user_sax"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:gravity="right"
+                            android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@string/user_whgit"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
+                            <RadioButton
+                                android:id="@+id/sax_man"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/click_button_bg"
+                                android:checked="true"
+                                android:text="男"
+                                android:textColor="@color/app_white" />
 
-                    <EditText
-                        android:id="@+id/user_wight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
+                            <RadioButton
+                                android:id="@+id/sax_women"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/click_button_bg"
+                                android:text="女"
+                                android:textColor="@color/app_white" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/app_white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
                         android:background="#00000000"
-                        android:gravity="right"
-                        android:inputType="number" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:text="kg"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="年龄"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp"
-                    android:background="@drawable/login_bottom_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                        <EditText
+                            android:id="@+id/user_bri"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:layout_marginRight="7dp"
+                            android:gravity="right"
+                            android:inputType="number"
+                            android:textColor="@color/text_black" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@string/user_waist"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/app_white" />
 
-                    <EditText
-                        android:id="@+id/user_yaowei"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
                         android:background="#00000000"
-                        android:gravity="right"
-                        android:inputType="number" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:text="cm"
-                        android:textColor="@color/app_green"
-                        android:textSize="18sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="@string/user_hight"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/user_hight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="#00000000"
+                            android:gravity="right"
+                            android:inputType="number"
+                            android:textColor="@color/text_black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/pending_left"
+                            android:text="cm"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/app_white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#00000000"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="@string/user_whgit"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/user_wight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="#00000000"
+                            android:gravity="right"
+                            android:inputType="number"
+                            android:textColor="@color/text_black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:text="kg"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/app_white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#00000000"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:text="@string/user_waist"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/user_yaowei"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="#00000000"
+                            android:gravity="right"
+                            android:inputType="number"
+                            android:textColor="@color/text_black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="7dp"
+                            android:text="cm"
+                            android:textColor="@color/app_white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -227,14 +246,16 @@
                     android:layout_marginRight="18dp"
                     android:background="@drawable/button_select"
                     android:text="@string/button_commit"
-                    android:textColor="@color/app_white" />
+                    android:textColor="@color/app_white"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/itemLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -255,7 +276,8 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/edit_bg"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/mess_name"
@@ -263,16 +285,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:text="体重指数"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                         android:textColor="@android:color/black"
-                        android:gravity="right" />
+                        android:gravity="left"
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -280,17 +303,8 @@
                 android:id="@+id/allLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:text="计算结果"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <LinearLayout
                     android:id="@+id/passwordLayout"
@@ -308,15 +322,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item1"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -335,15 +350,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item2"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -361,15 +377,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item3"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -387,15 +404,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item4"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -413,15 +431,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item5"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -439,15 +458,16 @@
                         android:layout_marginLeft="5dp"
                         android:gravity="center_vertical"
                         android:text="@string/utils_item6"
-                        android:textColor="@color/app_green"
+                        android:textColor="@color/app_white"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/text6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:gravity="right" />
+                        android:gravity="left" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -466,8 +486,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:lineSpacingExtra="3dp"
                 android:text="@string/utils_wight"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_black"
                 android:textSize="13sp" />
         </LinearLayout>
     </ScrollView>

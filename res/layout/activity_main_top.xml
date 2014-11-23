@@ -11,7 +11,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
         android:text="@string/login_title"
-        android:drawableLeft="@drawable/left"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/return_iamge_select"
         android:textColor="@color/app_white"
         android:textSize="18dp" />
     <TextView

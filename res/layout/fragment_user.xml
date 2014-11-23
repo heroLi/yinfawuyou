@@ -8,269 +8,315 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_device_text"
-        android:textColor="@color/line_gray"
+        android:layout_marginBottom="6dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="19dp"
-        android:layout_marginBottom="6dp"
+        android:text="@string/user_device_text"
+        android:textColor="@color/line_gray"
         android:textSize="@dimen/text_small" />
 
     <LinearLayout
-        android:id="@+id/user_blood_p"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/left"
         android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_top_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:background="@drawable/layout_bg_round"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_device_one"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size"/>
+        <LinearLayout
+            android:id="@+id/user_blood_p"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_device_one"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
 
-    <LinearLayout
-        android:id="@+id/user_blood_s"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_bottom_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <ImageView
+                android:id="@+id/user_blood_p_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_device_three"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon" />
+        <LinearLayout
+            android:id="@+id/user_blood_s"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_device_three"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
+
+            <ImageView
+                android:id="@+id/iamge2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="6dp"
-        android:textSize="@dimen/text_small"
         android:text="@string/user_account_text"
-        android:textColor="@color/line_gray" />
+        android:textColor="@color/line_gray"
+        android:textSize="@dimen/text_small" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/left"
         android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_top_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:background="@drawable/layout_bg_round"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_account_name"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
-
-        <TextView
-            android:id="@+id/user_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:background="#00000000"
-            android:gravity="right"
-            android:text="000" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-    <RelativeLayout
-        android:id="@+id/user_account_pass"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_middle_bg" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_account_name"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/user_account_pass"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
+            <TextView
+                android:id="@+id/user_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="#00000000"
+                android:gravity="right"
+                android:text="000" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-             />
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
 
-    <LinearLayout
-        android:id="@+id/change_acconut"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_bottom_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        <RelativeLayout
+            android:id="@+id/user_account_pass"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_account_huan"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_account_pass"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon"
-            android:gravity="right" />
+            <ImageView
+                android:id="@+id/iamge3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
+
+        <LinearLayout
+            android:id="@+id/change_acconut"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_account_huan"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press"
+                android:gravity="right"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="19dp"
-        android:layout_marginBottom="6dp"
-        android:textSize="@dimen/text_small"
         android:text="@string/user_about_text"
-        android:textColor="@color/line_gray" />
-
-    <LinearLayout
-        android:id="@+id/feedBack"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_top_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_about_feed"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon" />
-    </LinearLayout>
+        android:textColor="@color/line_gray"
+        android:textSize="@dimen/text_small" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/left"
         android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_middle_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:background="@drawable/layout_bg_round"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_about_verson"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" />
+        <LinearLayout
+            android:id="@+id/feedBack"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:gravity="right"
-            android:text="@string/app_ver" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_about_feed"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_middle_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <ImageView
+                android:id="@+id/feedBack_iamge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关于我们"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/pending_left"
-            android:textSize="@dimen/text_size" 
-            android:textColor="@color/app_green"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/ver_gengxin"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/left"
-        android:layout_marginRight="@dimen/left"
-        android:background="@drawable/login_bottom_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_about_verson"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:text="@string/user_about_update"
-            android:textColor="@color/app_green"
-            android:layout_weight="1"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="right"
+                android:text="@string/app_ver" />
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/next_icon" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
+
+        <LinearLayout
+            android:id="@+id/ver_gengxin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/pending_left"
+                android:layout_weight="1"
+                android:text="@string/user_about_update"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_size" />
+
+            <ImageView
+                android:id="@+id/ver_gengxin_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
+
+        <LinearLayout
+            android:id="@+id/about_us"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="关于我们"
+                android:textColor="@color/text_black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/about_us_iamge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/utlis_right_press" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -283,6 +329,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/button_bg_shape"
         android:text="@string/user_login_out"
-        android:textColor="@color/app_white" />
+        android:textColor="@color/app_white"
+        android:textSize="18sp" />
 
 </LinearLayout>
