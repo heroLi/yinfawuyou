@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -75,6 +77,8 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 	private DevicesListInfo listnew = null;
 
 	private ChartFragment chartFragment = null;
+	
+	private RadioButton button1,button2,button3;
 
 	private int type = 0;
 
@@ -181,6 +185,9 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		menufriend = (ImageButton) findViewById(R.id.activity_top_menu2);
 		title = (TextView) findViewById(R.id.activity_top_title);
 		radioGroup = (RadioGroup) findViewById(R.id.chart_group);
+		button1 = (RadioButton) findViewById(R.id.chart_week);
+		button2 = (RadioButton) findViewById(R.id.chart_month);
+		button3 = (RadioButton) findViewById(R.id.chart_year);
 		layout = (RelativeLayout) findViewById(R.id.main_layout);
 		menuList.setVisibility(View.VISIBLE);
 		menufriend.setVisibility(View.VISIBLE);
@@ -197,11 +204,24 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
 			title.setText("血糖");
 			type = 1;
+			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_selelct_xuetang);
+			button1.setTextColor(colorStateList);
+			button2.setTextColor(colorStateList);
+			button3.setTextColor(colorStateList);
+			
 		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
 			title.setText("血压");
+			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_select_xueya);
+			button1.setTextColor(colorStateList);
+			button2.setTextColor(colorStateList);
+			button3.setTextColor(colorStateList);
 			type = 0;
 		} else {
 			title.setText("心率");
+			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_select_xinlv);
+			button1.setTextColor(colorStateList);
+			button2.setTextColor(colorStateList);
+			button3.setTextColor(colorStateList);
 			type = 3;
 		}
 		adapter = new BloodListAdapter(this, mCurrentList, type);
@@ -253,7 +273,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		}
 		List<UserInfo> agoList = dbManager.quaryAll(type);
 		loger.d("showDialog  " + agoList.size());
-		dialog = new Dialog(this);
+		dialog = new Dialog(this,R.style.ThemeDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,
 				null);

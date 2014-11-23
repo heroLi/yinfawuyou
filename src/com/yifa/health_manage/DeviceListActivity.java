@@ -9,8 +9,10 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +29,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
@@ -58,8 +59,7 @@ import com.yifa.health_manage.util.WebServiceUtils;
 /**
  * 设备列表
  * */
-public class DeviceListActivity extends Activity implements
-		OnLongClickListener, OnClickListener {
+public class DeviceListActivity extends Activity implements OnClickListener {
 
 	private String deviceType = "blood_presure";
 
@@ -225,7 +225,7 @@ public class DeviceListActivity extends Activity implements
 						}
 
 						if (listnew.getData().size() == 2) {
-							addDevice.setVisibility(View.GONE);
+							addDevice.setVisibility(View.VISIBLE);
 							layout2.setVisibility(View.VISIBLE);
 							layout1.setVisibility(View.VISIBLE);
 							if (listnew.getData().get(0).getRelative().size() <= 0) {
@@ -252,8 +252,8 @@ public class DeviceListActivity extends Activity implements
 								}
 
 							}
-							layout1.setOnLongClickListener(DeviceListActivity.this);
-							layout2.setOnLongClickListener(DeviceListActivity.this);
+							// layout1.setOnLongClickListener(DeviceListActivity.this);
+							// layout2.setOnLongClickListener(DeviceListActivity.this);
 
 						} else if (listnew.getData().size() == 1) {
 							addDevice.setVisibility(View.VISIBLE);
@@ -269,7 +269,7 @@ public class DeviceListActivity extends Activity implements
 									.getRelative().get(0).getName());
 							friend2.setText(listnew.getData().get(0)
 									.getRelative().get(1).getName());
-							layout1.setOnLongClickListener(DeviceListActivity.this);
+							// layout1.setOnLongClickListener(DeviceListActivity.this);
 
 						} else {
 							addDevice.setVisibility(View.VISIBLE);
@@ -586,8 +586,9 @@ public class DeviceListActivity extends Activity implements
 		friendImage3.setOnClickListener(this);
 		friendImage4.setOnClickListener(this);
 		addDevice.setOnClickListener(this);
+		delete.setOnClickListener(this);
 		friend1.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				friend1.setFocusable(true);
@@ -596,7 +597,7 @@ public class DeviceListActivity extends Activity implements
 			}
 		});
 		friend2.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				friend2.setFocusable(true);
@@ -605,7 +606,7 @@ public class DeviceListActivity extends Activity implements
 			}
 		});
 		friend11.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				friend11.setFocusable(true);
@@ -614,7 +615,7 @@ public class DeviceListActivity extends Activity implements
 			}
 		});
 		friend12.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				friend12.setFocusable(true);
@@ -626,10 +627,11 @@ public class DeviceListActivity extends Activity implements
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				loger.d("friend1------"+hasFocus);
-				loger.d("friend1------"+hasFocus);
+				loger.d("friend1------" + hasFocus);
+				loger.d("friend1------" + hasFocus);
 				if (!hasFocus) {
-					if (friend1.getText().toString().trim().equalsIgnoreCase("")) {
+					if (friend1.getText().toString().trim()
+							.equalsIgnoreCase("")) {
 						friend1.setText(friendName1);
 					}
 				}
@@ -670,45 +672,43 @@ public class DeviceListActivity extends Activity implements
 		});
 	}
 
-	@Override
-	public boolean onLongClick(View v) {
-		if (isSum == 1) {
-			delete.setVisibility(View.VISIBLE);
-			deviceCheck1.setVisibility(View.VISIBLE);
-		} else {
-			delete.setVisibility(View.VISIBLE);
-			deviceCheck1.setVisibility(View.VISIBLE);
-			deviceCheck2.setVisibility(View.VISIBLE);
+	// public boolean onLongClick(View v) {
+	// if (isSum == 1) {
+	// delete.setVisibility(View.VISIBLE);
+	// deviceCheck1.setVisibility(View.VISIBLE);
+	// } else {
+	// delete.setVisibility(View.VISIBLE);
+	// deviceCheck1.setVisibility(View.VISIBLE);
+	// deviceCheck2.setVisibility(View.VISIBLE);
+	//
+	// }
+	// deviceCheck1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	//
+	// @Override
+	// public void onCheckedChanged(CompoundButton buttonView,
+	// boolean isChecked) {
+	// if (isChecked) {
+	// device_id = listnew.getData().get(0).getDevice_sn();
+	// deviceCheck2.setChecked(false);
+	// }
+	//
+	// }
+	// });
+	// deviceCheck2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	//
+	// @Override
+	// public void onCheckedChanged(CompoundButton buttonView,
+	// boolean isChecked) {
+	// if (isChecked) {
+	// device_id = listnew.getData().get(1).getDevice_sn();
+	// deviceCheck1.setChecked(false);
+	// }
+	// }
+	// });
+	// delete.setOnClickListener(this);
+	// return false;
+	// }
 
-		}
-		deviceCheck1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					device_id = listnew.getData().get(0).getDevice_sn();
-					deviceCheck2.setChecked(false);
-				}
-
-			}
-		});
-		deviceCheck2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					device_id = listnew.getData().get(1).getDevice_sn();
-					deviceCheck1.setChecked(false);
-				}
-			}
-		});
-		delete.setOnClickListener(this);
-		return false;
-	}
-
-	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 11 && requestCode == 1) {
@@ -771,32 +771,32 @@ public class DeviceListActivity extends Activity implements
 		case R.id.commit:
 			if (deviceCheck1.isChecked()) {
 				new WebServiceUtils(DeviceListActivity.this, mHandler)
-						.sendExecuteNo(
+						.sendExecute(
 								new String[] {
 										SharePrefenceUtils
 												.getAccount(DeviceListActivity.this),
 										deviceType, device_id },
 								WebServiceParmas.DELETE_DEVICE,
-								WebServiceParmas.HTTP_POST);
+								WebServiceParmas.HTTP_POST, "加载中...");
 				if (deviceCheck2.isChecked()) {
 					new WebServiceUtils(DeviceListActivity.this, mHandler)
-							.sendExecuteNo(
+							.sendExecute(
 									new String[] {
 											SharePrefenceUtils
 													.getAccount(DeviceListActivity.this),
 											deviceType, device_id },
 									WebServiceParmas.DELETE_DEVICE,
-									WebServiceParmas.HTTP_POST);
+									WebServiceParmas.HTTP_POST, "加载中...");
 				}
 			} else if (deviceCheck2.isChecked()) {
 				new WebServiceUtils(DeviceListActivity.this, mHandler)
-						.sendExecuteNo(
+						.sendExecute(
 								new String[] {
 										SharePrefenceUtils
 												.getAccount(DeviceListActivity.this),
 										deviceType, device_id },
 								WebServiceParmas.DELETE_DEVICE,
-								WebServiceParmas.HTTP_POST);
+								WebServiceParmas.HTTP_POST, "加载中...");
 			}
 
 			break;
@@ -818,11 +818,7 @@ public class DeviceListActivity extends Activity implements
 			break;
 		case R.id.activity_top_menu2:
 
-			Intent intent = new Intent(this, MipcaActivityCapture.class);
-			// Intent intent = new Intent(this, CaptureActivity.class);
-			intent.putExtra("deviceType", deviceType);
-
-			startActivityForResult(intent, 1);
+			showMenuDialog(deviceType);
 			break;
 
 		default:
@@ -941,7 +937,7 @@ public class DeviceListActivity extends Activity implements
 	}
 
 	private void showDialog() {
-		final Dialog dialog = new Dialog(this);
+		final Dialog dialog = new Dialog(this,R.style.ThemeDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view = LayoutInflater.from(this).inflate(R.layout.dialog_image,
 				null);
@@ -987,5 +983,95 @@ public class DeviceListActivity extends Activity implements
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		dbManager.close();
+	}
+
+	private Dialog dialog = null;
+
+	@SuppressLint("InflateParams")
+	private void showMenuDialog(String type) {
+		if (type.equalsIgnoreCase("heart_rate")) {
+			type = "blood_presure";
+		}
+		List<UserInfo> agoList = dbManager.quaryAll(type);
+		dialog = new Dialog(DeviceListActivity.this,R.style.ThemeDialog);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.dialog_devices, null, false);
+		dialog.setContentView(view);
+		dialog.show();
+		TextView autoAdd = (TextView) view.findViewById(R.id.auto);
+		TextView handAdd = (TextView) view.findViewById(R.id.hand);
+		TextView deletebutton = (TextView) view.findViewById(R.id.delete);
+		if (agoList.size() > 2) {
+			autoAdd.setEnabled(false);
+			handAdd.setEnabled(false);
+		}
+		autoAdd.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(DeviceListActivity.this,
+						MipcaActivityCapture.class);
+				// Intent intent = new Intent(this, CaptureActivity.class);
+				intent.putExtra("deviceType", deviceType);
+				startActivityForResult(intent, 1);
+				dialog.dismiss();
+			}
+		});
+		handAdd.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent resultIntent = new Intent(DeviceListActivity.this,
+						AddDeviceActivity.class);
+				resultIntent.putExtra("deviceType", deviceType);
+				startActivityForResult(resultIntent, 1);
+				dialog.dismiss();
+			}
+		});
+		deletebutton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (isSum == 1) {
+					delete.setVisibility(View.VISIBLE);
+					deviceCheck1.setVisibility(View.VISIBLE);
+				} else {
+					delete.setVisibility(View.VISIBLE);
+					deviceCheck1.setVisibility(View.VISIBLE);
+					deviceCheck2.setVisibility(View.VISIBLE);
+
+				}
+				deviceCheck1
+						.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+							@Override
+							public void onCheckedChanged(
+									CompoundButton buttonView, boolean isChecked) {
+								if (isChecked) {
+									device_id = listnew.getData().get(0)
+											.getDevice_sn();
+									deviceCheck2.setChecked(false);
+								}
+
+							}
+						});
+				deviceCheck2
+						.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+							@Override
+							public void onCheckedChanged(
+									CompoundButton buttonView, boolean isChecked) {
+								if (isChecked) {
+									device_id = listnew.getData().get(1)
+											.getDevice_sn();
+									deviceCheck1.setChecked(false);
+								}
+							}
+						});
+				dialog.dismiss();
+			}
+		});
+
 	}
 }

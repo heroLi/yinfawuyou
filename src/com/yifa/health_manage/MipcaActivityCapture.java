@@ -59,9 +59,7 @@ public class MipcaActivityCapture extends Activity implements Callback,
 
 	private TextView title;
 
-	private Button addButton;
 
-	private EditText deviceName;
 
 	private String type;
 
@@ -130,11 +128,8 @@ public class MipcaActivityCapture extends Activity implements Callback,
 
 	private void initView() {
 
-		addButton = (Button) findViewById(R.id.add_button);
-		deviceName = (EditText) findViewById(R.id.bind_devices_name);
 		title = (TextView) findViewById(R.id.activity_top_title);
-		addDevices = (TextView) findViewById(R.id.add_devices);
-		addDevices.setVisibility(View.VISIBLE);
+//		addDevices.setVisibility(View.VISIBLE);
 		if (type.equalsIgnoreCase("blood_presure")) {
 			title.setText("ÃÌº”—™—πº∆");
 		} else
@@ -143,9 +138,7 @@ public class MipcaActivityCapture extends Activity implements Callback,
 	}
 
 	private void initLisenter() {
-		addButton.setOnClickListener(this);
 		title.setOnClickListener(this);
-		addDevices.setOnClickListener(this);
 
 	}
 
@@ -153,20 +146,20 @@ public class MipcaActivityCapture extends Activity implements Callback,
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.add_button:
-			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
-				new WebServiceUtils(this, mmHandler).sendExecuteNo(
-						new String[] {
-								SharePrefenceUtils
-										.getAccount(MipcaActivityCapture.this),
-								type, deviceName.getText().toString().trim() },
-						WebServiceParmas.BIND_DEVICE,
-						WebServiceParmas.HTTP_POST);
-			} else {
-				AndroidUtils.showToast(this, "«ÎÃÓ–¥…Ë±∏±‡¬Î");
-			}
-
-			break;
+//		case R.id.add_button:
+//			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
+//				new WebServiceUtils(this, mmHandler).sendExecuteNo(
+//						new String[] {
+//								SharePrefenceUtils
+//										.getAccount(MipcaActivityCapture.this),
+//								type, deviceName.getText().toString().trim() },
+//						WebServiceParmas.BIND_DEVICE,
+//						WebServiceParmas.HTTP_POST);
+//			} else {
+//				AndroidUtils.showToast(this, "«ÎÃÓ–¥…Ë±∏±‡¬Î");
+//			}
+//
+//			break;
 		case R.id.activity_top_title:
 			finish();
 			break;

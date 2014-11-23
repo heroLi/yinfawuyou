@@ -19,6 +19,7 @@ import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
+import com.yifa.health_manage.util.YhyyUtil;
 
 /**
  * 找回密码
@@ -73,7 +74,16 @@ public class FindPasswordActivity extends Activity {
 		nameEdit = (EditText) findViewById(R.id.login_edit_name);
 		nextButton = (Button) findViewById(R.id.register_btn_no);
 		title = (TextView) findViewById(R.id.activity_top_title);
+		nameEdit.setHint("请输入邮箱");
 		title.setText("找回密码");
+		title.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+				
+			}
+		});
 	}
 
 	@Override
@@ -90,7 +100,10 @@ public class FindPasswordActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if (nameEdit.getText().toString().trim().equalsIgnoreCase("")) {
-					AndroidUtils.showToast(FindPasswordActivity.this, "账号不能为空");
+					AndroidUtils.showToast(FindPasswordActivity.this, "邮箱不能为空");
+					return;
+				}else if(!YhyyUtil.isEmail(nameEdit.getText().toString().trim())){
+					AndroidUtils.showToast(FindPasswordActivity.this, "邮箱格式不正确");
 					return;
 				}
 				SharePrefenceUtils.saveAccount(FindPasswordActivity.this,

@@ -1,4 +1,4 @@
- package com.yifa.health_manage.fragment;
+package com.yifa.health_manage.fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.yifa.health_manage.AboutUsActivity;
 import com.yifa.health_manage.ChangePasswordActivity;
 import com.yifa.health_manage.DeviceListActivity;
 import com.yifa.health_manage.FrontPagerWebactivity;
@@ -40,9 +41,11 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private EditText nameEdit, briEdit, heightEdit, weightEdit, yaoEdit;
 
-	private ImageView userPhoto;
+	private ImageView userPhoto, image1, image2, image3, image4, image5,
+			image6;
 
-	private LinearLayout blood_p, blood_s, changeAccount, feedBack, verGengxin;
+	private LinearLayout blood_p, blood_s, changeAccount, feedBack, verGengxin,
+			about;
 
 	private RelativeLayout changePass;
 
@@ -84,11 +87,18 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private void initView(View view) {
 		userPhoto = (ImageView) view.findViewById(R.id.user_photo);
+		image1 = (ImageView) view.findViewById(R.id.user_blood_p_image);
+		image2 = (ImageView) view.findViewById(R.id.iamge2);
+		image3 = (ImageView) view.findViewById(R.id.iamge3);
+		image4 = (ImageView) view.findViewById(R.id.feedBack_iamge);
+		image5 = (ImageView) view.findViewById(R.id.ver_gengxin_image);
+		image6 = (ImageView) view.findViewById(R.id.about_us_iamge);
 		blood_p = (LinearLayout) view.findViewById(R.id.user_blood_p);
 		feedBack = (LinearLayout) view.findViewById(R.id.feedBack);
 		verGengxin = (LinearLayout) view.findViewById(R.id.ver_gengxin);
 		changeAccount = (LinearLayout) view.findViewById(R.id.change_acconut);
 		blood_s = (LinearLayout) view.findViewById(R.id.user_blood_s);
+		about = (LinearLayout) view.findViewById(R.id.about_us);
 		userAccount = (TextView) view.findViewById(R.id.user_name_text);
 		changePass = (RelativeLayout) view.findViewById(R.id.user_account_pass);
 		outButton = (Button) view.findViewById(R.id.user_out_button);
@@ -97,6 +107,7 @@ public class UserFragment extends Fragment implements OnClickListener {
 
 	private void initListener() {
 		blood_p.setOnClickListener(this);
+		about.setOnClickListener(this);
 		feedBack.setOnClickListener(this);
 		verGengxin.setOnClickListener(this);
 		changePass.setOnClickListener(this);
@@ -137,16 +148,19 @@ public class UserFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.user_blood_p:
+			image1.setPressed(true);
 			Intent intent = new Intent(getActivity(), DeviceListActivity.class);
 			intent.putExtra("type", "blood_presure");
 			startActivity(intent);
 			break;
 		case R.id.user_blood_s:
+			image2.setPressed(true);
 			Intent intent2 = new Intent(getActivity(), DeviceListActivity.class);
 			intent2.putExtra("type", "blood_glucose");
 			startActivity(intent2);
 			break;
 		case R.id.user_account_pass:
+			image3.setPressed(true);
 			startActivity(new Intent(getActivity(),
 					ChangePasswordActivity.class));
 			break;
@@ -158,6 +172,7 @@ public class UserFragment extends Fragment implements OnClickListener {
 			getActivity().finish();
 			break;
 		case R.id.feedBack:
+			image4.setPressed(true);
 			Intent intent1 = new Intent(getActivity(),
 					FrontPagerWebactivity.class);
 			intent1.putExtra("url",
@@ -165,11 +180,15 @@ public class UserFragment extends Fragment implements OnClickListener {
 			startActivity(intent1);
 			break;
 		case R.id.ver_gengxin:
-
+			image5.setPressed(true);
 			new WebServiceUtils(getActivity(), handler).sendExecute(
 					new String[] {}, WebServiceParmas.VEN_CODE,
 					WebServiceParmas.HTTP_POST, "加载中...");
 
+			break;
+		case R.id.about_us:
+			image6.setPressed(true);
+			startActivity(new Intent(getActivity(), AboutUsActivity.class));
 			break;
 
 		default:

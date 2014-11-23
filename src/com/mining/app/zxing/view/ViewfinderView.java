@@ -199,7 +199,7 @@ public final class ViewfinderView extends View {
 					null, lineRect, paint);
 
 			// »­É¨Ãè¿òÏÂÃæµÄ×Ö
-			paint.setColor(Color.WHITE);
+			paint.setColor(Color.parseColor("#929292"));
 			paint.setTextSize(TEXT_SIZE * density);
 			paint.setAlpha(0x40);
 			paint.setTypeface(Typeface.create("System", Typeface.BOLD));

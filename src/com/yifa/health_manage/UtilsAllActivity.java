@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 	private int brisday;
 
 	private Button okButton;
+
+	private LinearLayout allLayout, nameLayout, itemlayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,9 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 		weightEdit = (EditText) findViewById(R.id.user_wight);
 		yaoEdit = (EditText) findViewById(R.id.user_yaowei);
 		okButton = (Button) findViewById(R.id.register_btn_next);
+		allLayout = (LinearLayout) findViewById(R.id.allLayout);
+		nameLayout = (LinearLayout) findViewById(R.id.namelayout);
+		itemlayout = (LinearLayout) findViewById(R.id.itemLayout);
 
 		text1 = (TextView) findViewById(R.id.text1);
 		text2 = (TextView) findViewById(R.id.text2);
@@ -129,35 +135,43 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 
 			if (isCheck()) {
 				initDate();
+				String meass = "";
+				itemlayout.setVisibility(View.VISIBLE);
+				switch (type) {
+				case type0:
+					meass = getObesityInt() + "BMI";
+					nameLayout.setVisibility(View.VISIBLE);
+					break;
+				case type1:
+					nameLayout.setVisibility(View.VISIBLE);
+					meass = getObesity();
+					break;
+				case type2:
+					nameLayout.setVisibility(View.VISIBLE);
+					meass = getWeight();
+					break;
+				case type3:
+					nameLayout.setVisibility(View.VISIBLE);
+					meass = getSportHeart();
+					break;
+				case type4:
+					nameLayout.setVisibility(View.VISIBLE);
+					meass = getHotValue();
+					break;
+				case type5:
+					nameLayout.setVisibility(View.VISIBLE);
+					meass = getJiChuDaiXie() + "BMR";
+					break;
+				case type6:
+					allLayout.setVisibility(View.VISIBLE);
+					setAll(getUserData());
+					break;
+				default:
+					break;
+				}
+				message.setText(meass);
+				break;
 			}
-			String meass="";
-			switch (type) {
-			case type0:
-				meass = getObesityInt() + "BMI";
-				break;
-			case type1:
-				meass = getObesity();
-				break;
-			case type2:
-				meass = getWeight();
-				break;
-			case type3:
-				meass= getSportHeart();
-				break;
-			case type4:
-				meass = getHotValue();
-				break;
-			case type5:
-				meass = getJiChuDaiXie()+"BMR";
-				break;
-			case type6:
-				setAll(getUserData());
-				break;
-			default:
-				break;
-			}
-			message.setText(meass);
-			break;
 		default:
 			break;
 		}
@@ -325,7 +339,14 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 	}
 
 	private boolean isCheck() {
-		if (heightEdit.getText().toString().trim().equalsIgnoreCase("")) {
+		if (briEdit.getText().toString().trim().equalsIgnoreCase("")) {
+			AndroidUtils.showToast(this, "请填写年龄");
+			return false;
+		} else if (Integer.valueOf(briEdit.getText().toString().trim()) <= 0
+				|| Integer.valueOf(briEdit.getText().toString().trim()) > 120) {
+			AndroidUtils.showToast(this, "请正确填写年龄");
+			return false;
+		} else if (heightEdit.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "请填写身高");
 			return false;
 		} else if (weightEdit.getText().toString().trim().equalsIgnoreCase("")) {
@@ -333,13 +354,6 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 			return false;
 		} else if (yaoEdit.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "请填写腰围");
-			return false;
-		} else if (briEdit.getText().toString().trim().equalsIgnoreCase("")) {
-			AndroidUtils.showToast(this, "请填写年龄");
-			return false;
-		} else if (Integer.valueOf(briEdit.getText().toString().trim()) <= 0
-				|| Integer.valueOf(briEdit.getText().toString().trim()) > 120) {
-			AndroidUtils.showToast(this, "请正确填写年龄");
 			return false;
 		}
 		return true;

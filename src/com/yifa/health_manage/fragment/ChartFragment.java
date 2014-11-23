@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -547,15 +549,15 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			// 轴上数字的数量
 			renderer.setXLabels(15);
 			renderer.setYLabels(0);
-			
-//			renderer.addXTextLabel(1, "1");
-//			renderer.addXTextLabel(2, "2");
-//			renderer.addXTextLabel(3, "3");
-//			renderer.addXTextLabel(4, "4");
-//			renderer.addXTextLabel(5, "5");
-//			renderer.addXTextLabel(6, "6");
-//			renderer.addXTextLabel(7, "7");
-			
+
+			// renderer.addXTextLabel(1, "1");
+			// renderer.addXTextLabel(2, "2");
+			// renderer.addXTextLabel(3, "3");
+			// renderer.addXTextLabel(4, "4");
+			// renderer.addXTextLabel(5, "5");
+			// renderer.addXTextLabel(6, "6");
+			// renderer.addXTextLabel(7, "7");
+
 			renderer.setPanLimits(new double[] { 0, 31, 2, 12 });
 			break;
 		case 2:
@@ -678,7 +680,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		Calendar calendar = Calendar.getInstance();
 		DateFormat dateFormat = new DateFormat();
 
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy");
 		try {
 			switch (v.getId()) {
@@ -688,18 +690,18 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
 							.getTime());
 					calendar.add(Calendar.DATE, -1);
-					startTime = (String) dateFormat.format("yyyy-MM-dd",
+					startTime = (String) dateFormat.format("yyyy.MM.dd",
 							calendar);
 					calendar.add(Calendar.DATE, -6);
 					endTime = startTime;
-					startTime = (String) dateFormat.format("yyyy-MM-dd",
+					startTime = (String) dateFormat.format("yyyy.MM.dd",
 							calendar);
 					break;
 				case 1:
 					calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
 							.getTime());
 					calendar.add(Calendar.DATE, -1);
-					startTime = (String) dateFormat.format("yyyy-MM-dd",
+					startTime = (String) dateFormat.format("yyyy.MM.dd",
 							calendar);
 					calendar.add(Calendar.DATE, 1);
 					calendar.add(Calendar.MONTH, -1);
@@ -707,10 +709,10 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					// startTime = (String) dateFormat.format("yyyy-MM-dd",
 					// calendar);
 					int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-					startTime = (String) dateFormat.format("yyyy-MM", calendar)
-							+ "-" + 01;
-					endTime = (String) dateFormat.format("yyyy-MM", calendar)
-							+ "-" + day;
+					startTime = (String) dateFormat.format("yyyy.MM", calendar)
+							+ "." + 01;
+					endTime = (String) dateFormat.format("yyyy.MM", calendar)
+							+ "." + day;
 
 					break;
 				case 2:
@@ -727,11 +729,13 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					break;
 				}
 				blood_time.setText(endTime);
+				String start = startTime.replace(".", "-");
+				String end = endTime.replace(".", "-");
 				new WebServiceUtils(getActivity(), mHandler).sendExecute(
 						new String[] {
 								SharePrefenceUtils.getAccount(getActivity()),
 								deviceType, device_sn, relative, timeType,
-								startTime, endTime },
+								start, end },
 						WebServiceParmas.GET_BLOOD_DATA,
 						WebServiceParmas.HTTP_POST, "加载中...");
 				break;
@@ -743,25 +747,25 @@ public class ChartFragment extends Fragment implements OnClickListener {
 							.getTime());
 					calendar.add(Calendar.DATE, 1);
 					endTime = (String) dateFormat
-							.format("yyyy-MM-dd", calendar);
+							.format("yyyy.MM.dd", calendar);
 					calendar.add(Calendar.DATE, 6);
 					startTime = endTime;
 					endTime = (String) dateFormat
-							.format("yyyy-MM-dd", calendar);
+							.format("yyyy.MM.dd", calendar);
 					break;
 				case 1:
 					calendar.setTimeInMillis(simpleDateFormat.parse(endTime)
 							.getTime());
 					calendar.add(Calendar.DATE, 1);
 					endTime = (String) dateFormat
-							.format("yyyy-MM-dd", calendar);
+							.format("yyyy.MM.dd", calendar);
 					calendar.add(Calendar.DATE, -1);
 					calendar.add(Calendar.MONTH, 1);
 					int day = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-					startTime = (String) dateFormat.format("yyyy-MM", calendar)
-							+ "-" + 01;
-					endTime = (String) dateFormat.format("yyyy-MM", calendar)
-							+ "-" + day;
+					startTime = (String) dateFormat.format("yyyy.MM", calendar)
+							+ "." + 01;
+					endTime = (String) dateFormat.format("yyyy.MM", calendar)
+							+ "." + day;
 					break;
 				case 2:
 					calendar.setTimeInMillis(simpleDateFormat2.parse(endTime)
@@ -775,11 +779,13 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					break;
 				}
 				blood_time.setText(endTime);
+				String start1 = startTime.replace(".", "-");
+				String end1 = endTime.replace(".", "-");
 				new WebServiceUtils(getActivity(), mHandler).sendExecute(
 						new String[] {
 								SharePrefenceUtils.getAccount(getActivity()),
 								deviceType, device_sn, relative, timeType,
-								startTime, endTime },
+								start1, end1 },
 						WebServiceParmas.GET_BLOOD_DATA,
 						WebServiceParmas.HTTP_POST, "加载中...");
 				break;
@@ -831,10 +837,11 @@ public class ChartFragment extends Fragment implements OnClickListener {
 	public void reflashData(int type2) {
 		this.type = type2;
 		initRequstTime(type);
-
+		String start1 = startTime.replace(".", "-");
+		String end1 = endTime.replace(".", "-");
 		new WebServiceUtils(getActivity(), mHandler).sendExecute(new String[] {
 				SharePrefenceUtils.getAccount(getActivity()), deviceType,
-				device_sn, relative, timeType, startTime, endTime },
+				device_sn, relative, timeType, start1, end1 },
 				WebServiceParmas.GET_BLOOD_DATA, WebServiceParmas.HTTP_POST,
 				"加载中...");
 	}
@@ -845,7 +852,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		case 0:
 			Calendar calendar0 = Calendar.getInstance();
 			SimpleDateFormat simpleDateFormat0 = new SimpleDateFormat(
-					"yyyy-MM-dd");
+					"yyyy.MM.dd");
 			try {
 				calendar0.setTimeInMillis(simpleDateFormat0.parse(startTime)
 						.getTime());
@@ -855,13 +862,13 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			}
 			calendar0.add(Calendar.DAY_OF_WEEK, click - 1);
 			DateFormat dateFormat0 = new DateFormat();
-			String time0 = (String) dateFormat0.format("yyyy-MM-dd", calendar0);
+			String time0 = (String) dateFormat0.format("yyyy.MM.dd", calendar0);
 			blood_time.setText(time0);
 			break;
 		case 1:
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-					"yyyy-MM-dd");
+					"yyyy.MM.dd");
 			try {
 				calendar.setTimeInMillis(simpleDateFormat.parse(startTime)
 						.getTime());
@@ -871,7 +878,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			}
 			calendar.set(Calendar.DAY_OF_MONTH, click);
 			DateFormat dateFormat = new DateFormat();
-			String time = (String) dateFormat.format("yyyy-MM-dd", calendar);
+			String time = (String) dateFormat.format("yyyy.MM.dd", calendar);
 			blood_time.setText(time);
 
 			break;
@@ -887,7 +894,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			}
 			calendar2.set(Calendar.MONTH, click);
 			DateFormat dateFormat2 = new DateFormat();
-			String time2 = (String) dateFormat2.format("yyyy-MM", calendar2);
+			String time2 = (String) dateFormat2.format("yyyy.MM", calendar2);
 			blood_time.setText(time2);
 			break;
 
@@ -1013,5 +1020,14 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				break;
 			}
 		}
+	}
+
+	/** 调用系统分享功能 */
+	public void shareClient(Context context, String title, String message) {
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain"); // 分享发送的数据类型
+		String msg = message;// 分享的内容
+		shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
+		context.startActivity(Intent.createChooser(shareIntent, title));// 目标应用选择对话框的标题
 	}
 }

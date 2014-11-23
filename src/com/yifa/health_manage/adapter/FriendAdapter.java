@@ -71,7 +71,23 @@ public class FriendAdapter extends BaseAdapter {
 			convertView.setTag(hodler);
 		} else
 			hodler = (ViewHodler) convertView.getTag();
+		switch (position) {
+		case 0:
+			hodler.imagePhoto.setBackgroundResource(R.drawable.father);
+			break;
+		case 1:
+			hodler.imagePhoto.setBackgroundResource(R.drawable.mother);
+			break;
+		case 2:
+			hodler.imagePhoto.setBackgroundResource(R.drawable.father);
+			break;
+		case 3:
+			hodler.imagePhoto.setBackgroundResource(R.drawable.mother);
+			break;
 
+		default:
+			break;
+		}
 		hodler.friend1.setText(mList.get(position).getName());
 		if (!mList.get(position).getImageUrl().equalsIgnoreCase("")) {
 			byte[] b = Base64.decode(mList.get(position).getImageUrl()
@@ -117,7 +133,7 @@ public class FriendAdapter extends BaseAdapter {
 
 		if (map.get(position)) {
 			hodler.iamgeCheck.setBackgroundResource(R.drawable.click_ok);
-		}else{
+		} else {
 			hodler.iamgeCheck.setBackgroundResource(R.drawable.click_no);
 		}
 		return convertView;

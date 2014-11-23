@@ -48,7 +48,7 @@ public class AndroidUtils {
 	 * */
 	@SuppressLint("SimpleDateFormat")
 	public static String getTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		Date data = new Date(System.currentTimeMillis());
 		String time = dateFormat.format(data);
 		return time;
@@ -62,7 +62,7 @@ public class AndroidUtils {
 		Calendar now = Calendar.getInstance();
 		now.setTime(data);
 		now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		String time = dateFormat.format(now.getTime());
 		return time;
 	}
@@ -76,7 +76,7 @@ public class AndroidUtils {
 		Calendar now = Calendar.getInstance();
 		now.setTime(data);
 		now.set(Calendar.DATE, now.get(Calendar.DATE) + day);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		String time = dateFormat.format(now.getTime());
 		return time;
 	}
