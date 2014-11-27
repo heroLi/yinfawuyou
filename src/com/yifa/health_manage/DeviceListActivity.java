@@ -51,6 +51,7 @@ import com.yifa.health_manage.model.DeviceInfo;
 import com.yifa.health_manage.model.DevicesListInfo;
 import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.model.UserInfo;
+import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.MyLoger;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
@@ -476,8 +477,15 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 										new DeviceFriendName());
 							}
 						}
-
-						finish();
+						// finish();
+						new WebServiceUtils(DeviceListActivity.this, mHandler)
+								.sendExecuteNo(
+										new String[] {
+												SharePrefenceUtils
+														.getAccount(DeviceListActivity.this),
+												deviceType },
+										WebServiceParmas.GET_DEVICE_FRIEND,
+										WebServiceParmas.HTTP_POST);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -937,7 +945,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 	}
 
 	private void showDialog() {
-		final Dialog dialog = new Dialog(this,R.style.ThemeDialog);
+		final Dialog dialog = new Dialog(this, R.style.ThemeDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view = LayoutInflater.from(this).inflate(R.layout.dialog_image,
 				null);
@@ -992,8 +1000,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 		if (type.equalsIgnoreCase("heart_rate")) {
 			type = "blood_presure";
 		}
-		List<UserInfo> agoList = dbManager.quaryAll(type);
-		dialog = new Dialog(DeviceListActivity.this,R.style.ThemeDialog);
+		final List<UserInfo> agoList = dbManager.quaryAll(type);
+		dialog = new Dialog(DeviceListActivity.this, R.style.ThemeDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.dialog_devices, null, false);
@@ -1002,14 +1010,14 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 		TextView autoAdd = (TextView) view.findViewById(R.id.auto);
 		TextView handAdd = (TextView) view.findViewById(R.id.hand);
 		TextView deletebutton = (TextView) view.findViewById(R.id.delete);
-		if (agoList.size() > 2) {
-			autoAdd.setEnabled(false);
-			handAdd.setEnabled(false);
-		}
 		autoAdd.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				if (agoList.size() > 2) {
+					AndroidUtils.showToast(DeviceListActivity.this, "最多绑定2个设备");
+					return;
+				}
 				Intent intent = new Intent(DeviceListActivity.this,
 						MipcaActivityCapture.class);
 				// Intent intent = new Intent(this, CaptureActivity.class);
@@ -1022,6 +1030,10 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
+				if (agoList.size() > 2) {
+					AndroidUtils.showToast(DeviceListActivity.this, "最多绑定2个设备");
+					return;
+				}
 				Intent resultIntent = new Intent(DeviceListActivity.this,
 						AddDeviceActivity.class);
 				resultIntent.putExtra("deviceType", deviceType);

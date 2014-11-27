@@ -42,6 +42,19 @@
             android:text="@string/about_us"
             android:textColor="#363636"
             android:textSize="15sp" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dp"
+            android:layout_gravity="center_horizontal"
+            android:text="银发无忧售后热线：\n400-673-228 按2键"
+            android:textColor="#363636"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

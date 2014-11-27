@@ -138,10 +138,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			AndroidUtils.showToast(this, "两次密码不一致");
 			return false;
 		}
-		if (!YhyyUtil.isMobileNo(nameEdit.getText().toString().trim())) {
-			AndroidUtils.showToast(this, "请输入正确的手机号");
-			return false;
-		}
 		return true;
 	}
 }
