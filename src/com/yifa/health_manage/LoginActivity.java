@@ -112,10 +112,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 			nameEdit.setText(SharePrefenceUtils.getAccount(this));
 			CharSequence text = nameEdit.getText().toString().trim();
 			nameEdit.setSelection(text.length());
-		}
+		} 
 		if (!SharePrefenceUtils.getPassword(this).equalsIgnoreCase("")) {
 			passEdit.setText(SharePrefenceUtils.getPassword(this));
-		}
+		} 
 		title.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 	}
 

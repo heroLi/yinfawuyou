@@ -44,6 +44,7 @@ import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.DeviceInfo;
 import com.yifa.health_manage.model.DevicesListInfo;
 import com.yifa.health_manage.model.UserInfo;
+import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.MyLoger;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
@@ -77,8 +78,8 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 	private DevicesListInfo listnew = null;
 
 	private ChartFragment chartFragment = null;
-	
-	private RadioButton button1,button2,button3;
+
+	private RadioButton button1, button2, button3;
 
 	private int type = 0;
 
@@ -105,7 +106,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 				getSupportFragmentManager().beginTransaction()
 						.add(R.id.chart_layout, chartFragment).commit();
 				if (listnew == null || listnew.getData().size() <= 0) {
-
+					AndroidUtils.showToast(ChartActivity.this, "请添加用户设备");
 					return;
 				}
 				if (listnew.getData().get(0).getRelative() == null
@@ -204,21 +205,24 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {
 			title.setText("血糖");
 			type = 1;
-			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_selelct_xuetang);
+			ColorStateList colorStateList = getResources().getColorStateList(
+					R.drawable.text_selelct_xuetang);
 			button1.setTextColor(colorStateList);
 			button2.setTextColor(colorStateList);
 			button3.setTextColor(colorStateList);
-			
+
 		} else if (deviceType.equalsIgnoreCase("blood_presure")) {
 			title.setText("血压");
-			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_select_xueya);
+			ColorStateList colorStateList = getResources().getColorStateList(
+					R.drawable.text_select_xueya);
 			button1.setTextColor(colorStateList);
 			button2.setTextColor(colorStateList);
 			button3.setTextColor(colorStateList);
 			type = 0;
 		} else {
 			title.setText("心率");
-			ColorStateList colorStateList = getResources().getColorStateList(R.drawable.text_select_xinlv);
+			ColorStateList colorStateList = getResources().getColorStateList(
+					R.drawable.text_select_xinlv);
 			button1.setTextColor(colorStateList);
 			button2.setTextColor(colorStateList);
 			button3.setTextColor(colorStateList);
@@ -272,8 +276,12 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 			type = "blood_presure";
 		}
 		List<UserInfo> agoList = dbManager.quaryAll(type);
+		if (agoList.size() <= 0) {
+			AndroidUtils.showToast(ChartActivity.this, "请添加用户设备");
+			return;
+		}
 		loger.d("showDialog  " + agoList.size());
-		dialog = new Dialog(this,R.style.ThemeDialog);
+		dialog = new Dialog(this, R.style.ThemeDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,
 				null);

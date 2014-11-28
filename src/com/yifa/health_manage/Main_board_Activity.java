@@ -1,9 +1,9 @@
 package com.yifa.health_manage;
 
 import net.tsz.afinal.FinalBitmap;
-import android.graphics.BitmapFactory;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.RadioGroup;
@@ -13,7 +13,6 @@ import com.yifa.health_manage.fragment.ProductFragment;
 import com.yifa.health_manage.fragment.StartFragment;
 import com.yifa.health_manage.fragment.UserFragment;
 import com.yifa.health_manage.fragment.UtilsFragment;
-import com.yifa.health_manage.util.AndroidUtils;
 
 public class Main_board_Activity extends FragmentActivity implements
 		OnCheckedChangeListener {
@@ -88,21 +87,42 @@ public class Main_board_Activity extends FragmentActivity implements
 
 	@Override
 	public void onBackPressed() {
-		if (!isOut) {
-			AndroidUtils.showToast(this, "再按一次退出程序");
-			isOut = true;
+//		if (!isOut) {
+//			AndroidUtils.showToast(this, "再按一次退出程序");
+//			isOut = true;
+//
+//			new Handler().postDelayed(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					isOut = false;
+//
+//				}
+//			}, 2000);
+//		} else {
+//			finish();
+//		}
+		
+		new AlertDialog.Builder(this)
+		.setTitle("温馨提示：您确定退出此程序吗？")
+		.setPositiveButton("确定",
+				new DialogInterface.OnClickListener() {
 
-			new Handler().postDelayed(new Runnable() {
-
-				@Override
-				public void run() {
-					isOut = false;
-
-				}
-			}, 2000);
-		} else {
-			finish();
-		}
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						dialog.dismiss();
+						Main_board_Activity.this.finish();
+					}
+				})
+		.setNegativeButton("取消",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog,
+							int which) {
+						dialog.dismiss();
+					}
+				}).show();
 	}
 
 	private void showFragment(Fragment from, Fragment to) {

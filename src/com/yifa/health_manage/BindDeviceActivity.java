@@ -154,7 +154,6 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.register_btn_next:
-
 			new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
 					name.trim(), pass.trim(), email.trim() },
 					WebServiceParmas.REGISTER, WebServiceParmas.HTTP_POST);
@@ -175,12 +174,15 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 		case R.id.bind_blood_glucose:
 			type = "blood_glucose";
 			isBind = true;
+			deviceName.setEnabled(true);
 			break;
 		case R.id.bind_blood_presure:
 			type = "blood_presure";
 			isBind = true;
+			deviceName.setEnabled(true);
 			break;
 		case R.id.bind_no:
+			deviceName.setEnabled(false);
 			isBind = false;
 			break;
 

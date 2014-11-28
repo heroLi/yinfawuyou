@@ -65,7 +65,7 @@
                     android:hint="@string/login_name_ps"
                     android:textColor="@color/text_gray"
                     android:textColorHint="@color/text_hint"
-                    android:textCursorDrawable="@color/text_black"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
                     android:textSize="@dimen/text_small" />
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                     android:password="true"
                     android:textColor="@color/text_gray"
                     android:textColorHint="@color/text_hint"
-                    android:textCursorDrawable="@color/text_black"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
                     android:textSize="@dimen/text_small" />
             </LinearLayout>
         </LinearLayout>

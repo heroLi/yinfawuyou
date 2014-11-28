@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -17,6 +18,8 @@ public class MyLinearLayout extends View implements Runnable {
 	private Bitmap needleBm;
 	private int valuse = 0;
 	private Bitmap oilBm;
+	
+	private Rect mImageRect;
 
 	public MyLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -38,7 +41,7 @@ public class MyLinearLayout extends View implements Runnable {
 
 	private void init() {
 		matrix = new Matrix();
-
+		mImageRect = new Rect();
 		needleBm = BitmapFactory.decodeResource(getResources(), R.drawable.pan);
 		oilBm = BitmapFactory.decodeResource(getResources(),
 				R.drawable.xinlv_group);

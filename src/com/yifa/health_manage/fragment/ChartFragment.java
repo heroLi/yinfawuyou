@@ -149,6 +149,8 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				if (startTime.equalsIgnoreCase(endTime) && type == 2) {
 					time_title.setText(startTime);
 				}
+				blood_time.setText(startTime);
+				blood_text.setText("0");
 				break;
 
 			default:

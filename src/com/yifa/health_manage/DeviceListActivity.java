@@ -130,6 +130,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 					// Map<String, UserInfo> maps = SharePrefenceUtils
 					// .getUsetInfoList(DeviceListActivity.this);
 					if (listnew == null || listnew.getData().size() <= 0) {
+						AndroidUtils.showToast(DeviceListActivity.this, "请添加用户设备");
 						addDevice.setVisibility(View.VISIBLE);
 						layout1.setVisibility(View.GONE);
 						layout2.setVisibility(View.GONE);
