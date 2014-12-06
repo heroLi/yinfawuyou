@@ -34,7 +34,7 @@ public class FindPasswordActivity extends Activity {
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
-			if (msg.obj.toString().equalsIgnoreCase("")) {
+			if (msg.what==-1) {
 				return;
 			}
 			JSONObject jsonObject;

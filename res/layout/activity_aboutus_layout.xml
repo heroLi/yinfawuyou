@@ -52,7 +52,7 @@
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="3dp"
             android:layout_gravity="center_horizontal"
-            android:text="银发无忧售后热线：\n400-673-228 按2键"
+            android:text="银发无忧售后热线：\n400-673-2288 按2键"
             android:textColor="#363636"
             android:textSize="15sp" />
     </LinearLayout>

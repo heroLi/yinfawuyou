@@ -106,6 +106,11 @@ public class SetNewPasswordActivity extends Activity {
 			AndroidUtils.showToast(this, "密码不能为空");
 			return false;
 		}
+		if (passEdit.getText().toString().trim().length() < 6
+				|| passEdit.getText().toString().trim().length() > 30) {
+			AndroidUtils.showToast(this, "密码必须为6-30位");
+			return false;
+		}
 		if (!passEdit.getText().toString().trim()
 				.equalsIgnoreCase(passTwoEdit.getText().toString().trim())) {
 			AndroidUtils.showToast(this, "两次密码不一致");

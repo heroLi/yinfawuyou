@@ -112,9 +112,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
-			loger.d(msg.obj.toString());
 			switch (msg.what) {
 			case WebServiceParmas.GET_BLOOD_DATA:
+				loger.d(msg.obj.toString());
 				JSONObject jsonObject;
 				try {
 					jsonObject = new JSONObject(msg.obj.toString());
@@ -152,7 +152,9 @@ public class ChartFragment extends Fragment implements OnClickListener {
 				blood_time.setText(startTime);
 				blood_text.setText("0");
 				break;
-
+			case -1:
+				AndroidUtils.showToast(getActivity(), "请连接网络");
+				break;
 			default:
 				break;
 			}
@@ -522,8 +524,10 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		renderer.setYLabelsColor(0, Color.parseColor("#ffffff"));
 
 		renderer.setLegendHeight(20);
-		renderer.setYLabelsAlign(Paint.Align.RIGHT);
-		renderer.setYAxisAlign(Paint.Align.LEFT, 0);
+		// renderer.setYLabelsAlign(Paint.Align.RIGHT);
+		// renderer.setYAxisAlign(Paint.Align.LEFT, 0);
+		renderer.setYLabelsAlign(Paint.Align.RIGHT);// 右对齐
+		renderer.setXLabelsAlign(Paint.Align.RIGHT);
 
 		renderer.setYTitle("mm\nhg");
 		renderer.setXTitle("");
@@ -546,21 +550,24 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			renderer.setPanLimits(new double[] { 0, 8, 2, 12 });
 			break;
 		case 1:
-			renderer.setXAxisMin(0.5);
-			renderer.setXAxisMax(15.5);
+			renderer.setXAxisMin(0);
+			renderer.setXAxisMax(15);
 			// 轴上数字的数量
-			renderer.setXLabels(15);
+			renderer.setXLabels(0);
 			renderer.setYLabels(0);
+//
+//			renderer.addXTextLabel(1, "1");
+//			renderer.addXTextLabel(2, "2");
+//			renderer.addXTextLabel(3, "3");
+//			renderer.addXTextLabel(4, "4");
+//			renderer.addXTextLabel(5, "5");
+//			renderer.addXTextLabel(6, "6");
+//			renderer.addXTextLabel(7, "7");
 
-			// renderer.addXTextLabel(1, "1");
-			// renderer.addXTextLabel(2, "2");
-			// renderer.addXTextLabel(3, "3");
-			// renderer.addXTextLabel(4, "4");
-			// renderer.addXTextLabel(5, "5");
-			// renderer.addXTextLabel(6, "6");
-			// renderer.addXTextLabel(7, "7");
-
-			renderer.setPanLimits(new double[] { 0, 31, 2, 12 });
+			for (int i = 1; i < 31; i++) {
+				renderer.addXTextLabel(i, i + "");
+			}
+			renderer.setPanLimits(new double[] { 0, 30.5, 2, 12 });
 			break;
 		case 2:
 			renderer.setXLabels(0);
@@ -631,7 +638,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		renderer.setShowGrid(true);
 		// renderer.setShowAxes(false);
 		renderer.setPanEnabled(true); // 图表是否可以移动
-		renderer.setZoomEnabled(false); // 图表是否可以缩放
+		// renderer.setZoomEnabled(false); // 图表是否可以缩放
 
 		renderer.setZoomEnabled(false, false);
 		renderer.setZoomLimits(new double[] { 0, 0, 0, 0 });
@@ -737,8 +744,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						new String[] {
 								SharePrefenceUtils.getAccount(getActivity()),
 								deviceType, device_sn, relative, timeType,
-								start, end },
-						WebServiceParmas.GET_BLOOD_DATA,
+								start, end }, WebServiceParmas.GET_BLOOD_DATA,
 						WebServiceParmas.HTTP_POST, "加载中...");
 				break;
 			case R.id.chart_right:
