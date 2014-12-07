@@ -56,7 +56,12 @@ public class MyLinearLayout extends View implements Runnable {
 		canvas.drawBitmap(oilBm, 0, 0, null);
 
 		matrix.preTranslate(0, oilBm.getHeight() - needleBm.getHeight() - 3);
-		matrix.preRotate(angel, oilBm.getWidth() / 2-10, needleBm.getHeight()-5);
+		matrix.preRotate(angel, oilBm.getWidth() / 2-20, needleBm.getHeight()-10);
+//		matrix.preRotate(angel, oilBm.getWidth() / 2, needleBm.getHeight());
+		
+//		matrix.preTranslate( oilBm.getWidth() / 2-1,
+//				oilBm.getHeight() / 2 - 2);
+//		matrix.preRotate(angel, needleBm.getWidth()/2, needleBm.getHeight()/6);
 
 		canvas.drawBitmap(needleBm, matrix, null);
 	}
