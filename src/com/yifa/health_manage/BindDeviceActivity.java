@@ -16,6 +16,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.yifa.health_manage.db.DBManager;
+import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.ResultResponse;
 import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;
@@ -37,7 +39,7 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 	private boolean isBind = false;
 
 	private RadioGroup group;
-
+	private DBManager dbManager = null;
 	private String name, pass, email;
 
 	private String type = "blood_presure";
@@ -76,6 +78,20 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 					ResultResponse response = gson.fromJson(
 							jsonObject2.toString(), ResultResponse.class);
 					if (response.isResult()) {
+						if (!SharePrefenceUtils.getAccount(
+								BindDeviceActivity.this).equalsIgnoreCase(name)) {
+							dbManager.deleteAll();
+							SharePrefenceUtils.saveSugarFriendId(
+									BindDeviceActivity.this,
+									new DeviceFriendName());
+							SharePrefenceUtils.savePressureFriendId(
+									BindDeviceActivity.this,
+									new DeviceFriendName());
+						}
+						SharePrefenceUtils.saveAccount(BindDeviceActivity.this,
+								name);
+						SharePrefenceUtils.savePassword(
+								BindDeviceActivity.this, pass);
 						if (isBind) {
 							if (!deviceName.getText().toString().trim()
 									.equalsIgnoreCase("")) {
@@ -118,6 +134,7 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bind_layout);
+		dbManager = new DBManager(this);
 		initView();
 		initIntent();
 		initLisenter();
@@ -190,5 +207,12 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 			break;
 		}
 
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		dbManager.close();
 	}
 }
