@@ -30,7 +30,7 @@ public class Main_board_Activity extends FragmentActivity implements
 		initView();
 		initListener();
 		bitmap = FinalBitmap.create(this);
-		bitmap.configDiskCacheSize(1024);
+//		bitmap.configDiskCacheSize(1024);
 		startFragment = new StartFragment(bitmap);
 		nowFragment = startFragment;
 		getSupportFragmentManager().beginTransaction()

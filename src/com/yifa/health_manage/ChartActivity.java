@@ -106,7 +106,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 				getSupportFragmentManager().beginTransaction()
 						.add(R.id.chart_layout, chartFragment).commit();
 				if (listnew == null || listnew.getData().size() <= 0) {
-					AndroidUtils.showToast(ChartActivity.this, "请添加用户设备");
+					// AndroidUtils.showToast(ChartActivity.this, "请添加用户设备");
 					return;
 				}
 				if (listnew.getData().get(0).getRelative() == null
@@ -276,7 +276,7 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 			type = "blood_presure";
 		}
 		List<UserInfo> agoList = dbManager.quaryAll(type);
-		if (agoList.size() <= 0) {
+		if (agoList == null || agoList.size() <= 0) {
 			AndroidUtils.showToast(ChartActivity.this, "请添加用户设备");
 			return;
 		}
@@ -366,23 +366,62 @@ public class ChartActivity extends FragmentActivity implements OnClickListener,
 			for (UserInfo userInfo : mList) {
 				if (!userInfo.getDevice_sn().equalsIgnoreCase("")
 						&& !userInfo.getFriend_id().equalsIgnoreCase("")) {
-					if (dbManager.quaryId(userInfo.getDevice_sn(),
+					if (dbManager.quaryId(userInfo.getDevice_sn(),deviceType,
 							userInfo.getFriend_id()) == null) {
 						dbManager.insert(deviceType, userInfo.getDevice_sn(),
 								userInfo.getFriend_id(), userInfo);
 					} else {
 						if (!dbManager
-								.quaryId(userInfo.getDevice_sn(),
+								.quaryId(userInfo.getDevice_sn(),deviceType,
 										userInfo.getFriend_id()).getLayoutId()
 								.equalsIgnoreCase(userInfo.getLayoutId())) {
 							dbManager.updateType(userInfo);
+
 						}
 					}
 				}
 			}
 
 		}
+		if (listnew.getData().size() > 0) {
+			dbManager.deleteOther(listnew.getData());
+		} else {
+			dbManager.deleteDeviceType(deviceType);
+		}
 
+		if (deviceType.equalsIgnoreCase("blood_glucose")) {
+			if (!SharePrefenceUtils.getSugarFriendId(ChartActivity.this)
+					.getId().equalsIgnoreCase("")) {
+				if (dbManager.quaryFriendId(deviceType, SharePrefenceUtils
+						.getPressureFriendId(ChartActivity.this).getId()) == null) {
+					listnew.getData()
+							.get(0)
+							.getRelative()
+							.get(0)
+							.setDevice_sn(
+									listnew.getData().get(0).getDevice_sn());
+					SharePrefenceUtils.saveSugarFriendId(ChartActivity.this,
+							listnew.getData().get(0).getRelative().get(0));
+				}
+
+			}
+		} else {
+			if (!SharePrefenceUtils.getPressureFriendId(ChartActivity.this)
+					.getId().equalsIgnoreCase("")) {
+				if (dbManager.quaryFriendId(deviceType, SharePrefenceUtils
+						.getPressureFriendId(ChartActivity.this).getId()) == null) {
+					listnew.getData()
+							.get(0)
+							.getRelative()
+							.get(0)
+							.setDevice_sn(
+									listnew.getData().get(0).getDevice_sn());
+					SharePrefenceUtils.savePressureFriendId(ChartActivity.this,
+							listnew.getData().get(0).getRelative().get(0));
+				}
+
+			}
+		}
 	}
 
 	@Override

@@ -39,8 +39,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -73,9 +75,9 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 	private LinearLayout layout1, layout2;
 
-	private TextView deviceId1, deviceId2, title;
+	private TextView deviceId1, deviceId2, title, friend11, friend1;
 
-	private EditText friend1, friend2, friend11, friend12;
+	private EditText friend2, friend12;
 
 	private CheckBox deviceCheck1, deviceCheck2;
 
@@ -99,6 +101,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 	private String device_id;
 
+	private Dialog dialogName = null;
+
 	private DBManager dbManager = null;
 
 	private DevicesListInfo listnew;
@@ -110,13 +114,32 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 	private List<DeviceInfo> list = new ArrayList<DeviceInfo>();
 
+	private String friendName = "";
+
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			if (msg.obj.toString().equalsIgnoreCase("")) {
+			if (null == msg.obj || msg.obj.toString().equalsIgnoreCase("")) {
 				return;
 			}
 			loger.d(msg.obj.toString());
 			switch (msg.what) {
+			case WebServiceParmas.UPDATE_FRIEND_NAME:
+				if (dialogName != null) {
+					dialogName.dismiss();
+				}
+
+				switch (typeName) {
+				case R.id.device_friend1_name:
+					friend1.setText(friendName);
+					break;
+				case R.id.device1_friend1_name:
+					friend11.setText(friendName);
+					break;
+
+				default:
+					break;
+				}
+				break;
 			case WebServiceParmas.GET_DEVICE_FRIEND:
 				JSONObject jsonObject;
 				try {
@@ -130,7 +153,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 					// Map<String, UserInfo> maps = SharePrefenceUtils
 					// .getUsetInfoList(DeviceListActivity.this);
 					if (listnew == null || listnew.getData().size() <= 0) {
-						AndroidUtils.showToast(DeviceListActivity.this, "请添加用户设备");
+						// AndroidUtils.showToast(DeviceListActivity.this,
+						// "请添加用户设备");
 						addDevice.setVisibility(View.VISIBLE);
 						layout1.setVisibility(View.GONE);
 						layout2.setVisibility(View.GONE);
@@ -203,9 +227,10 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 										"")
 										&& !userInfo.getFriend_id()
 												.equalsIgnoreCase("")) {
-									if (dbManager.quaryId(
-											userInfo.getDevice_sn(),
-											userInfo.getFriend_id()) == null) {
+									if (dbManager
+											.quaryId(userInfo.getDevice_sn(),
+													deviceType,
+													userInfo.getFriend_id()) == null) {
 										dbManager.insert(deviceType,
 												userInfo.getDevice_sn(),
 												userInfo.getFriend_id(),
@@ -214,6 +239,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 										if (!dbManager
 												.quaryId(
 														userInfo.getDevice_sn(),
+														deviceType,
 														userInfo.getFriend_id())
 												.getLayoutId()
 												.equalsIgnoreCase(
@@ -269,8 +295,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 									.getDevice_sn());
 							friend1.setText(listnew.getData().get(0)
 									.getRelative().get(0).getName());
-							friend2.setText(listnew.getData().get(0)
-									.getRelative().get(1).getName());
+							// friend2.setText(listnew.getData().get(0)
+							// .getRelative().get(1).getName());
 							// layout1.setOnLongClickListener(DeviceListActivity.this);
 
 						} else {
@@ -284,9 +310,9 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 						// --------
 						if (listnew.getData().get(0).getRelative().size() == 1) {
 							UserInfo user1 = dbManager.quaryId(listnew
-									.getData().get(0).getDevice_sn(), listnew
-									.getData().get(0).getRelative().get(0)
-									.getId());
+									.getData().get(0).getDevice_sn(),
+									deviceType, listnew.getData().get(0)
+											.getRelative().get(0).getId());
 							if (user1 != null) {
 								if (!user1.getImageUrl().equalsIgnoreCase("")) {
 									byte[] b = Base64.decode(user1
@@ -302,9 +328,9 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 						} else {
 							UserInfo user1 = dbManager.quaryId(listnew
-									.getData().get(0).getDevice_sn(), listnew
-									.getData().get(0).getRelative().get(0)
-									.getId());
+									.getData().get(0).getDevice_sn(),
+									deviceType, listnew.getData().get(0)
+											.getRelative().get(0).getId());
 							if (user1 != null) {
 								if (!user1.getImageUrl().equalsIgnoreCase("")) {
 									byte[] b = Base64.decode(user1
@@ -318,29 +344,29 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 							}
 							friend1.setText(user1.getName());
 
-							UserInfo user2 = dbManager.quaryId(listnew
-									.getData().get(0).getDevice_sn(), listnew
-									.getData().get(0).getRelative().get(1)
-									.getId());
-							if (user2 != null) {
-								if (!user2.getImageUrl().equalsIgnoreCase("")) {
-									byte[] b = Base64.decode(user2
-											.getImageUrl().getBytes(),
-											Base64.DEFAULT);
-									Bitmap bitmap = BitmapFactory
-											.decodeByteArray(b, 0, b.length);
-									if (bitmap != null)
-										friendImage2.setImageBitmap(bitmap);
-								}
-							}
-							friend2.setText(user2.getName());
+							// UserInfo user2 = dbManager.quaryId(listnew
+							// .getData().get(0).getDevice_sn(), listnew
+							// .getData().get(0).getRelative().get(1)
+							// .getId());
+							// if (user2 != null) {
+							// if (!user2.getImageUrl().equalsIgnoreCase("")) {
+							// byte[] b = Base64.decode(user2
+							// .getImageUrl().getBytes(),
+							// Base64.DEFAULT);
+							// Bitmap bitmap = BitmapFactory
+							// .decodeByteArray(b, 0, b.length);
+							// if (bitmap != null)
+							// friendImage2.setImageBitmap(bitmap);
+							// }
+							// }
+							// friend2.setText(user2.getName());
 						}
 						if (listnew.getData().size() == 2) {
 							if (listnew.getData().get(1).getRelative().size() == 1) {
 								UserInfo user1 = dbManager.quaryId(listnew
 										.getData().get(1).getDevice_sn(),
-										listnew.getData().get(1).getRelative()
-												.get(0).getId());
+										deviceType, listnew.getData().get(1)
+												.getRelative().get(0).getId());
 								if (user1 != null) {
 									if (!user1.getImageUrl().equalsIgnoreCase(
 											"")) {
@@ -359,8 +385,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 								UserInfo user1 = dbManager.quaryId(listnew
 										.getData().get(1).getDevice_sn(),
-										listnew.getData().get(1).getRelative()
-												.get(0).getId());
+										deviceType, listnew.getData().get(1)
+												.getRelative().get(0).getId());
 								if (user1 != null) {
 									if (!user1.getImageUrl().equalsIgnoreCase(
 											"")) {
@@ -376,8 +402,8 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 								friend11.setText(user1.getName());
 								UserInfo user2 = dbManager.quaryId(listnew
 										.getData().get(1).getDevice_sn(),
-										listnew.getData().get(1).getRelative()
-												.get(1).getId());
+										deviceType, listnew.getData().get(1)
+												.getRelative().get(1).getId());
 								if (user2 != null) {
 									if (!user2.getImageUrl().equalsIgnoreCase(
 											"")) {
@@ -396,16 +422,19 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 						UserInfo current = null;
 						if (deviceType.equalsIgnoreCase("blood_glucose")) {
-							current = dbManager.quaryId(SharePrefenceUtils
-									.getSugarFriendId(DeviceListActivity.this)
-									.getDevice_sn(), SharePrefenceUtils
-									.getSugarFriendId(DeviceListActivity.this)
-									.getId());
+							current = dbManager.quaryId(
+									SharePrefenceUtils.getSugarFriendId(
+											DeviceListActivity.this)
+											.getDevice_sn(),
+									deviceType,
+									SharePrefenceUtils.getSugarFriendId(
+											DeviceListActivity.this).getId());
 						} else {
 							current = dbManager.quaryId(
 									SharePrefenceUtils.getPressureFriendId(
 											DeviceListActivity.this)
 											.getDevice_sn(),
+									deviceType,
 									SharePrefenceUtils.getPressureFriendId(
 											DeviceListActivity.this).getId());
 						}
@@ -435,6 +464,60 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 							break;
 						}
 
+						if (listnew.getData().size() > 0) {
+							dbManager.deleteOther(listnew.getData());
+						} else {
+							dbManager.deleteDeviceType(deviceType);
+						}
+
+						if (deviceType.equalsIgnoreCase("blood_glucose")) {
+							if (!SharePrefenceUtils
+									.getSugarFriendId(DeviceListActivity.this)
+									.getId().equalsIgnoreCase("")) {
+								if (dbManager.quaryFriendId(
+										deviceType,
+										SharePrefenceUtils.getPressureFriendId(
+												DeviceListActivity.this)
+												.getId()) == null) {
+									listnew.getData()
+											.get(0)
+											.getRelative()
+											.get(0)
+											.setDevice_sn(
+													listnew.getData().get(0)
+															.getDevice_sn());
+									SharePrefenceUtils.saveSugarFriendId(
+											DeviceListActivity.this, listnew
+													.getData().get(0)
+													.getRelative().get(0));
+								}
+
+							}
+						} else {
+							if (!SharePrefenceUtils
+									.getPressureFriendId(
+											DeviceListActivity.this).getId()
+									.equalsIgnoreCase("")) {
+								if (dbManager.quaryFriendId(
+										deviceType,
+										SharePrefenceUtils.getPressureFriendId(
+												DeviceListActivity.this)
+												.getId()) == null) {
+									listnew.getData()
+											.get(0)
+											.getRelative()
+											.get(0)
+											.setDevice_sn(
+													listnew.getData().get(0)
+															.getDevice_sn());
+									SharePrefenceUtils.savePressureFriendId(
+											DeviceListActivity.this, listnew
+													.getData().get(0)
+													.getRelative().get(0));
+								}
+
+							}
+						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -534,11 +617,11 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 						info.get(i)
 								.setName(friend1.getText().toString().trim());
 						break;
-					case 1:
+					case 2:
 						info.get(i)
 								.setName(friend2.getText().toString().trim());
 						break;
-					case 2:
+					case 1:
 						info.get(i).setName(
 								friend11.getText().toString().trim());
 						break;
@@ -571,9 +654,9 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 		title = (TextView) findViewById(R.id.activity_top_title);
 		deviceId1 = (TextView) findViewById(R.id.device_id);
 		deviceId2 = (TextView) findViewById(R.id.device_id2);
-		friend1 = (EditText) findViewById(R.id.device_friend1_name);
+		friend1 = (TextView) findViewById(R.id.device_friend1_name);
 		friend2 = (EditText) findViewById(R.id.device_friend2_name);
-		friend11 = (EditText) findViewById(R.id.device1_friend1_name);
+		friend11 = (TextView) findViewById(R.id.device1_friend1_name);
 		friend12 = (EditText) findViewById(R.id.device2_friend2_name);
 		delete = (Button) findViewById(R.id.commit);
 		deviceCheck1 = (CheckBox) findViewById(R.id.device_check);
@@ -591,20 +674,22 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 		addDevice.setBackgroundResource(R.drawable.list_icon_no);
 
 		friendImage1.setOnClickListener(this);
+		friend1.setOnClickListener(this);
+		friend11.setOnClickListener(this);
 		friendImage2.setOnClickListener(this);
 		friendImage3.setOnClickListener(this);
 		friendImage4.setOnClickListener(this);
 		addDevice.setOnClickListener(this);
 		delete.setOnClickListener(this);
-		friend1.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				friend1.setFocusable(true);
-				friend1.setFocusableInTouchMode(true);
-				return false;
-			}
-		});
+		// friend1.setOnTouchListener(new OnTouchListener() {
+		//
+		// @Override
+		// public boolean onTouch(View v, MotionEvent event) {
+		// friend1.setFocusable(true);
+		// friend1.setFocusableInTouchMode(true);
+		// return false;
+		// }
+		// });
 		friend2.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -614,15 +699,15 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 				return false;
 			}
 		});
-		friend11.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				friend11.setFocusable(true);
-				friend11.setFocusableInTouchMode(true);
-				return false;
-			}
-		});
+		// friend11.setOnTouchListener(new OnTouchListener() {
+		//
+		// @Override
+		// public boolean onTouch(View v, MotionEvent event) {
+		// friend11.setFocusable(true);
+		// friend11.setFocusableInTouchMode(true);
+		// return false;
+		// }
+		// });
 		friend12.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -632,20 +717,20 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 				return false;
 			}
 		});
-		friend1.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				loger.d("friend1------" + hasFocus);
-				loger.d("friend1------" + hasFocus);
-				if (!hasFocus) {
-					if (friend1.getText().toString().trim()
-							.equalsIgnoreCase("")) {
-						friend1.setText(friendName1);
-					}
-				}
-			}
-		});
+		// friend1.setOnFocusChangeListener(new OnFocusChangeListener() {
+		//
+		// @Override
+		// public void onFocusChange(View v, boolean hasFocus) {
+		// loger.d("friend1------" + hasFocus);
+		// loger.d("friend1------" + hasFocus);
+		// if (!hasFocus) {
+		// if (friend1.getText().toString().trim()
+		// .equalsIgnoreCase("")) {
+		// friend1.setText(friendName1);
+		// }
+		// }
+		// }
+		// });
 		friend2.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
@@ -657,17 +742,17 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 				}
 			}
 		});
-		friend11.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (!hasFocus) {
-					if (friend11.toString().trim().equalsIgnoreCase("")) {
-						friend11.setText(friendName3);
-					}
-				}
-			}
-		});
+		// friend11.setOnFocusChangeListener(new OnFocusChangeListener() {
+		//
+		// @Override
+		// public void onFocusChange(View v, boolean hasFocus) {
+		// if (!hasFocus) {
+		// if (friend11.toString().trim().equalsIgnoreCase("")) {
+		// friend11.setText(friendName3);
+		// }
+		// }
+		// }
+		// });
 		friend12.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
@@ -749,28 +834,28 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onBackPressed() {
-		List<UserInfo> info = dbManager.quaryAll(deviceType);
-		for (int i = 0; i < info.size(); i++) {
-			switch (i) {
-			case 0:
-				info.get(i).setName(friend1.getText().toString().trim());
-				break;
-			case 1:
-				info.get(i).setName(friend2.getText().toString().trim());
-				break;
-			case 2:
-				info.get(i).setName(friend11.getText().toString().trim());
-				break;
-			case 3:
-				info.get(i).setName(friend12.getText().toString().trim());
-				break;
-
-			default:
-				break;
-			}
-
-		}
-		dbManager.updateName(info);
+		// List<UserInfo> info = dbManager.quaryAll(deviceType);
+		// for (int i = 0; i < info.size(); i++) {
+		// switch (i) {
+		// case 0:
+		// info.get(i).setName(friend1.getText().toString().trim());
+		// break;
+		// case 2:
+		// info.get(i).setName(friend2.getText().toString().trim());
+		// break;
+		// case 1:
+		// info.get(i).setName(friend11.getText().toString().trim());
+		// break;
+		// case 3:
+		// info.get(i).setName(friend12.getText().toString().trim());
+		// break;
+		//
+		// default:
+		// break;
+		// }
+		//
+		// }
+		// dbManager.updateName(info);
 		finish();
 	}
 
@@ -787,16 +872,17 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 										deviceType, device_id },
 								WebServiceParmas.DELETE_DEVICE,
 								WebServiceParmas.HTTP_POST, "加载中...");
-				if (deviceCheck2.isChecked()) {
-					new WebServiceUtils(DeviceListActivity.this, mHandler)
-							.sendExecute(
-									new String[] {
-											SharePrefenceUtils
-													.getAccount(DeviceListActivity.this),
-											deviceType, device_id },
-									WebServiceParmas.DELETE_DEVICE,
-									WebServiceParmas.HTTP_POST, "加载中...");
-				}
+				// if (deviceCheck2.isChecked()) {
+				// new WebServiceUtils(DeviceListActivity.this, mHandler)
+				// .sendExecute(
+				// new String[] {
+				// SharePrefenceUtils
+				// .getAccount(DeviceListActivity.this),
+				// deviceType, device_id },
+				// WebServiceParmas.DELETE_DEVICE,
+				// WebServiceParmas.HTTP_POST, "加载中...");
+				// }
+				deviceCheck1.setChecked(false);
 			} else if (deviceCheck2.isChecked()) {
 				new WebServiceUtils(DeviceListActivity.this, mHandler)
 						.sendExecute(
@@ -806,6 +892,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 										deviceType, device_id },
 								WebServiceParmas.DELETE_DEVICE,
 								WebServiceParmas.HTTP_POST, "加载中...");
+				deviceCheck2.setChecked(false);
 			}
 
 			break;
@@ -829,12 +916,25 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 			showMenuDialog(deviceType);
 			break;
-
+		case R.id.device_friend1_name:// 修改名字
+			showNameDialog(friend1.getText().toString(),
+					listnew.getData().get(0).getDevice_sn(), listnew.getData()
+							.get(0).getRelative().get(0).getId());
+			typeName = R.id.device_friend1_name;
+			break;
+		case R.id.device1_friend1_name:
+			typeName = R.id.device1_friend1_name;
+			showNameDialog(friend11.getText().toString(), listnew.getData()
+					.get(1).getDevice_sn(), listnew.getData().get(1)
+					.getRelative().get(0).getId());
+			break;
 		default:
 			break;
 		}
 
 	}
+
+	private int typeName = 0;
 
 	/**
 	 * 裁剪图片方法实现
@@ -888,7 +988,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 			case 0:
 				friendImage1.setImageBitmap(photo);
 				userInfo.setName(friend1.getText().toString().trim()
-						.equalsIgnoreCase("") ? "亲友一" : friend1.getText()
+						.equalsIgnoreCase("") ? "爸爸" : friend1.getText()
 						.toString().trim());// 亲友名字
 				userInfo.setDevice_sn(listnew.getData().get(0).getDevice_sn());
 				userInfo.setFriend_id(listnew.getData().get(0).getRelative()
@@ -906,7 +1006,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 			case 2:
 				friendImage3.setImageBitmap(photo);
 				userInfo.setName(friend11.getText().toString().trim()
-						.equalsIgnoreCase("") ? "亲友一" : friend1.getText()
+						.equalsIgnoreCase("") ? "爸爸" : friend1.getText()
 						.toString().trim());// 亲友名字
 				userInfo.setDevice_sn(listnew.getData().get(1).getDevice_sn());
 				userInfo.setFriend_id(listnew.getData().get(1).getRelative()
@@ -989,7 +1089,6 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		dbManager.close();
 	}
@@ -1015,7 +1114,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				if (agoList.size() > 2) {
+				if (agoList.size() >= 2) {
 					AndroidUtils.showToast(DeviceListActivity.this, "最多绑定2个设备");
 					return;
 				}
@@ -1031,7 +1130,7 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				if (agoList.size() > 2) {
+				if (agoList.size() >= 2) {
 					AndroidUtils.showToast(DeviceListActivity.this, "最多绑定2个设备");
 					return;
 				}
@@ -1046,9 +1145,14 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
+				if (agoList.size() <= 0) {
+					AndroidUtils.showToast(DeviceListActivity.this, "请先添加设备");
+					return;
+				}
 				if (isSum == 1) {
 					delete.setVisibility(View.VISIBLE);
 					deviceCheck1.setVisibility(View.VISIBLE);
+					deviceCheck2.setVisibility(View.VISIBLE);
 				} else {
 					delete.setVisibility(View.VISIBLE);
 					deviceCheck1.setVisibility(View.VISIBLE);
@@ -1085,6 +1189,52 @@ public class DeviceListActivity extends Activity implements OnClickListener {
 				dialog.dismiss();
 			}
 		});
-
 	}
+
+	private void showNameDialog(String nameF, final String devicesn,
+			final String deviceid) {
+		dialogName = new Dialog(this, R.style.ThemeDialog);
+		dialogName.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		View view = LayoutInflater.from(this).inflate(R.layout.name_dialog,
+				null, false);
+		LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.MATCH_PARENT);
+
+		layoutParams.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.85);
+		dialogName.setContentView(view, layoutParams);
+		final EditText name = (EditText) view.findViewById(R.id.name);
+		name.setText(nameF);
+		Button cancel = (Button) view.findViewById(R.id.cancel);
+		Button ok = (Button) view.findViewById(R.id.ok);
+		cancel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dialogName.dismiss();
+			}
+		});
+		ok.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (name.getText().toString().trim().equals("")) {
+					Toast.makeText(DeviceListActivity.this, "名字不能为空", 3000)
+							.show();
+				} else {
+					friendName = name.getText().toString().trim();
+					new WebServiceUtils(DeviceListActivity.this, mHandler).sendExecute(
+							new String[] {
+									SharePrefenceUtils
+											.getAccount(DeviceListActivity.this),
+									deviceType, devicesn, deviceid,
+									name.getText().toString() },
+							WebServiceParmas.UPDATE_FRIEND_NAME,
+							WebServiceParmas.HTTP_POST, "加载中...");
+
+				}
+			}
+		});
+		dialogName.show();
+	}
+
 }

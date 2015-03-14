@@ -3,11 +3,12 @@ package com.yifa.health_manage;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.DownloadListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -51,11 +52,17 @@ public class FrontPagerWebactivity extends Activity {
 //		});
 	}
 
-	@SuppressLint("SetJavaScriptEnabled")
+	@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 	private void initWeb() {
 
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setSupportZoom(true);
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setDisplayZoomControls(false);
+//		webView.getSettings().setAllowFileAccessFromFileURLs(true);
+		webView.getSettings().setDatabaseEnabled(true);
+		webView.getSettings().setDomStorageEnabled(true);
+		webView.setDownloadListener(new MyWebViewDownLoadListener());
 		webView.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -71,6 +78,17 @@ public class FrontPagerWebactivity extends Activity {
 		});
 	}
 
+	private class MyWebViewDownLoadListener implements DownloadListener {  
+		  
+        @Override  
+        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,  
+                                    long contentLength) {  
+            Uri uri = Uri.parse(url);  
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);  
+            startActivity(intent);  
+        }  
+  
+    }  
 	@Override
 	protected void onResume() {
 		super.onResume();

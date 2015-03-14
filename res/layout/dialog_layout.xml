@@ -9,8 +9,8 @@
         android:layout_height="fill_parent"
         android:background="@drawable/layout_bg_round"
         android:orientation="vertical"
-        android:paddingBottom="4dp"
-         >
+        android:paddingBottom="4dp" >
+
 
         <RelativeLayout
             android:id="@+id/device_layout"
@@ -27,8 +27,8 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
                 android:text="切换亲友"
-                android:textSize="18sp"
-                android:textColor="@color/app_white" />
+                android:textColor="@color/app_white"
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/device_check"

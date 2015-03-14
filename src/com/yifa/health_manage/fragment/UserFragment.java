@@ -3,6 +3,8 @@ package com.yifa.health_manage.fragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,8 +27,10 @@ import com.google.gson.JsonObject;
 import com.yifa.health_manage.AboutUsActivity;
 import com.yifa.health_manage.ChangePasswordActivity;
 import com.yifa.health_manage.DeviceListActivity;
+import com.yifa.health_manage.FeedActivity;
 import com.yifa.health_manage.FrontPagerWebactivity;
 import com.yifa.health_manage.LoginActivity;
+import com.yifa.health_manage.Main_board_Activity;
 import com.yifa.health_manage.R;
 import com.yifa.health_manage.model.UserInfo;
 import com.yifa.health_manage.util.AndroidUtils;
@@ -58,7 +62,9 @@ public class UserFragment extends Fragment implements OnClickListener {
 			try {
 				JSONObject jsonObject = new JSONObject(msg.obj.toString());
 				String vercode = jsonObject.getString("version");
-
+				if (vercode == null) {
+					return;
+				}
 				if (vercode.equalsIgnoreCase(getResources().getString(
 						R.string.app_ver))) {
 					AndroidUtils.showToast(getActivity(), "已是最新版本");
@@ -67,6 +73,8 @@ public class UserFragment extends Fragment implements OnClickListener {
 							FrontPagerWebactivity.class);
 					intent3.putExtra("url",
 							"http://121.40.172.222/health2/site/app");
+					// intent3.putExtra("url",
+					// "http://121.40.172.222/health2/down/download/27");
 					startActivity(intent3);
 				}
 			} catch (JSONException e) {
@@ -169,14 +177,33 @@ public class UserFragment extends Fragment implements OnClickListener {
 			startActivity(new Intent(getActivity(), LoginActivity.class));
 			break;
 		case R.id.user_out_button:
-			getActivity().finish();
+			new AlertDialog.Builder(getActivity())
+			.setTitle("温馨提示：您确定退出此程序吗？")
+			.setPositiveButton("确定",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							dialog.dismiss();
+							getActivity().finish();
+						}
+					})
+			.setNegativeButton("取消",
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							dialog.dismiss();
+						}
+					}).show();
 			break;
 		case R.id.feedBack:
 			image4.setPressed(true);
 			Intent intent1 = new Intent(getActivity(),
-					FrontPagerWebactivity.class);
-			intent1.putExtra("url",
-					"http://121.40.172.222/health2/site/feedback");
+					FeedActivity.class);
+//			intent1.putExtra("url",
+//					"http://121.40.172.222/health2/site/feedback");
 			startActivity(intent1);
 			break;
 		case R.id.ver_gengxin:

@@ -1,15 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    
     android:background="@color/app_white" >
-    <include layout="@layout/activity_main_top"
-        android:id="@+id/top"/>
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/activity_main_top" />
+
     <LinearLayout
         android:id="@+id/namelayout"
         android:layout_width="match_parent"
-        android:layout_below="@id/top"
         android:layout_height="50dp"
+        android:layout_below="@id/top"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginTop="18dp"
@@ -20,28 +22,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_name"
             android:layout_marginLeft="@dimen/pending_left"
+            android:text="@string/login_name"
             android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/login_edit_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:gravity="right"
-            android:textColor="@color/text_gray"
+            android:layout_height="match_parent"
             android:layout_marginRight="7dp"
+            android:background="#00000000"
+            android:gravity="right|center"
+            android:hint="@string/login_name_ps"
+            android:textColor="@color/text_gray"
             android:textColorHint="@color/text_hint"
-            android:hint="@string/login_name_ps" />
+            android:textCursorDrawable="@drawable/edittext_cursor" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/passwordLayout"
-        android:layout_below="@id/namelayout"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/namelayout"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:background="@drawable/login_middle_bg"
@@ -51,27 +54,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/pending_left"
             android:text="@string/login_email"
-             android:layout_marginLeft="@dimen/pending_left"
-              android:textColor="@color/text_black"
+            android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/login_edit_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:gravity="right"
-            android:textColorHint="@color/text_hint"
-            android:textColor="@color/text_gray"
+            android:layout_height="match_parent"
             android:layout_marginRight="7dp"
-            android:hint="@string/login_email" />
+            android:background="#00000000"
+            android:gravity="right|center"
+            android:hint="@string/login_email"
+            android:textColor="@color/text_gray"
+            android:textColorHint="@color/text_hint"
+            android:textCursorDrawable="@drawable/edittext_cursor" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/passwordLayout2"
-        android:layout_below="@id/passwordLayout"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/passwordLayout"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:background="@drawable/login_middle_bg"
@@ -81,27 +86,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/pending_left"
             android:text="@string/login_pass"
-             android:textColor="@color/text_black"
-             android:layout_marginLeft="@dimen/pending_left"
+            android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/login_edit_pass"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:gravity="right"
-            android:inputType="textPassword"
-            android:textColorHint="@color/text_hint"
+            android:layout_height="match_parent"
             android:layout_marginRight="7dp"
+            android:background="#00000000"
+            android:gravity="right|center"
+            android:hint="@string/login_pass_ps"
+            android:inputType="textPassword"
             android:textColor="@color/text_gray"
-            android:hint="@string/login_pass_ps" />
+            android:textColorHint="@color/text_hint"
+            android:textCursorDrawable="@drawable/edittext_cursor" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/ssss"
         android:layout_width="match_parent"
-        android:layout_below="@id/passwordLayout2"
         android:layout_height="50dp"
+        android:layout_below="@id/passwordLayout2"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:background="@drawable/login_bottom_bg"
@@ -111,57 +119,68 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/pending_left"
             android:text="@string/login_pass_two"
-             android:textColor="@color/text_black"
-             android:layout_marginLeft="@dimen/pending_left"
+            android:textColor="@color/text_black"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/login_edit_password_two"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:gravity="right"
-            android:textColorHint="@color/text_hint"
-            android:textColor="@color/text_gray"
-            android:inputType="textPassword"
+            android:layout_height="match_parent"
             android:layout_marginRight="7dp"
-            android:hint="@string/login_pass_ps" />
+            android:background="#00000000"
+            android:gravity="right|center"
+            android:hint="@string/login_pass_ps"
+            android:inputType="textPassword"
+            android:textColor="@color/text_gray"
+            android:textColorHint="@color/text_hint"
+            android:textCursorDrawable="@drawable/edittext_cursor" />
     </LinearLayout>
-    
+
+
+        <TextView
+            android:id="@+id/register_ps"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center|left"
+            android:layout_below="@id/ssss"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:text="点击下一步即表示您已同意《银发无忧用户协议》"
+            android:textColor="#0170c2" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        >
-        <Button 
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/login_btn_no"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:layout_weight="1"
             android:layout_marginLeft="18dp"
-            android:textColor="@color/app_white"
             android:layout_marginRight="18dp"
-            android:text="@string/button_no"
-            android:textSize="18sp"
+            android:layout_weight="1"
             android:background="@drawable/button_select"
-            />
-        <Button 
-           android:id="@+id/login_btn_next"
+            android:text="@string/button_no"
+            android:textColor="@color/app_white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/login_btn_next"
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:layout_weight="1"
-            android:layout_marginRight="18dp"
             android:layout_marginLeft="18dp"
-            android:textColor="@color/app_white"
-            android:text="@string/button_next"
-            android:textSize="18sp"
+            android:layout_marginRight="18dp"
+            android:layout_weight="1"
             android:background="@drawable/button_select"
-            />
-        
+            android:text="@string/button_next"
+            android:textColor="@color/app_white"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </RelativeLayout>

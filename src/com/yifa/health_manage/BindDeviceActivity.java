@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 import com.yifa.health_manage.db.DBManager;
 import com.yifa.health_manage.model.DeviceFriendName;
 import com.yifa.health_manage.model.ResultResponse;
-import com.yifa.health_manage.util.AndroidUtils;
 import com.yifa.health_manage.util.SharePrefenceUtils;
 import com.yifa.health_manage.util.WebServiceParmas;
 import com.yifa.health_manage.util.WebServiceUtils;
@@ -61,6 +60,7 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 					if (response.isResult()) {
 						startActivity(new Intent(BindDeviceActivity.this,
 								Main_board_Activity.class));
+						setResult(0);
 						finish();
 					}
 				} catch (JSONException e) {
@@ -111,11 +111,14 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 								startActivity(new Intent(
 										BindDeviceActivity.this,
 										Main_board_Activity.class));
+								setResult(0);
+								finish();
 							}
 						} else {
-
 							startActivity(new Intent(BindDeviceActivity.this,
 									Main_board_Activity.class));
+							setResult(0);
+							finish();
 						}
 					}
 				} catch (JSONException e) {
@@ -183,6 +186,16 @@ public class BindDeviceActivity extends Activity implements OnClickListener,
 			break;
 		}
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0 && resultCode == 0) {
+			setResult(0);
+			finish();
+		}
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 	private String[] params;
 	private String titleString = "";
 	private boolean isDialog = false;
-	
+
 	private MyLoger loger = MyLoger.getInstence("WebServiceUtils");
 
 	private ProgressDialog progressDialog = null;
@@ -112,7 +112,7 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			ResultResponse response = gson.fromJson(jsonObject.toString(),
 					ResultResponse.class);
 			if (response.isResult()) {
-			}else{
+			} else {
 				AndroidUtils.showToast(mContext, response.getInfo());
 			}
 		} catch (JSONException e) {
@@ -164,6 +164,12 @@ public class WebServiceUtils extends AsyncTask<String, Integer, Object> {
 			break;
 		case WebServiceParmas.VEN_CODE:
 			obj = WebServiceParmas.getVerCode(httpType, params);
+			break;
+		case WebServiceParmas.FEED_BACK:
+			obj = WebServiceParmas.getFeed(httpType, params);
+			break;
+		case WebServiceParmas.UPDATE_FRIEND_NAME:
+			obj = WebServiceParmas.updateFriendName(httpType, params);
 			break;
 
 		default:

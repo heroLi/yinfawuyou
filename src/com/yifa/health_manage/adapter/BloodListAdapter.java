@@ -1,5 +1,6 @@
 package com.yifa.health_manage.adapter;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import android.content.Context;
@@ -92,47 +93,70 @@ public class BloodListAdapter extends BaseAdapter {
 					Integer.valueOf(mList.get(position).getHigh_value()));
 			holder.data.setText(mList.get(position).getHigh_value() + "/"
 					+ mList.get(position).getLow_value() + "mmHg");
+			holder.level_1.setBackgroundResource(R.drawable.newdata_text_bg_no);;
+			holder.level_2.setBackgroundResource(R.drawable.newdata_text_bg_no);
+			holder.level_3.setBackgroundResource(R.drawable.newdata_text_bg_no);
 		} else if (type == 1) {
 			level = AndroidUtils.getBloodLevel(type,
-					Integer.valueOf(mList.get(position).getValue()));
-			holder.data.setText(mList.get(position).getValue() + "mmol/L");
+					Integer.valueOf(mList.get(position).getValue())/18);
+			DecimalFormat decimalFormat = new DecimalFormat("#.#");
+			
+			holder.data.setText(decimalFormat.format((Double.valueOf(mList.get(position).getValue())/18)) + "mmol/L");
+			holder.level_h.setText("低血糖");
+			holder.level_l.setText("高血糖");
 		} else {
 			level = AndroidUtils.getBloodLevel(type,
 					Integer.valueOf(mList.get(position).getValue()));
 			holder.data.setText(mList.get(position).getValue() + "BPM");
+			holder.level_h.setText("偏快");
+			holder.level_l.setText("偏慢");
 		}
 		holder.time.setText(mList.get(position).getDatetime());
 		Drawable left = mContext.getResources().getDrawable(
 				R.drawable.chart_list_ok);
-		switch (level) {
-		case 0:
-			holder.level.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-		case 1:
-			holder.level_h.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-		case 2:
-			holder.level_l.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-		case 3:
-			holder.level_1.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-		case 4:
-			holder.level_2.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-		case 5:
-			holder.level_3.setCompoundDrawablesWithIntrinsicBounds(left, null,
-					null, null);
-			break;
-
-		default:
-			break;
+		holder.level.setBackgroundResource(R.drawable.newdata_text_bg_no);
+		holder.level_h.setBackgroundResource(R.drawable.newdata_text_bg_no);
+		holder.level_l.setBackgroundResource(R.drawable.newdata_text_bg_no);
+		
+		if(type == 0){
+			switch (level) {
+			case 0:
+				holder.level.setBackgroundResource(R.drawable.newdata_201);
+				break;
+			case 1:
+				holder.level_h.setBackgroundResource(R.drawable.newdata_202);
+				break;
+			case 2:
+				holder.level_l.setBackgroundResource(R.drawable.newdata_203);
+				break;
+			case 3:
+				holder.level_1.setBackgroundResource(R.drawable.newdata_204);
+				break;
+			case 4:
+				holder.level_2.setBackgroundResource(R.drawable.newdata_205);
+				break;
+			case 5:
+				holder.level_3.setBackgroundResource(R.drawable.newdata_206);
+				break;
+			default:
+				break;
+			}
+		}else{
+			switch (level) {
+			case 0:
+				holder.level.setBackgroundResource(R.drawable.newdata_301);
+				break;
+			case 1:
+				holder.level_h.setBackgroundResource(R.drawable.newdata_302);
+				break;
+			case 2:
+				holder.level_l.setBackgroundResource(R.drawable.newdata_303);
+				break;
+			default:
+				break;
+			}
 		}
+		
 
 		return convertView;
 	}

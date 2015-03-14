@@ -29,7 +29,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
 	private EditText nameEdit, emailEdit, passEdit, passTwoEdit;
 
-	private TextView title;
+	private TextView title, registerPS;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -44,8 +44,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					ResultResponse response = gson.fromJson(
 							jsonObject.toString(), ResultResponse.class);
 					if (response.isResult()) {
-						startActivity(new Intent(RegisterActivity.this,
-								BindDeviceActivity.class));
+						startActivityForResult(
+								new Intent(RegisterActivity.this,
+										BindDeviceActivity.class), 0);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -76,13 +77,25 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		passEdit = (EditText) findViewById(R.id.login_edit_pass);
 		passTwoEdit = (EditText) findViewById(R.id.login_edit_password_two);
 		title = (TextView) findViewById(R.id.activity_top_title);
+		registerPS = (TextView) findViewById(R.id.register_ps);
 		title.setText("注册");
 	}
 
 	private void initLisenter() {
 		buttonOk.setOnClickListener(this);
 		buttonNo.setOnClickListener(this);
+		registerPS.setOnClickListener(this);
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0 && resultCode == 0) {
+			setResult(0);
+			finish();
+		}
 	}
 
 	@Override
@@ -97,13 +110,18 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				intent.putExtra("password", passEdit.getText().toString()
 						.trim());
 				intent.putExtra("email", emailEdit.getText().toString().trim());
-				startActivity(intent);
+				startActivityForResult(intent, 0);
 			}
 			break;
 		case R.id.login_btn_no:
 			// startActivity(new Intent(RegisterActivity.this,
 			// RegisterMessageActivity.class));
 			finish();
+			break;
+		case R.id.register_ps:
+			Intent intent = new Intent(this, FrontPagerWebactivity.class);
+			intent.putExtra("url", "http://121.40.172.222/health2/site/protocol");
+			startActivity(intent);
 			break;
 
 		default:
@@ -129,7 +147,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			AndroidUtils.showToast(this, "密码不能为空");
 			return false;
 		}
-		if (passEdit.getText().toString().trim().length()<6||passEdit.getText().toString().trim().length()>30) {
+		if (passEdit.getText().toString().trim().length() < 6
+				|| passEdit.getText().toString().trim().length() > 30) {
 			AndroidUtils.showToast(this, "密码必须为6-30位");
 			return false;
 		}

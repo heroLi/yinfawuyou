@@ -42,51 +42,66 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:layout_margin="2dp"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
                 android:text="理想"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/app_white" />
 
             <TextView
                 android:id="@+id/level2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
+                android:layout_margin="2dp"
                 android:text="正常"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/app_white" />
 
             <TextView
                 android:id="@+id/level_high"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
+                android:layout_margin="2dp"
                 android:text="偏高"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/app_white" />
+
             <TextView
                 android:id="@+id/level_high1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:layout_margin="2dp"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
                 android:text="轻度"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/app_white" />
+
             <TextView
                 android:id="@+id/level_high2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:layout_margin="2dp"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
                 android:text="中度"
-                android:textColor="@android:color/black" /><TextView
+                android:textColor="@color/app_white" />
+
+            <TextView
                 android:id="@+id/level_high3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/chart_list_no"
+                android:layout_margin="2dp"
+                android:background="@drawable/newdata_text_bg_no"
+                android:gravity="center"
                 android:text="高度"
-                android:textColor="@android:color/black" />
-
+                android:textColor="@color/app_white" />
         </LinearLayout>
     </LinearLayout>
 

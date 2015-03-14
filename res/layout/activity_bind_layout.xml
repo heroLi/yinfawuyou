@@ -69,8 +69,10 @@
             android:layout_marginRight="5dp"
             android:background="#00000000"
             android:gravity="right"
+            android:textCursorDrawable="@drawable/edittext_cursor"
             android:enabled="false"
-            android:inputType="number"
+			android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+			android:maxLength="15"
             android:textColorHint="@color/text_hint"
             android:textColor="@color/text_gray"
             android:hint="@string/user_device_num" />

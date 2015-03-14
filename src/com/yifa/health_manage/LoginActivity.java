@@ -130,15 +130,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-
-		// finish();
+	if(requestCode==1&&resultCode==0){
+		finish();
+		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.no_login_name:
-			startActivity(new Intent(this, RegisterActivity.class));
+			startActivityForResult(new Intent(this, RegisterActivity.class),1);
 
 			break;
 		case R.id.login_forget_pass:

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yifa.health_manage"
-    android:versionCode="3"
+    android:versionCode="4"
     android:versionName="@string/app_ver" >
 
     <uses-sdk
-        android:minSdkVersion="12"
+        android:minSdkVersion="10"
         android:targetSdkVersion="14" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -50,6 +50,12 @@
         </activity>
         <activity
             android:name="com.yifa.health_manage.MipcaActivityCapture"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden" 
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.yifa.health_manage.FeedActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden" 
             android:screenOrientation="portrait" >

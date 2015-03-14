@@ -24,6 +24,8 @@ public class WebServiceParmas {
 	public static final int GET_IMAGE_URL = GET_BLOOD_DATA + 1;
 	public static final int NEW_DATA_2 = GET_IMAGE_URL + 1;
 	public static final int VEN_CODE = NEW_DATA_2 + 1;
+	public static final int FEED_BACK = VEN_CODE + 1;
+	public static final int UPDATE_FRIEND_NAME = FEED_BACK + 1;
 
 	// private static final String Url =
 	// "http://112.124.126.43/health/json.php";//demo
@@ -300,6 +302,48 @@ public class WebServiceParmas {
 		JSONObject entity = new JSONObject();
 		try {
 			entity.put("type", "getversion");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		obj = Connection.getConnection(Url, httpType, entity);
+
+		return obj;
+	}
+
+	/**
+	 * 更新版本
+	 **/
+	public static Object getFeed(int httpType, String[] parmas) {
+		Object obj = null;
+		JSONObject entity = new JSONObject();
+		try {
+			entity.put("type", "feedback");
+			entity.put("username", parmas[0]);
+			entity.put("title", parmas[1]);
+			entity.put("context", parmas[2]);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		obj = Connection.getConnection(Url, httpType, entity);
+
+		return obj;
+	}
+
+	/**
+	 * 更新亲友名字
+	 **/
+	public static Object updateFriendName(int httpType, String[] parmas) {
+		Object obj = null;
+		JSONObject entity = new JSONObject();
+		try {
+			entity.put("type", "modify_relative");
+			entity.put("username", parmas[0]);
+			entity.put("device_type", parmas[1]);
+			entity.put("device_sn", parmas[2]);
+			entity.put("relative_id", parmas[3]);
+			entity.put("relative_name", parmas[4]);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

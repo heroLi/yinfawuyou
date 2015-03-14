@@ -61,6 +61,9 @@ public class NewDataActivity extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				if (isFrist) {
+					initData(mData);
+				}
 				if (!SharePrefenceUtils
 						.getPressureFriendId(NewDataActivity.this).getId()
 						.equalsIgnoreCase("")) {
@@ -80,9 +83,7 @@ public class NewDataActivity extends Activity {
 						isFlag = false;
 					}
 				}
-				if (!isFrist) {
-					initData(mData);
-				}
+
 				break;
 			case WebServiceParmas.NEW_DATA_2:
 				if (msg.obj.toString().equalsIgnoreCase("")) {
@@ -109,6 +110,9 @@ public class NewDataActivity extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				if (isFrist) {
+					initData(mData);
+				}
 				if (!SharePrefenceUtils.getSugarFriendId(NewDataActivity.this)
 						.getId().equalsIgnoreCase("")) {
 
@@ -124,12 +128,10 @@ public class NewDataActivity extends Activity {
 														.getId() },
 										WebServiceParmas.NEW_DATA,
 										WebServiceParmas.HTTP_POST);
-						isFlag = false;
+						isFlag = true;
 					}
 				}
-				if (isFrist) {
-					initData(mData);
-				}
+
 				break;
 
 			default:
@@ -219,22 +221,22 @@ public class NewDataActivity extends Activity {
 					Integer.valueOf(mList.get(0).getHigh_value()));
 			switch (level) {
 			case 0:
-				xy1.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy1.setBackgroundResource(R.drawable.newdata_201);
 				break;
 			case 1:
-				xy2.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy2.setBackgroundResource(R.drawable.newdata_202);
 				break;
 			case 2:
-				xy3.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy3.setBackgroundResource(R.drawable.newdata_203);
 				break;
 			case 3:
-				xy4.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy4.setBackgroundResource(R.drawable.newdata_204);
 				break;
 			case 4:
-				xy5.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy5.setBackgroundResource(R.drawable.newdata_205);
 				break;
 			case 5:
-				xy6.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xy6.setBackgroundResource(R.drawable.newdata_206);
 				break;
 			default:
 				break;
@@ -242,18 +244,18 @@ public class NewDataActivity extends Activity {
 		}
 		if (mList.get(1).getDatetime() != null) {
 			data2.setText(mList.get(1).getDatetime());
-			blood_t.setText(mList.get(1).getValue());
+			blood_t.setText(""+(Integer.valueOf(mList.get(1).getValue()) / 18));
 			level = AndroidUtils.getBloodLevel(1,
 					Integer.valueOf(mList.get(1).getValue()));
 			switch (level) {
 			case 0:
-				xt1.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xt1.setBackgroundResource(R.drawable.newdata_301);
 				break;
 			case 1:
-				xt2.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xt2.setBackgroundResource(R.drawable.newdata_302);
 				break;
 			case 2:
-				xt3.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xt3.setBackgroundResource(R.drawable.newdata_303);
 				break;
 			default:
 				break;
@@ -266,13 +268,13 @@ public class NewDataActivity extends Activity {
 					Integer.valueOf(mList.get(2).getValue()));
 			switch (level) {
 			case 0:
-				xl2.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xl2.setBackgroundResource(R.drawable.newdata_101);
 				break;
 			case 1:
-				xl1.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xl1.setBackgroundResource(R.drawable.newdata_102);
 				break;
 			case 2:
-				xl3.setBackgroundResource(R.drawable.newdata_text_bg_ok);
+				xl3.setBackgroundResource(R.drawable.newdata_103);
 				break;
 			default:
 				break;

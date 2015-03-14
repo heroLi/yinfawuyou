@@ -107,7 +107,7 @@
                     android:gravity="center"
                     android:paddingBottom="2dp"
                     android:textColor="@color/text_black"
-                    android:text="100"
+                    android:text="0"
                     android:textSize="@dimen/text_size" />
 
                 <TextView
@@ -328,7 +328,7 @@
                     android:paddingLeft="4dp"
                     android:textColor="@color/app_white"
                     android:paddingRight="4dp"
-                    android:text="可接受" />
+                    android:text="低血糖" />
             </LinearLayout>
 
             <LinearLayout
@@ -346,7 +346,7 @@
                     android:paddingLeft="4dp"
                     android:textColor="@color/app_white"
                     android:paddingRight="4dp"
-                    android:text="不可接受" />
+                    android:text="高血糖" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -439,7 +439,7 @@
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
                     android:textColor="@color/app_white"
-                    android:text="偏低" />
+                    android:text="偏慢" />
             </LinearLayout>
 
             <LinearLayout
@@ -471,7 +471,7 @@
                     android:textColor="@color/app_white"
                     android:background="@drawable/newdata_text_bg_no"
                     android:gravity="center"
-                    android:text="偏高" />
+                    android:text="偏快" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

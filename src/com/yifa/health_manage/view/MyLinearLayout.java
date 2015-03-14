@@ -43,6 +43,7 @@ public class MyLinearLayout extends View implements Runnable {
 		matrix = new Matrix();
 		mImageRect = new Rect();
 		needleBm = BitmapFactory.decodeResource(getResources(), R.drawable.pan);
+		
 		oilBm = BitmapFactory.decodeResource(getResources(),
 				R.drawable.xinlv_group);
 		// new Thread(this).start();
@@ -56,8 +57,12 @@ public class MyLinearLayout extends View implements Runnable {
 		canvas.drawBitmap(oilBm, 0, 0, null);
 
 		matrix.preTranslate(0, oilBm.getHeight() - needleBm.getHeight() - 3);
-		matrix.preRotate(angel, oilBm.getWidth() / 2-20, needleBm.getHeight()-10);
-//		matrix.preRotate(angel, oilBm.getWidth() / 2, needleBm.getHeight());
+		int ss= 20;
+		if(angel>120){
+			ss = 0;
+		}
+		matrix.preRotate(angel, oilBm.getWidth() / 2-ss, needleBm.getHeight()-10);
+//		matrix.preRotate(angel, oilBm.getWidth() / 2, 0);
 		
 //		matrix.preTranslate( oilBm.getWidth() / 2-1,
 //				oilBm.getHeight() / 2 - 2);
@@ -68,6 +73,9 @@ public class MyLinearLayout extends View implements Runnable {
 
 	public void setBackImage(int id) {
 		oilBm = BitmapFactory.decodeResource(getResources(), id);
+		if(id==R.drawable.xinlv_group_small||id==R.drawable.xueya_group_small){
+			needleBm = BitmapFactory.decodeResource(getResources(), R.drawable.pan2);
+		}
 	}
 
 	public void setReflush(int value) {
@@ -75,7 +83,7 @@ public class MyLinearLayout extends View implements Runnable {
 		new Thread(this).start();
 
 	}
-	@Override
+//	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
 		/** 

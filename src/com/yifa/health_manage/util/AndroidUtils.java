@@ -109,11 +109,12 @@ public class AndroidUtils {
 			}
 			break;
 		case 1:// 血糖
-			if (4 <= value && value < 8) {
+//			value = value / 18;
+			if (4 <= value && value <= 7) {
 				return 0;
-			} else if (8 <= value && value < 11) {
+			} else if (value<4) {
 				return 1;
-			} else if (11 <= value) {
+			} else if (7 < value) {
 				return 2;
 			}
 			break;

@@ -71,7 +71,7 @@ public class StartFragment extends Fragment {
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
-			if (msg.obj.toString().equalsIgnoreCase("")) {
+			if (msg==null||msg.obj==null||msg.obj.toString().equalsIgnoreCase("")) {
 				return;
 			}
 			JSONObject jsonObject;

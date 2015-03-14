@@ -64,6 +64,8 @@ public class FriendAdapter extends BaseAdapter {
 					R.layout.item_dialog, null, false);
 			hodler.friend1 = (TextView) convertView
 					.findViewById(R.id.device_friend_name);
+			hodler.deviceType = (TextView) convertView
+					.findViewById(R.id.device_type);
 			hodler.iamgeCheck = (ImageView) convertView
 					.findViewById(R.id.device_check);
 			hodler.imagePhoto = (ImageView) convertView
@@ -73,28 +75,48 @@ public class FriendAdapter extends BaseAdapter {
 			hodler = (ViewHodler) convertView.getTag();
 		switch (position) {
 		case 0:
-			hodler.imagePhoto.setBackgroundResource(R.drawable.father);
+			hodler.imagePhoto.setImageResource(R.drawable.father);
 			break;
 		case 1:
-			hodler.imagePhoto.setBackgroundResource(R.drawable.mother);
+			hodler.imagePhoto.setImageResource(R.drawable.father);
 			break;
 		case 2:
-			hodler.imagePhoto.setBackgroundResource(R.drawable.father);
+			hodler.imagePhoto.setImageResource(R.drawable.father);
 			break;
 		case 3:
-			hodler.imagePhoto.setBackgroundResource(R.drawable.mother);
+			hodler.imagePhoto.setImageResource(R.drawable.father);
 			break;
 
 		default:
 			break;
 		}
 		hodler.friend1.setText(mList.get(position).getName());
+		hodler.deviceType.setText("设备号："+mList.get(position).getDevice_sn());
 		if (!mList.get(position).getImageUrl().equalsIgnoreCase("")) {
+			Log.d("-------------------------", position + "");
 			byte[] b = Base64.decode(mList.get(position).getImageUrl()
 					.getBytes(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
 			if (bitmap != null)
 				hodler.imagePhoto.setImageBitmap(bitmap);
+		} else {
+			switch (position) {
+			case 0:
+				hodler.imagePhoto.setImageResource(R.drawable.father);
+				break;
+			case 1:
+				hodler.imagePhoto.setImageResource(R.drawable.father);
+				break;
+			case 2:
+				hodler.imagePhoto.setImageResource(R.drawable.father);
+				break;
+			case 3:
+				hodler.imagePhoto.setImageResource(R.drawable.father);
+				break;
+
+			default:
+				break;
+			}
 		}
 		map.put(position, false);
 		if (mList.get(position).getType().equalsIgnoreCase("blood_glucose")) {
@@ -140,7 +162,7 @@ public class FriendAdapter extends BaseAdapter {
 	}
 
 	class ViewHodler {
-		TextView id, friend1, friend2;
+		TextView id, friend1, friend2, deviceType;
 		ImageView iamgeCheck, imagePhoto;
 	}
 

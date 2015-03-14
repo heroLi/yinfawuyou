@@ -101,11 +101,11 @@ public class AddDeviceActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.add_button:
 			if (!deviceName.getText().toString().trim().equalsIgnoreCase("")) {
-				new WebServiceUtils(this, mHandler).sendExecuteNo(new String[] {
+				new WebServiceUtils(this, mHandler).sendExecute(new String[] {
 						SharePrefenceUtils.getAccount(AddDeviceActivity.this),
 						type, deviceName.getText().toString().trim() },
 						WebServiceParmas.BIND_DEVICE,
-						WebServiceParmas.HTTP_POST);
+						WebServiceParmas.HTTP_POST,"加载中...");
 			} else {
 				AndroidUtils.showToast(this, "请填写设备编码");
 			}

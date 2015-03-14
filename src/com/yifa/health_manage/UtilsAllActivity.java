@@ -40,13 +40,13 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 
 	private final int type0 = 0, type1 = 1, type2 = 2, type3 = 3, type4 = 4,
 			type5 = 5, type6 = 6;
-	private TextView text1, text2, text3, text4, text5, text6;
+	private TextView text1, text2, text3, text4, text5, text6, utilSuggest;
 
 	private int brisday;
 
 	private Button okButton;
 
-	private LinearLayout allLayout, nameLayout, itemlayout;
+	private LinearLayout allLayout, nameLayout, itemlayout, bottomLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,36 +60,43 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 			title.setText("体重检测");
 			messageName.setText("体重检测");
 			item_ps.setText(R.string.utils_wight);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_7);
 			break;
 		case type1:
 			title.setText("一分钟肥胖检测");
 			messageName.setText("一分钟肥胖检测");
 			item_ps.setText(R.string.utils_1fenzhong);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_6);
 			break;
 		case type2:
 			messageName.setText("标准体重计算器");
 			title.setText("标准体重");
 			item_ps.setText(R.string.utils_biaozhun);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_5);
 			break;
 		case type3:
 			title.setText("运动心率");
 			messageName.setText("运动心率");
 			item_ps.setText(R.string.utils_yundong);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_4);
 			break;
 		case type4:
 			title.setText("每日所需总热量");
 			messageName.setText("每日所需总热量");
 			item_ps.setText(R.string.utils_reliang);
+//			bottomLayout.setBackgroundResource(R.drawable.utils_bg_3);
 			break;
 		case type5:
 			title.setText("基础代谢计算");
 			messageName.setText("基础代谢");
 			item_ps.setText(R.string.utils_jichudaixie);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_2);
 			break;
 		case type6:
 			title.setText("全部检测");
 			messageName.setText("全部检测");
 			item_ps.setText(R.string.utils_all_mes);
+			// bottomLayout.setBackgroundResource(R.drawable.utils_bg_1);
 			break;
 
 		default:
@@ -101,6 +108,7 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 		title = (TextView) findViewById(R.id.activity_top_title);
 		item_ps = (TextView) findViewById(R.id.jiashao);
 		messageName = (TextView) findViewById(R.id.mess_name);
+		utilSuggest = (TextView) findViewById(R.id.utils_suggest);
 		message = (TextView) findViewById(R.id.text);
 		saxGroup = (RadioGroup) findViewById(R.id.user_sax);
 		briEdit = (EditText) findViewById(R.id.user_bri);
@@ -111,6 +119,7 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 		allLayout = (LinearLayout) findViewById(R.id.allLayout);
 		nameLayout = (LinearLayout) findViewById(R.id.namelayout);
 		itemlayout = (LinearLayout) findViewById(R.id.itemLayout);
+		bottomLayout = (LinearLayout) findViewById(R.id.utils_bg_b);
 
 		text1 = (TextView) findViewById(R.id.text1);
 		text2 = (TextView) findViewById(R.id.text2);
@@ -136,31 +145,44 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 			if (isCheck()) {
 				initDate();
 				String meass = "";
+				String textMess="";
 				itemlayout.setVisibility(View.VISIBLE);
 				switch (type) {
 				case type0:
 					meass = getObesityInt() + "BMI";
 					nameLayout.setVisibility(View.VISIBLE);
+					textMess = getObesityIntMess(getObesityInt());
 					break;
 				case type1:
 					nameLayout.setVisibility(View.VISIBLE);
 					meass = getObesity();
+					if(meass.contains("偏瘦")){
+						textMess="偏廋：适当补充必要营养，如鸡、鱼、肉、蛋等脂肪类的食物。";
+					}else if (meass.contains("正常")) {
+						textMess="正常：注意保持您的身体各项指标正常，请继续保持。";
+					}else{
+						textMess="肥胖：建议您适当控制饮食并合理的增加运动量。";
+					}
 					break;
 				case type2:
 					nameLayout.setVisibility(View.VISIBLE);
 					meass = getWeight();
+					textMess="检测建议：要按照标准体重，合理的改善自己的饮食喔。";
 					break;
 				case type3:
 					nameLayout.setVisibility(View.VISIBLE);
 					meass = getSportHeart();
+					textMess="每天您要坚持锻炼，才会有一个健康的身体。";
 					break;
 				case type4:
 					nameLayout.setVisibility(View.VISIBLE);
 					meass = getHotValue();
+					textMess="控制总热量，使您的体重达到并维持在理想或适宜的水平。";
 					break;
 				case type5:
 					nameLayout.setVisibility(View.VISIBLE);
 					meass = getJiChuDaiXie() + "BMR";
+					textMess="控制总热量，使您的体重达到并维持在理想或适宜的水平。";
 					break;
 				case type6:
 					allLayout.setVisibility(View.VISIBLE);
@@ -170,6 +192,7 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 					break;
 				}
 				message.setText(meass);
+				utilSuggest.setText(textMess);
 				break;
 			}
 		default:
@@ -267,10 +290,36 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 	}
 
 	// 体重指数
+	/**
+	 * 过轻：低于18.5
+	 * 
+	 * 正常：18.5-24.99
+	 * 
+	 * 适中：20-25
+	 * 
+	 * 过重：25-28
+	 * 
+	 * 肥胖：28-32
+	 * 
+	 * 非常肥胖, 高于32
+	 * */
 	private double getObesityInt() {
 		double a = weight * 10000 / (height * height);
 		return a;
 	}
+	private String getObesityIntMess(double dd) {
+		StringBuffer textString=new StringBuffer();
+		if(dd<18.5){
+			textString.append("偏廋：适当补充必要营养，如鸡、鱼、肉、蛋等脂肪类的食物。");
+		}else if(dd>=18.5&&dd<=28){
+			textString.append("正常：注意保持您的身体各项指标正常，请继续保持。");
+		}else if(dd>28){
+			textString.append("肥胖：建议您适当控制饮食并合理的增加运动量。");
+		}
+
+		return textString.toString();
+	}
+	
 
 	/**
 	 * 最佳运动心率控制区域计算法：(适合一般人) （220─现在年龄）×0.8=最大运动心率 （220─现在年龄）×0.6=最小运动心率
@@ -343,17 +392,26 @@ public class UtilsAllActivity extends Activity implements OnClickListener,
 			AndroidUtils.showToast(this, "请填写年龄");
 			return false;
 		} else if (Integer.valueOf(briEdit.getText().toString().trim()) <= 0
-				|| Integer.valueOf(briEdit.getText().toString().trim()) > 120) {
+				|| Integer.valueOf(briEdit.getText().toString().trim()) > 130) {
 			AndroidUtils.showToast(this, "请正确填写年龄");
 			return false;
 		} else if (heightEdit.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "请填写身高");
 			return false;
-		} else if (weightEdit.getText().toString().trim().equalsIgnoreCase("")) {
+		} else if (Integer.valueOf(heightEdit.getText().toString().trim())>230	 ) {
+			AndroidUtils.showToast(this, "请正确填写身高");
+			return false;
+		}else if (weightEdit.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "请填写体重");
+			return false;
+		}else if (Integer.valueOf(weightEdit.getText().toString().trim())>500	 ) {
+			AndroidUtils.showToast(this, "请正确填写体重");
 			return false;
 		} else if (yaoEdit.getText().toString().trim().equalsIgnoreCase("")) {
 			AndroidUtils.showToast(this, "请填写腰围");
+			return false;
+		}else if (Integer.valueOf(yaoEdit.getText().toString().trim())>150	 ) {
+			AndroidUtils.showToast(this, "请正确填写腰围");
 			return false;
 		}
 		return true;
