@@ -275,7 +275,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 					time_title.setText(startTime);
 				}
 				blood_time.setText(startTime);
-				blood_text.setText("0");
+//				blood_text.setText("0");
 				break;
 			case -1:
 				AndroidUtils.showToast(getActivity(), "请连接网络");
@@ -952,7 +952,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						WebServiceParmas.HTTP_POST, "加载中...");
 				break;
 			case R.id.share_text:
-				shareClient(getActivity(), "银发无忧", "我正在使用银发无忧App，你也快来用吧！");
+				shareClient(getActivity(), "银发无忧", "我正在使用银发无忧App，您也快来用吧！请点击网址http://121.40.172.222/health2/site/app下载并使用此应用！");
 				break;
 			}
 		} catch (ParseException e) {

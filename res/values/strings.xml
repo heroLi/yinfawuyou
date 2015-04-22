@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">银发无忧</string>
-    <string name="app_ver">V1.0.150313</string>
+    <string name="app_ver">V1.0.150422</string>
 
-    <integer name="vercode">10150313</integer>
+    <integer name="vercode">10150422</integer>
     <integer name="vercode_ne">4</integer>
 
     <string name="hello_world">Hello world!</string>

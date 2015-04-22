@@ -1,6 +1,7 @@
 package com.yifa.health_manage;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class NewDataActivity extends Activity {
 				if (msg.obj.toString().equalsIgnoreCase("")) {
 					return;
 				}
+				
 				JSONObject jsonObject;
 				try {
 					jsonObject = new JSONObject(msg.obj.toString());
@@ -52,6 +54,8 @@ public class NewDataActivity extends Activity {
 					}.getType();
 					List<NewDataInfo> mList = gson.fromJson(
 							jsonArray.toString(), type);
+					if (mList.size() <= 0)
+						return;
 					if (isFrist) {
 						mData.addAll(mList);
 					} else {
@@ -61,6 +65,7 @@ public class NewDataActivity extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+
 				if (isFrist) {
 					initData(mData);
 				}
@@ -100,11 +105,17 @@ public class NewDataActivity extends Activity {
 					}.getType();
 					List<NewDataInfo> mList = gson.fromJson(
 							jsonArray.toString(), type);
+					if (mList.size() <= 0)
+						return;
 					if (!isFrist) {
 						mData.addAll(mList);
 					} else {
 						mData.set(0, mList.get(0));
-						mData.set(2, mList.get(2));
+						if (mList.size() <= 2) {
+							// mData.set(2, "0");
+						} else
+							mData.set(2, mList.get(2));
+
 					}
 					// initData(mList);
 				} catch (JSONException e) {
@@ -142,7 +153,7 @@ public class NewDataActivity extends Activity {
 	};
 
 	private TextView data1, blood_xh, blood_xl, blood_lv, blood_t, data2,
-			data3;
+			data3, rightText;
 
 	private TextView xy1, xy2, xy3, xy4, xy5, xy6, xt1, xt2, xt3, xl1, xl2,
 			xl3, title;
@@ -177,6 +188,7 @@ public class NewDataActivity extends Activity {
 	}
 
 	private void initView() {
+		rightText = (TextView) findViewById(R.id.add_devices);
 		data1 = (TextView) findViewById(R.id.data1);
 		data2 = (TextView) findViewById(R.id.data2);
 		data3 = (TextView) findViewById(R.id.data3);
@@ -199,6 +211,39 @@ public class NewDataActivity extends Activity {
 		title = (TextView) findViewById(R.id.activity_top_title);
 		layout = (RelativeLayout) findViewById(R.id.top);
 		title.setText("最新数据");
+		rightText.setText("刷新");
+		rightText.setVisibility(View.VISIBLE);
+		rightText.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				mData.clear();
+				if (!SharePrefenceUtils.getSugarFriendId(NewDataActivity.this)
+						.getId().equalsIgnoreCase("")) {
+					isFrist = true;
+					new WebServiceUtils(NewDataActivity.this, mHandler).sendExecuteNo(
+							new String[] {
+									SharePrefenceUtils
+											.getAccount(NewDataActivity.this),
+									SharePrefenceUtils.getSugarFriendId(
+											NewDataActivity.this).getId() },
+							WebServiceParmas.NEW_DATA,
+							WebServiceParmas.HTTP_POST);
+				} else if (!SharePrefenceUtils
+						.getPressureFriendId(NewDataActivity.this).getId()
+						.equalsIgnoreCase("")) {
+					isFrist = false;
+					new WebServiceUtils(NewDataActivity.this, mHandler).sendExecuteNo(
+							new String[] {
+									SharePrefenceUtils
+											.getAccount(NewDataActivity.this),
+									SharePrefenceUtils.getPressureFriendId(
+											NewDataActivity.this).getId() },
+							WebServiceParmas.NEW_DATA_2,
+							WebServiceParmas.HTTP_POST);
+				}
+			}
+		});
 		title.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -212,72 +257,87 @@ public class NewDataActivity extends Activity {
 	@SuppressLint("ResourceAsColor")
 	private void initData(List<NewDataInfo> mList) {
 		int level = 0;
+		DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
-		if (mList.get(0).getDatetime() != null) {
-			data1.setText(mList.get(0).getDatetime());
-			blood_xh.setText(mList.get(0).getHigh_value());
-			blood_xl.setText(mList.get(0).getLow_value());
-			level = AndroidUtils.getBloodLevel(0,
-					Integer.valueOf(mList.get(0).getHigh_value()));
-			switch (level) {
-			case 0:
-				xy1.setBackgroundResource(R.drawable.newdata_201);
-				break;
-			case 1:
-				xy2.setBackgroundResource(R.drawable.newdata_202);
-				break;
-			case 2:
-				xy3.setBackgroundResource(R.drawable.newdata_203);
-				break;
-			case 3:
-				xy4.setBackgroundResource(R.drawable.newdata_204);
-				break;
-			case 4:
-				xy5.setBackgroundResource(R.drawable.newdata_205);
-				break;
-			case 5:
-				xy6.setBackgroundResource(R.drawable.newdata_206);
-				break;
-			default:
-				break;
-			}
-		}
-		if (mList.get(1).getDatetime() != null) {
-			data2.setText(mList.get(1).getDatetime());
-			blood_t.setText(""+(Integer.valueOf(mList.get(1).getValue()) / 18));
-			level = AndroidUtils.getBloodLevel(1,
-					Integer.valueOf(mList.get(1).getValue()));
-			switch (level) {
-			case 0:
-				xt1.setBackgroundResource(R.drawable.newdata_301);
-				break;
-			case 1:
-				xt2.setBackgroundResource(R.drawable.newdata_302);
-				break;
-			case 2:
-				xt3.setBackgroundResource(R.drawable.newdata_303);
-				break;
-			default:
-				break;
-			}
-		}
-		if (mList.get(2).getDatetime() != null) {
-			data3.setText(mList.get(2).getDatetime());
-			blood_lv.setText(mList.get(2).getValue());
-			level = AndroidUtils.getBloodLevel(2,
-					Integer.valueOf(mList.get(2).getValue()));
-			switch (level) {
-			case 0:
-				xl2.setBackgroundResource(R.drawable.newdata_101);
-				break;
-			case 1:
-				xl1.setBackgroundResource(R.drawable.newdata_102);
-				break;
-			case 2:
-				xl3.setBackgroundResource(R.drawable.newdata_103);
-				break;
-			default:
-				break;
+		for (int i = 0; i < mList.size(); i++) {
+			if (mList.get(i).getData_type().equalsIgnoreCase("blood_presure")) {
+
+				if (mList.get(i).getDatetime() != null) {
+					data1.setText(mList.get(i).getDatetime());
+					blood_xh.setText(mList.get(i).getHigh_value());
+					blood_xl.setText(mList.get(i).getLow_value());
+					level = AndroidUtils.getBloodLevel(i,
+							Integer.valueOf(mList.get(i).getHigh_value()));
+					switch (level) {
+					case 0:
+						xy1.setBackgroundResource(R.drawable.newdata_201);
+						break;
+					case 1:
+						xy2.setBackgroundResource(R.drawable.newdata_202);
+						break;
+					case 2:
+						xy3.setBackgroundResource(R.drawable.newdata_203);
+						break;
+					case 3:
+						xy4.setBackgroundResource(R.drawable.newdata_204);
+						break;
+					case 4:
+						xy5.setBackgroundResource(R.drawable.newdata_205);
+						break;
+					case 5:
+						xy6.setBackgroundResource(R.drawable.newdata_206);
+						break;
+					default:
+						break;
+					}
+				}
+			} else if (mList.get(i).getData_type()
+					.equalsIgnoreCase("blood_glucose")) {
+
+				if (mList.get(i).getDatetime() != null) {
+					data2.setText(mList.get(i).getDatetime());
+					blood_t.setText(decimalFormat.format(Double.valueOf(mList
+							.get(i).getValue()) / 18));
+					level = AndroidUtils.getBloodLevel(i,
+							Integer.valueOf(mList.get(i).getValue()));
+					switch (level) {
+					case 0:
+						xt1.setBackgroundResource(R.drawable.newdata_301);
+						break;
+					case 1:
+						xt2.setBackgroundResource(R.drawable.newdata_302);
+						break;
+					case 2:
+						xt3.setBackgroundResource(R.drawable.newdata_303);
+						break;
+					default:
+						break;
+					}
+				}
+
+			} else if (mList.get(i).getData_type()
+					.equalsIgnoreCase("heart_rate")) {
+
+				if (mList.get(i).getDatetime() != null) {
+					data3.setText(mList.get(i).getDatetime());
+					blood_lv.setText(mList.get(i).getValue());
+					level = AndroidUtils.getBloodLevel(i,
+							Integer.valueOf(mList.get(i).getValue()));
+					switch (level) {
+					case 0:
+						xl2.setBackgroundResource(R.drawable.newdata_101);
+						break;
+					case 1:
+						xl1.setBackgroundResource(R.drawable.newdata_102);
+						break;
+					case 2:
+						xl3.setBackgroundResource(R.drawable.newdata_103);
+						break;
+					default:
+						break;
+					}
+				}
+
 			}
 		}
 

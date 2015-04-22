@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/app_white"
+    android:orientation="vertical" >
+    <include
+        layout="@layout/activity_main_top" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="标题："
+        android:textSize="18sp"
+        android:textColor="@color/app_black"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/feed_title"
+         android:layout_margin="10dp"
+        android:maxLength="50"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="内容："
+        android:textSize="18sp"
+        android:textColor="@color/app_black"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/feed_mes"
+         android:gravity="left|top"
+         android:layout_margin="10dp"
+        />
+    <Button 
+            android:id="@+id/login_btn_no"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_marginLeft="18dp"
+            android:textColor="@color/app_white"
+            android:layout_marginRight="18dp"
+            android:text="提交"
+            android:textSize="18sp"
+            android:background="@drawable/button_select"
+            />
+
+</LinearLayout>
