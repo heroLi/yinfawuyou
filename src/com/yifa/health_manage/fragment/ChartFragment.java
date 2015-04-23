@@ -461,7 +461,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 			if (mList.size() > 0) {
 				blood_text.setText(mList.get(mList.size() - 1).getValue());
 				series_line.add(initDateTime(mList.get(0).getDatetime()), 2);
-				series_line.add(initDateTime(mList.get(0).getDatetime()), 14);
+				series_line.add(initDateTime(mList.get(0).getDatetime()), 34);
 				initBloodLevel(AndroidUtils.getBloodLevel(1,
 						Integer.valueOf(mList.get(0).getValue())));
 				// setImageShow(Integer.valueOf(mList.get(mList.size() - 1)
@@ -610,7 +610,7 @@ public class ChartFragment extends Fragment implements OnClickListener {
 						blood_text.setText(decimalFormat
 								.format((Double) (seriesSelection.getValue())));
 						series_line.add(seriesSelection.getXValue(), 2);
-						series_line.add(seriesSelection.getXValue(), 14);
+						series_line.add(seriesSelection.getXValue(), 34);
 						initBloodLevel(AndroidUtils.getBloodLevel(1,
 								(int) seriesSelection.getValue()));
 					} else {
@@ -748,15 +748,20 @@ public class ChartFragment extends Fragment implements OnClickListener {
 		if (deviceType.equalsIgnoreCase("blood_glucose")) {// 血糖
 
 			renderer.setYTitle("mmol/L");
-			renderer.setYAxisMax(14.5);
+			renderer.setYAxisMax(35.5);
 			renderer.setYAxisMin(2);
 
 			renderer.addYTextLabel(2, "2");
-			renderer.addYTextLabel(4, "4");
-			renderer.addYTextLabel(6, "6");
+//			renderer.addYTextLabel(4, "4");
+//			renderer.addYTextLabel(6, "6");
 			renderer.addYTextLabel(8, "8");
-			renderer.addYTextLabel(10, "10");
-			renderer.addYTextLabel(12, "12");
+//			renderer.addYTextLabel(10, "10");
+//			renderer.addYTextLabel(12, "12");
+			renderer.addYTextLabel(14, "14");
+			renderer.addYTextLabel(20, "20");
+			renderer.addYTextLabel(26, "26");
+			renderer.addYTextLabel(32, "32");
+			renderer.addYTextLabel(34, "34");
 		} else if (deviceType.equalsIgnoreCase("heart_rate")) {
 			renderer.setYTitle("BPM");
 			renderer.setYAxisMax(195);
